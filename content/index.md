@@ -1,6 +1,5 @@
 ---
-title: Welcome to Quartz
+title: CS 280A
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+This is my website to showcase CS 280A projects at UC Berkeley.
