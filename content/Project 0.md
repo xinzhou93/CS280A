@@ -2,7 +2,6 @@
 title: "Becoming Friends with Your Camera"
 tags: [project, cs280a]
 ---
-Name: Xin Zhou
 
 Link to webpage: https://xinzhou93.github.io/CS280A/Project-0
 
