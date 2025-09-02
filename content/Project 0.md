@@ -3,7 +3,7 @@ title: "Becoming Friends with Your Camera"
 tags: [project, cs280a]
 ---
 Name: Xin Zhou
-Link to webpage: [🚀 Webpage](https://publish.obsidian.md/xin/Coursework/CS184/HW1/CS184+Homework1)
+Link to webpage: https://xinzhou93.github.io/CS280A/Project-0
 
 # Overview
 
