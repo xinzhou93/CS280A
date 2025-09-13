@@ -18,8 +18,8 @@ tags: [project, cs280a]
 
 ### Gallery of required images
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
-  <figure style="margin: 0;">
-    <img src="/P1/9_aligned.jpg" alt="Image 9" style="width: 100%; height: auto; display: block; background-color: #222;" />
+  <figure style="margin: 0; background-color: #222; padding: 10px; border-radius: 6px;">
+    <img src="/P1/9_aligned.jpg" alt="Image 9" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
       G(4, 25), R(-5, 59)<br>
