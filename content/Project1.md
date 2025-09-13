@@ -1,4 +1,4 @@
 ---
-title: "Colorizing the [Prokudin-Gorskii(https://www.loc.gov/collections/prokudin-gorskii/) photo collection"
+title: "Colorizing the Prokudin-Gorskii photo collection"
 tags: [project, cs280a]
 ---
