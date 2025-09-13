@@ -207,7 +207,7 @@ tags: [project, cs280a]
 # Bells and Whistles
 
 ## Auto-Cropping
-<div style="background-color: #222; padding: 20px; border-radius: 8px;">
+<div style="background-color: #222; padding: 10px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P1/10_aligned.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
@@ -242,6 +242,42 @@ tags: [project, cs280a]
 
 ## Auto White Balance
 
+<div style="background-color: #222; padding: 10px; border-radius: 8px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/10_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto-Cropping applied
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/10_max_white_wb.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto White Balance applied
+    </figcaption>
+  </figure>
+
+</div>
+</div>
 ## Color Mapping
 
+<div style="background-color: #222; padding: 10px; border-radius: 8px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/10_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto-Cropping applied
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/10_matrix_transform_colormap.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Color mapping applied
+    </figcaption>
+  </figure>
+
+</div>
+</div>
 ## Edge-based Alignment
