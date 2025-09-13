@@ -260,6 +260,7 @@ tags: [project, cs280a]
 
 </div>
 </div>
+
 ## Color Mapping
 
 <div style="background-color: #222; padding: 10px; border-radius: 8px;">
@@ -280,6 +281,7 @@ tags: [project, cs280a]
 
 </div>
 </div>
+
 ## Edge-based Alignment
 
 <div style="background-color: #222; padding: 10px; border-radius: 8px;">
