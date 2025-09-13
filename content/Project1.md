@@ -17,10 +17,11 @@ tags: [project, cs280a]
 ## Image Pyramid with Predefined borders
 
 ### Gallery of required images
+<div style="background-color: #222; padding: 20px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
-  <figure style="margin: 0; background-color: #222; padding: 10px; border-radius: 6px;">
+  <figure style="margin: 0;">
     <img src="/P1/9_aligned.jpg" alt="Image 9" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    <figcaption style="font-size: 0.9em; color: white; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
       G(4, 25), R(-5, 59)<br>
       Runtime: 3.1 sec
@@ -120,6 +121,7 @@ tags: [project, cs280a]
       Runtime: 3.12 sec
     </figcaption>
   </figure>
+</div>
 </div>
 
 ### Gallery with other images
