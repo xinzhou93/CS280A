@@ -87,6 +87,8 @@ tags: [project, cs280a]
       Best Shift:<br>
       R(9, 85), R(-12, 158)<br>
       Runtime: 3.17 sec
+    </span><br>
+      <span style="color: red; font-weight: bold;">Not Perfectly Aligned</span>
     </figcaption>
   </figure>
 
@@ -94,8 +96,10 @@ tags: [project, cs280a]
     <img src="/P1/17_aligned.jpg" alt="Image 17" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
-      R(=1, 81), R(-3, 158)<br>
+      R(-1, 81), R(-3, 158)<br>
       Runtime: 3.3 sec
+    </span><br>
+      <span style="color: red; font-weight: bold;">Not Perfectly Aligned</span>
     </figcaption>
   </figure>
 
@@ -103,7 +107,7 @@ tags: [project, cs280a]
     <img src="/P1/18_aligned.jpg" alt="Image 18" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
-      R(=-7, 50), R(-25, 97)<br>
+      R(-7, 50), R(-25, 97)<br>
       Runtime: 3.35 sec
     </figcaption>
   </figure>
@@ -112,11 +116,12 @@ tags: [project, cs280a]
     <img src="/P1/19_aligned.jpg" alt="Image 19" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
-      R(=12, 55), R(9, 112)<br>
+      R(12, 55), R(9, 112)<br>
       Runtime: 3.12 sec
     </figcaption>
   </figure>
 </div>
+
 ### Gallery with other images
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
