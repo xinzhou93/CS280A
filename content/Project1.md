@@ -211,26 +211,28 @@ tags: [project, cs280a]
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P1/10_aligned.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Best Shift:<br>
-      G(24, 49), R(42, 104)<br>
-      Runtime: 3.3 sec
-    </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P1/10_intensity_borders.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Best Shift:<br>
-      G(-12, 46), R(-20, 109)<br>
-      Runtime: 3.3 sec
-    </figcaption>
   </figure>
 
 </div>
 </div>
 
 ## Auto Contrast
+<div style="background-color: #222; padding: 20px; border-radius: 8px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/10_aligned.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/10_rescale_contrast.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+  </figure>
+
+</div>
+</div>
 
 ## Auto White Balance
 
