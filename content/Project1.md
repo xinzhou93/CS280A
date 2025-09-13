@@ -281,3 +281,22 @@ tags: [project, cs280a]
 </div>
 </div>
 ## Edge-based Alignment
+
+<div style="background-color: #222; padding: 10px; border-radius: 8px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/10_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto-Cropping applied
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/10_sobel_edge.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Sobel Detector applied
+    </figcaption>
+  </figure>
+
+</div>
+</div>
