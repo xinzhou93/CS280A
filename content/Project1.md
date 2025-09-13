@@ -19,7 +19,7 @@ tags: [project, cs280a]
 ### Gallery of required images
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P1/9_aligned.jpg" alt="Image 9" style="width: 100%; height: auto; display: block;" />
+    <img src="/P1/9_aligned.jpg" alt="Image 9" style="width: 100%; height: auto; display: block; background-color: #222;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
       G(4, 25), R(-5, 59)<br>
@@ -201,3 +201,14 @@ tags: [project, cs280a]
 
 
 # Bells and Whistles
+
+## Auto-Cropping
+
+
+## Auto Contrast
+
+## Auto White Balance
+
+## Color Mapping
+
+## Edge-based Alignment
