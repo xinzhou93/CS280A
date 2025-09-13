@@ -21,7 +21,7 @@ tags: [project, cs280a]
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P1/9_aligned.jpg" alt="Image 9" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: white; margin-top: 6px; line-height: 1.4;">
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
       G(4, 25), R(-5, 59)<br>
       Runtime: 3.1 sec
@@ -125,6 +125,7 @@ tags: [project, cs280a]
 </div>
 
 ### Gallery with other images
+<div style="background-color: #222; padding: 20px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P1/1_aligned.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
@@ -199,13 +200,35 @@ tags: [project, cs280a]
   </figure>
   
 </div>
+</div>
 
 
 
 # Bells and Whistles
 
 ## Auto-Cropping
+<div style="background-color: #222; padding: 20px; border-radius: 8px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/1_aligned.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Best Shift:<br>
+      G(5, 65), R(-2, 133)<br>
+      Runtime: 3.1 sec
+    </figcaption>
+  </figure>
 
+  <figure style="margin: 0;">
+    <img src="/P1/2_aligned.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Best Shift:<br>
+      G(-12, 46), R(-20, 109)<br>
+      Runtime: 3.3 sec
+    </figcaption>
+  </figure>
+
+</div>
+</div>
 
 ## Auto Contrast
 
