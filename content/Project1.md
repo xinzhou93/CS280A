@@ -497,28 +497,28 @@ This method can make dark pixels become slightly brighter and bright pixels beco
 So far we use direct RGB serves as the standard approach, combing the three channels directly without color transformation. Color mapping here applies a $3\times 3$ transformation matrix to the image such that the final output can create nuanced color qualities:
 
 $$
-\text{RGB}{corrected} = M \times \text{RGB}{original}
+\text{RGB}{\text{corrected}} = M \times \text{RGB}{\text{original}}
 $$
 
 I tried several simple matrices to see how the color can be modified.
 $$
 M_1 = 
 \begin{bmatrix}
-  1 & 1 & 1
-  1 & 1 & 1
-  1 & 1 & 1
+  1 & 1 & 1 \\
+  1 & 1 & 1 \\
+  1 & 1 & 1 \\
 \end{bmatrix}, 
 M_2 = 
 \begin{bmatrix}
-  0.5 & 0.5 & 0.5
-  0.5 & 0.5 & 0.5
-  0.5 & 0.5 & 0.5
+  0.5 & 0.5 & 0.5 \\
+  0.5 & 0.5 & 0.5 \\
+  0.5 & 0.5 & 0.5 \\
 \end{bmatrix},
 M_3 = 
 \begin{bmatrix}
-  1.5 & 1.5 & 1.5
-  1.5 & 1.5 & 1.5
-  1.5 & 1.5 & 1.5
+  1.5 & 1.5 & 1.5 \\
+  1.5 & 1.5 & 1.5 \\
+  1.5 & 1.5 & 1.5 \\
 \end{bmatrix}
 $$
 
@@ -552,15 +552,15 @@ Then I tried some random values inside the matrix:
 $$
 M_4 = 
 \begin{bmatrix}
-  0.8 & 0.1 & 0.1
-  0.15 & 0.7 & 0.18
-  0.1 & 0.2 & 0.7
+  0.8 & 0.1 & 0.1 \\
+  0.15 & 0.7 & 0.18 \\
+  0.1 & 0.2 & 0.7 \\
 \end{bmatrix}, 
 M_5 = 
 \begin{bmatrix}
-  1.0 & -0.05 & -0.05
-  -0.1 & 1.0 & 0.1
-  -0.05 & -0.3 & 1.35
+  1.0 & -0.05 & -0.05 \\
+  -0.1 & 1.0 & 0.1 \\
+  -0.05 & -0.3 & 1.35 \\
 \end{bmatrix}
 $$
 
