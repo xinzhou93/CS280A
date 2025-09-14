@@ -294,22 +294,59 @@ All the `tif` glass plate images use this setting.
 </div>
 </div>
 
-
-
 # Bells and Whistles
+This section implement extra five features for either better image quality or alignment.
+## Intensity-Based Auto-Cropping
+The program implements an automatic border detection feature that can remove white or white, black or other color borders by analyzing **grayscale intensity patterns** at image edges. This methods scans from each edge to up to $20\%$ of the image dimension. Instead of checking every single pixel row by row, the algorithm takes rectangular slices of the image that are $10$ pixels wide, for example a horizontal strip that spans from row $5$ to row $15$ ($10$ pixels tall ) and sample this horizontal block, looking for where intensity becomes varied.
 
-## Auto-Cropping
+The algorithm determines if a region touches the inner pixels based on statistics. Specifically, the `Mean Intensity` measures average brightness and `Standard Deviation` computes pixel variations.
+
+```python
+mean_intensity = np.mean(block)  
+std_intensity = np.std(block)
+```
+
+Borders often has consistent and extreme colors, thus the program defines the border area with 
+$$
+\text{Low variation} (std < 0.08) \text{extreme intensities} (mean < 0.15(\text{really dark}) or > 0.85(\text{really bright}))
+$$
+
+In contrast, the inner pixels often have decent variations and intensity
+$$
+\text{decent variation} (std > 0.08) \text{decent intensities} (0.15 < mean < 0.85))
+$$
+If regions has $std > 0.15)$, they are classified as the inner pixels regardless of the mean intensity.
+
+For the three images, each channel is analyzed separately and the algorithm takes the largest margin for each side, which can ensure the consistent dimensions among three images.
+
 <div style="background-color: #222; padding: 10px; border-radius: 8px;">
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
-  <figure style="margin: 0;">
-    <img src="/P1/10_aligned.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
-  </figure>
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center;">
+    
+    <figure style="margin: 0;">
+      <img src="/P1/9_aligned.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    </figure>
+    
+    <figure style="margin: 0;">
+      <img src="/P1/9_intensity_borders.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    </figure>
+    
+    <figure style="margin: 0;">
+      <img src="/P1/10_aligned.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    </figure>
+    
+    <figure style="margin: 0;">
+      <img src="/P1/10_intensity_borders.jpg" alt="Image 4" style="width: 100%; height: auto; display: block;" />
+    </figure>
 
-  <figure style="margin: 0;">
-    <img src="/P1/10_intensity_borders.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
-  </figure>
+    <figure style="margin: 0;">
+      <img src="/P1/19_aligned.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    </figure>
+    
+    <figure style="margin: 0;">
+      <img src="/P1/19_intensity_borders.jpg" alt="Image 4" style="width: 100%; height: auto; display: block;" />
+    </figure>
 
-</div>
+  </div>
 </div>
 
 ## Auto Contrast
