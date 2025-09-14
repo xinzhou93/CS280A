@@ -6,12 +6,7 @@ tags: [project, cs280a]
 # Overview
 This project focuses on colorizing the photo collection made by Prokudin-Gorskii, a photographer travelling across Russian and took color photographs of everything he saw. The collections include portraits, scenery, architecture, etc, and each of them has three exposures of the scene onto a glass plate using a red, a green and a blue filter. Although the three images are black and white, when they overlay, a color photograph will magically appear. 
 
-The goal of this project is to use 
-
-
-
-
-
+The goal of this project is to use efficient alignment algorithm to combine these three separate channel images into a single color image. 
 
 # Methodology
 The program takes a single plate image as input and should divide it into three equal parts. Using the channel $B$ as the basis, the program should output a single color image by aligning the Channel $G$ and $R$ to the base $B$ and stacking them together.  We need to handle two challenges:
