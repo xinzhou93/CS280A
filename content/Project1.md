@@ -435,24 +435,67 @@ enhanced = exposure.rescale_intensity(img, in_range=(p5, p95))
 </div>
 
 ## Auto White Balance
+I followed two-step process to implement two illuminant estimization features as specified in the requirement:
+- Estimate the illuminant 
+- Manipulate the colors to counteract the illuminant and simulate a neutral illuminant.
 
-<div style="background-color: #222; padding: 10px; border-radius: 8px;">
+**Average Color**: The algorithm uses the average color of the image to be gray, making it as the illuminant. Then the method calculates the mean intensity for each color channel and calculates the mean gray average of the three values. Then each image can shift their averages towards this neutral gray illuminant.
+
+```python
+shift = gray_average / channel_average
+```
+
+**Brightness Color**: The algorithm uses the brightness regions in the image as the illuminant "pure white". Similar to Auto contrast, this method recognizes the 99.5% percentile value in each color as the reference white threshold and scales each channel by
+
+```python
+balanced = channel / channel_max (99.5th percentile value in that specific channel)
+```
+This method can make dark pixels become slightly brighter and bright pixels become slightly darker, shifting the overall color balance to neutral.
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/9_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Original
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/9_gray_world_wb.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto White Balance (Average Color)
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/9_max_white_wb.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto White Balance (Brightness Color)
+    </figcaption>
+  </figure>
+</div>
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P1/10_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Auto-Cropping applied
+      Original
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/10_gray_world_wb.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto White Balance (Average Color)
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P1/10_max_white_wb.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
       <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Auto White Balance applied
+      Auto White Balance (Brightness Color)
     </figcaption>
   </figure>
-
-</div>
 </div>
 
 ## Color Mapping
