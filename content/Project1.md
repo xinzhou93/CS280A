@@ -318,7 +318,7 @@ In contrast, the inner pixels often have decent variations and intensity
 - decent variation: $std > 0.08$
 - decent intensities: $0.15 < mean < 0.85$
 
-If regions have $std > 0.15)$, they are classified as the inner pixels regardless of the mean intensity.
+If regions have $std > 0.15$, they are classified as the inner pixels regardless of the mean intensity.
 
 For the three images, each channel is analyzed separately and the algorithm takes the largest margin for each side, which can ensure the consistent dimensions among three images.
 
@@ -338,6 +338,11 @@ For the three images, each channel is analyzed separately and the algorithm take
     </figcaption>
   </figure>
 
+</div>
+</div>
+
+<div style="background-color: #222; padding: 10px; border-radius: 8px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P1/10_aligned.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
@@ -351,8 +356,11 @@ For the three images, each channel is analyzed separately and the algorithm take
       Auto-Cropping applied
     </figcaption>
   </figure>
+  </div>
+</div>
 
-
+<div style="background-color: #222; padding: 10px; border-radius: 8px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P1/19_aligned.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
@@ -366,7 +374,7 @@ For the three images, each channel is analyzed separately and the algorithm take
       Auto-Cropping applied
     </figcaption>
   </figure>
-  
+
 </div>
 </div>
 
