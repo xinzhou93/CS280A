@@ -49,7 +49,7 @@ Then, the program only computes the $L2$ norm for the valid overlapping region a
 Although this method is simple to implement, it becomes expensive and slow when handling high-resolution glass plate scans.
 
 ## Image Pyramid Optimization
-The image pyramid uses multi-scale images from coarse to fine resolutions to approach to find the best displacement for alignment. 
+The image pyramid uses multi-scale images from coarse to fine resolutions to approach to the best displacement for alignment. 
 
 The pyramid uses a simple $2 \times 2$ box filter for downsampling. At the beginning, the program used nested for loops to extract $2 \times 2$ four pixels sequentially and average them to reduce resolution. Later on, it was replaced by the vectorized method which extracts even and odd rows and columns directly.
 
