@@ -71,7 +71,7 @@ However, the same values cannot be applied to image pyramid since the margin of 
 <div style="background-color: #222; padding: 10px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P1/j1_aligned.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <img src="/P1/j1_align.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
       G(2, 3), R(2, -3)<br>
@@ -80,7 +80,7 @@ However, the same values cannot be applied to image pyramid since the margin of 
   </figure>
 
   <figure style="margin: 0;">
-    <img src="/P1/j2_aligned.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <img src="/P1/j2_align.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
       G(2, 5), R(3, 12)<br>
@@ -89,7 +89,7 @@ However, the same values cannot be applied to image pyramid since the margin of 
   </figure>
 
   <figure style="margin: 0;">
-    <img src="/P1/j3_aligned.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P1/j3_align.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Best Shift:<br>
       G(2, 3), R(3, 6)<br>
