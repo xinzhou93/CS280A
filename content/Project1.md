@@ -413,7 +413,23 @@ enhanced = exposure.rescale_intensity(img, in_range=(p5, p95))
   <figure style="margin: 0;">
     <img src="/P1/9_199.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
       <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Auto-Contrast applied
+      Auto-Contrast (1st / 99th)
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/9_298.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto-Contrast (2nd / 98th)
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/9_595.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto-Contrast (5th / 95th)
     </figcaption>
   </figure>
 </div>
