@@ -4,10 +4,53 @@ tags: [project, cs280a]
 ---
 
 # Overview
+This project focuses on colorizing the photo collection made by Prokudin-Gorskii, a photographer travelling across Russian and took color photographs of everything he saw. The collections include portraits, scenery, architecture, etc, and each of them has three exposures of the scene onto a glass plate using a red, a green and a blue filter. Although the three images are black and white, when they overlay, a color photograph will magically appear. 
 
-# Main Implementation
+The goal of this project is to use 
 
-## Exhaustive Method
+
+
+
+
+
+# Methodology
+The program takes a single plate image as input and should divide it into three equal parts. Using the channel $B$ as the basis, the program should output a single color image by aligning the Channel $G$ and $R$ to the base $B$ and stacking them together.  We need to handle two challenges:
+- How to get the best alignment displacement for each glass plate image?
+- How to get the displacement efficiently for high-resolution glass plate scans?
+
+## $L2$ Norm Scoring Metric
+To determine the best displacement, we need a metric function to quantify the score of the alignment. In this project, I used $L2$ norm (Euclidean Distance) to calculate the sum of differences, which measures the pixels-wise difference between the two overlapping images. 
+
+$$L2(I_{ref}, I_{Target}) = \sum (I_{ref}(x,y) - I_{Target}(x,y))^2$$
+
+The smaller $L2$ value indicates the better alignment and we want to find the smallest value in a search range of possible displacements.
+
+## Exhaustive Search with Predefined Margin
+Before performing the alignment search, the algorithm crops both the reference and target images by removing a **fixed** margin on each side. It becomes more convenient and robust to compute metrics on interior pixels only. 
+
+The exhaustive search explores all possible displacement vectors $(dx, dy)$ within a defined search region $[-15, 15]$. For each candidate displacement $(dx, dy)$, the algorithm computes the overlapping region between the images using the boundary constraints:
+```python
+x_lower_overlap = max(0, dx)  
+x_upper_overlap = min(self.img_ref.shape[1], self.img_other.shape[1]+dx)  
+y_lower_overlap = max(0, dy)  
+y_upper_overlap = min(self.img_ref.shape[0], self.img_other.shape[0]+dy)
+```
+
+
+
+
+
+The program used an exhaustive search at the beginning. With a defined search region $[-15, 15]$, it scores each displacement using $L2$ metric, and take the displacement $(dx, dy)$ with the smallest score.  
+- 
+
+
+
+Although this method is simple to implement, it becomes expensive and slow when handling high-resolution glass plate scans.
+
+## Image Pyramid Optimization
+
+
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
   <img src="/P1/j1_align.jpg" alt="img1" />
   <img src="/P1/j2_align.jpg" alt="img2" />
