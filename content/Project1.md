@@ -504,24 +504,17 @@ I tried several simple matrices to see how the color can be modified.
 $$
 M_1 = 
 \begin{bmatrix}
-  1 & 1 & 1 \\
-  1 & 1 & 1 \\
-  1 & 1 & 1 \\
-\end{bmatrix}, 
-M_2 = 
-\begin{bmatrix}
   0.5 & 0.5 & 0.5 \\
   0.5 & 0.5 & 0.5 \\
   0.5 & 0.5 & 0.5 \\
 \end{bmatrix},
-M_3 = 
+M_2 = 
 \begin{bmatrix}
   1.5 & 1.5 & 1.5 \\
   1.5 & 1.5 & 1.5 \\
   1.5 & 1.5 & 1.5 \\
 \end{bmatrix}
 $$
-
 
 <div style="background-color: #222; padding: 10px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
@@ -548,7 +541,7 @@ $$
 </div>
 </div>
 
-Then I tried some random values inside the matrix:
+Then I tried some random values and adjusted them inside the matrix:
 $$
 M_4 = 
 \begin{bmatrix}
