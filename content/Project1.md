@@ -494,25 +494,108 @@ This method can make dark pixels become slightly brighter and bright pixels beco
 </div>
 
 ## Color Mapping
+So far we use direct RGB serves as the standard approach, combing the three channels directly without color transformation. Color mapping here applies a $3\times 3$ transformation matrix to the image such that the final output can create nuanced color qualities:
+
+$$
+\text{RGB}{corrected} = M \times \text{RGB}{original}
+$$
+
+I tried several simple matrices to see how the color can be modified.
+$$
+M_1 = 
+\begin{bmatrix}
+  1 & 1 & 1
+  1 & 1 & 1
+  1 & 1 & 1
+\end{bmatrix}, 
+M_2 = 
+\begin{bmatrix}
+  0.5 & 0.5 & 0.5
+  0.5 & 0.5 & 0.5
+  0.5 & 0.5 & 0.5
+\end{bmatrix},
+M_3 = 
+\begin{bmatrix}
+  1.5 & 1.5 & 1.5
+  1.5 & 1.5 & 1.5
+  1.5 & 1.5 & 1.5
+\end{bmatrix}
+$$
+
 
 <div style="background-color: #222; padding: 10px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P1/10_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+    <img src="/P1/9_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Auto-Cropping applied
+      Original
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
-    <img src="/P1/10_matrix_transform_colormap.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <img src="/P1/M1.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
       <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Color mapping applied
+      M1
     </figcaption>
   </figure>
 
+  <figure style="margin: 0;">
+    <img src="/P1/M2.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      M2
+    </figcaption>
+  </figure>
 </div>
 </div>
+
+Then I tried some random values inside the matrix:
+$$
+M_4 = 
+\begin{bmatrix}
+  0.8 & 0.1 & 0.1
+  0.15 & 0.7 & 0.18
+  0.1 & 0.2 & 0.7
+\end{bmatrix}, 
+M_5 = 
+\begin{bmatrix}
+  1.0 & -0.05 & -0.05
+  -0.1 & 1.0 & 0.1
+  -0.05 & -0.3 & 1.35
+\end{bmatrix}
+$$
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/9_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Original
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/M4.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      M4
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/9_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Original
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/M5.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+      <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      M4
+    </figcaption>
+  </figure>
+</div>
+
 
 ## Edge-based Alignment
 
