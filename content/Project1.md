@@ -21,34 +21,45 @@ The program takes a single plate image as input and should divide it into three 
 ## $L2$ Norm Scoring Metric
 To determine the best displacement, we need a metric function to quantify the score of the alignment. In this project, I used $L2$ norm (Euclidean Distance) to calculate the sum of differences, which measures the pixels-wise difference between the two overlapping images. 
 
-$$L2(I_{ref}, I_{Target}) = \sum (I_{ref}(x,y) - I_{Target}(x,y))^2$$
+$$
+L2(I_{ref}, I_{Target}) = \sum (I_{ref}(x,y) - I_{Target}(x,y))^2
+$$
 
 The smaller $L2$ value indicates the better alignment and we want to find the smallest value in a search range of possible displacements.
 
 ## Exhaustive Search with Predefined Margin
-Before performing the alignment search, the algorithm crops both the reference and target images by removing a **fixed** margin on each side. It becomes more convenient and robust to compute metrics on interior pixels only. 
+Before performing the alignment search, the algorithm crops both the reference and target images by removing a **fixed** margin on each side. It becomes more convenient and robust to compute metrics on interior pixels only.  The margin is ensured to not exceed half of the minimum image dimension, preventing over-cropping.
 
-The exhaustive search explores all possible displacement vectors $(dx, dy)$ within a defined search region $[-15, 15]$. For each candidate displacement $(dx, dy)$, the algorithm computes the overlapping region between the images using the boundary constraints:
 ```python
-x_lower_overlap = max(0, dx)  
-x_upper_overlap = min(self.img_ref.shape[1], self.img_other.shape[1]+dx)  
-y_lower_overlap = max(0, dy)  
-y_upper_overlap = min(self.img_ref.shape[0], self.img_other.shape[0]+dy)
+if not (0 <= self.margin < h_min/2 and 0 <= self.margin < w_min/2):  
+    raise ValueError("Margin is too large for the image")
 ```
 
+The exhaustive search explores all possible displacement vectors $(dx, dy)$ within a defined search region $[-15, 15]$. For each candidate displacement $(dx, dy)$, the algorithm computes the overlapping region between the images using the boundary constraints:
 
+```python
+x_lower_overlap = max(0, dx)  
+x_upper_overlap = min(self.img_ref.shape[1], img_other.shape[1]+dx)  
+y_lower_overlap = max(0, dy)  
+y_upper_overlap = min(self.img_ref.shape[0], img_other.shape[0]+dy)
+```
 
-
-
-The program used an exhaustive search at the beginning. With a defined search region $[-15, 15]$, it scores each displacement using $L2$ metric, and take the displacement $(dx, dy)$ with the smallest score.  
-- 
-
-
+Then, the program only computes the $L2$ norm for the valid overlapping region and take the displacement $(dx, dy)$ with the smallest score.  
 
 Although this method is simple to implement, it becomes expensive and slow when handling high-resolution glass plate scans.
 
 ## Image Pyramid Optimization
+The image pyramid uses multi-scale images from coarse to fine resolutions to approach to find the best displacement for alignment. 
 
+The pyramid uses a simple $2 \times 2$ box filter for downsampling. At the beginning, the program used nested for loops to extract $2 \times 2$ four pixels sequentially and average them to reduce resolution. Later on, it was replaced by the vectorized method which extracts even and odd rows and columns directly.
+
+The pyramid employs a recursive structure:
+- Base Case:
+	- When either image dimension goes under $100$ pixels, the program performs **exhaustive search with the predefined margin** to get the optimal displacement at this coarse level. Since the image size is really small, the exhaustive research can be really fast.
+- Recursive Case:
+	- The program downsamples both reference and target images using the $2 \times 2$ box filter and recursively calls alignment on downsampled images. In the meantime, it receives the coarse displacement $(dx_c, dy_c)$ from lower resolution. To match current finer resolution, the algorithm scales the coarse displacement up by 2 and performs small window search with $radius = 2$ pixels centered at the scaled displacement $dx_u = dx_c × 2, dy_u = dy_c × 2$. This offsets errors from the downsampling process.
+	- 
+Using this method can efficiently process high-resolution images because most searching happens at the coarse level.
 
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
