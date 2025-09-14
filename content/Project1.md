@@ -62,6 +62,11 @@ The pyramid employs a recursive structure:
 Using this method can efficiently process high-resolution images because most searching happens at the coarse level.
 
 # Alignment Result
+The program has two parameters: `search region` and `margin`.  In the alignment using exhaustive search with predefined margin, the hyperparamter values are `g_align = L2NormAlign(search_region = 15, g, b, margin = 10)`. All the `jpg` glass plate images use this setting.
+
+However, the same values cannot be applied to image pyramid since the margin of the original `tif` image can be way wider than `jpg`. At the base case level, the `search_region` should be smaller. The hyperparamter values for image pyramid is 
+`ImagePyramid(search_region = 3, g, b, margin = 100)`. All the `tif` glass plate images use this setting.
+
 ## The Alignment using Exhaustive Search with Predefined Margin
 <div style="background-color: #222; padding: 10px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
