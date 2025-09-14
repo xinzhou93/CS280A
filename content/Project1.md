@@ -307,20 +307,17 @@ std_intensity = np.std(block)
 ```
 
 Borders often has consistent and extreme colors, thus the program defines the border area with 
-$$
-\begin{align*}
-&\text{low variation} (std < 0.08) \\
-&\text{extreme intensities} (mean < 0.15(\text{really dark}) or > 0.85(\text{really bright}))
-\end{align*}
-$$
+
+- low variation: $std < 0.08$
+- extreme intensities:
+	- really dark: $mean < 0.15$
+	- really bright: $mean > 0.85$
 
 In contrast, the inner pixels often have decent variations and intensity
-$$
-\begin{align*}
-&\text{decent variation} (std > 0.08) \\
-&\text{decent intensities} (0.15 < mean < 0.85))
-\end{align*}
-$$
+
+- decent variation: $std > 0.08$
+- decent intensities: $0.15 < mean < 0.85$
+
 If regions have $std > 0.15)$, they are classified as the inner pixels regardless of the mean intensity.
 
 For the three images, each channel is analyzed separately and the algorithm takes the largest margin for each side, which can ensure the consistent dimensions among three images.
