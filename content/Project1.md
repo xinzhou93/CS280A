@@ -58,14 +58,40 @@ The pyramid employs a recursive structure:
 	- When either image dimension goes under $100$ pixels, the program performs **exhaustive search with the predefined margin** to get the optimal displacement at this coarse level. Since the image size is really small, the exhaustive research can be really fast.
 - Recursive Case:
 	- The program downsamples both reference and target images using the $2 \times 2$ box filter and recursively calls alignment on downsampled images. In the meantime, it receives the coarse displacement $(dx_c, dy_c)$ from lower resolution. To match current finer resolution, the algorithm scales the coarse displacement up by 2 and performs small window search with $radius = 2$ pixels centered at the scaled displacement $dx_u = dx_c × 2, dy_u = dy_c × 2$. This offsets errors from the downsampling process.
-	- 
+
 Using this method can efficiently process high-resolution images because most searching happens at the coarse level.
 
+# Alignment Result
+## The Alignment using Exhaustive Search with Predefined Margin
+<div style="background-color: #222; padding: 10px; border-radius: 8px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P1/j1_aligned.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Best Shift:<br>
+      G(2, 3), R(2, -3)<br>
+      Runtime: 0.68 sec
+    </figcaption>
+  </figure>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
-  <img src="/P1/j1_align.jpg" alt="img1" />
-  <img src="/P1/j2_align.jpg" alt="img2" />
-  <img src="/P1/j3_align.jpg" alt="img3" />
+  <figure style="margin: 0;">
+    <img src="/P1/j2_aligned.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Best Shift:<br>
+      G(2, 5), R(3, 12)<br>
+      Runtime: 0.49 sec
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P1/j3_aligned.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Best Shift:<br>
+      G(2, 3), R(3, 6)<br>
+      Runtime: 0.55 sec
+    </figcaption>
+  </figure>
+</div>
 </div>
 
 ## Image Pyramid with Predefined borders
