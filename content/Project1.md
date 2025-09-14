@@ -330,10 +330,16 @@ For the three images, each channel is analyzed separately and the algorithm take
     
     <figure style="margin: 0;">
       <img src="/P1/9_aligned.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Original
+    </figcaption>
     </figure>
     
     <figure style="margin: 0;">
       <img src="/P1/9_intensity_borders.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      Auto-Cropping applied
+    </figcaption>
     </figure>
     
     <figure style="margin: 0;">
