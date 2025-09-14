@@ -78,7 +78,7 @@ r_align = ImagePyramid(search_region = 3, r, b, margin = 100)
 
 All the `tif` glass plate images use this setting.
 
-## The Alignment using Exhaustive Search with Predefined Margin
+## The Alignment Using Exhaustive Search with Predefined Margin
 <div style="background-color: #222; padding: 10px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -110,9 +110,7 @@ All the `tif` glass plate images use this setting.
 </div>
 </div>
 
-## Image Pyramid with Predefined borders
-
-### Gallery of required images
+## The Alignment of Required Images Using Image Pyramid
 <div style="background-color: #222; padding: 20px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -195,8 +193,6 @@ All the `tif` glass plate images use this setting.
       Best Shift:<br>
       R(-1, 81), R(-3, 158)<br>
       Runtime: 3.3 sec
-    </span><br>
-      <span style="color: red; font-weight: bold;">Not Perfectly Aligned</span>
     </figcaption>
   </figure>
 
@@ -220,7 +216,7 @@ All the `tif` glass plate images use this setting.
 </div>
 </div>
 
-### Gallery with other images
+## The Alignment of Other Images Using Image Pyramid
 <div style="background-color: #222; padding: 20px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
