@@ -379,23 +379,43 @@ For the three images, each channel is analyzed separately and the algorithm take
 </div>
 
 ## Auto Contrast
-<div style="background-color: #222; padding: 10px; border-radius: 8px;">
+At the beginning, the algorithm attempted to look into each pixel and find the smallest and largest pixel
+- Absolute min pixel -> assigned $0$
+- Absolute max pixel -> assigned $1$
+
+However, this method is vulnerable to outliers. If one pixel is already $0$ and $1$, no contrast will be conducted. In addition, looking for only one min/max pixel is too limited. Instead, we need to find multiple pixels at the dark and bright ends.
+
+Then, the program uses **percentiles** to find the similar group of pixels that are the darkest or brightest.
+
+- With $A_{nd}$ percentile: The program finds $A\%$ of all pixels that the darkest and uses their value as the reference dark threshold.
+- With $100-Ath$ percentile: The program finds $100-Ath$ of all pixels that are the brightest in the image and uses their values as the reference bright threshold.
+
+In the implementation, I used the $skimage$ library and the methods below to try different percentiles:
+```python
+p1, p99 = np.percentile(img, (1, 99))  
+enhanced = exposure.rescale_intensity(img, in_range=(p1, p99))
+
+p2, p98 = np.percentile(img, (2, 98))  
+enhanced = exposure.rescale_intensity(img, in_range=(p2, p98))
+
+p5, p95 = np.percentile(img, (5, 95))  
+enhanced = exposure.rescale_intensity(img, in_range=(p5, p95))
+```
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P1/10_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
+    <img src="/P1/9_intensity_borders.jpg" alt="Image 10" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Auto-Cropping applied
+      Original
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
-    <img src="/P1/10_rescale_contrast.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <img src="/P1/9_199.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
       <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
       Auto-Contrast applied
     </figcaption>
   </figure>
-
-</div>
 </div>
 
 ## Auto White Balance
