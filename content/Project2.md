@@ -31,7 +31,11 @@ The implementation in `part11_finite_difference.py` includes functions for compu
       Runtime: 0.49 sec
     </figcaption>
   </figure>
+</div>
+</div>
 
+<div style="background-color: #222; padding: 10px; border-radius: 8px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P1_smaller_dx_edges.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
@@ -50,12 +54,6 @@ The implementation in `part11_finite_difference.py` includes functions for compu
   </figure>
 </div>
 </div>
-
-**Results:**
-
-[Add your finite difference results here - original image, dx, dy, gradient magnitude, thresholded edges]
-
----
 
 ## Part 1.2: Derivative of Gaussian (DoG) Filter
 
