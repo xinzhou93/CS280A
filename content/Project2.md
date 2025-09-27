@@ -12,7 +12,6 @@ For this section, I implemented basic edge detection using finite difference ope
 
 The implementation in `part11_finite_difference.py` includes functions for computing directional gradients, combining them into magnitude maps, and applying thresholds for edge detection. I found that the raw finite difference approach, while simple and fast, was quite sensitive to image noise, which motivated the need for the more sophisticated approach in the next section.
 
-<div style="background-color: #222; padding: 10px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P1_smaller.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
@@ -32,9 +31,7 @@ The implementation in `part11_finite_difference.py` includes functions for compu
     </figcaption>
   </figure>
 </div>
-</div>
 
-<div style="background-color: #222; padding: 10px; border-radius: 8px;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P1_smaller_dx_edges.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
@@ -52,7 +49,6 @@ The implementation in `part11_finite_difference.py` includes functions for compu
       Runtime: 0.55 sec
     </figcaption>
   </figure>
-</div>
 </div>
 
 ## Part 1.2: Derivative of Gaussian (DoG) Filter
