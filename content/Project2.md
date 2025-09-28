@@ -266,14 +266,22 @@ For the bells and whistles component, I extended the basic grayscale approach to
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P7_1.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P7_2.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    Image Gradient Orientations with HSV color space
+	    The hybrid Image of the samples
     </figcaption>
   </figure>
 </div>
 
----
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P7_3.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    The hybrid Image of the samples
+    </figcaption>
+  </figure>
+</div>
+
 ## Part 2.3: Gaussian and Laplacian Stacks
 For the stacks implementation, I built multi-scale image representations without downsampling to analyze how image content varies across different frequency bands. My approach involved creating Gaussian stacks by iteratively applying Gaussian blur with increasing sigma values, effectively removing progressively higher frequencies at each level. The corresponding Laplacian stack was computed by taking differences between consecutive Gaussian stack levels, isolating specific frequency bands at each scale.
 
