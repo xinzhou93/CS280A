@@ -264,11 +264,11 @@ Image alignment proved crucial for successful hybrid images, so I implemented an
 
 For the bells and whistles component, I extended the basic grayscale approach to explore color hybrid images by testing four different combinations: standard grayscale, high-frequency component in color, low-frequency component in color, and both components in color. This exploration revealed that different color strategies can enhance or diminish the hybrid effect, with some combinations making the transition between near and far viewing more dramatic. I implemented this in `part22_color_hybrid_bells_whistles.py` with comprehensive analysis of which color approaches work best for different image pairs.
 
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P7_2.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P7_5.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    The hybrid Image of the samples
     </figcaption>
   </figure>
 </div>
@@ -277,6 +277,15 @@ For the bells and whistles component, I extended the basic grayscale approach to
   <figure style="margin: 0;">
     <img src="/P2/P7_3.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P7_2.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    The hybrid Image of the samples
     </figcaption>
   </figure>
 </div>
