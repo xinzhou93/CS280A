@@ -155,7 +155,7 @@ I also demonstrated the mathematical principle that convolution is associative b
   <figure style="margin: 0;">
     <img src="/P2/P3_filters.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    Original
+	    DoG filters
     </figcaption>
   </figure>
 </div>
@@ -189,6 +189,20 @@ I also demonstrated the mathematical principle that convolution is associative b
     </figcaption>
   </figure>
 </div>
+
+
+## Part1.4: Bells and Whistles
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P4.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Image Gradient Orientations with HSV color space
+    </figcaption>
+  </figure>
+</div>
+
+
 
 # Part 2: Fun with Frequencies
 ## Part 2.1: Image "Sharpening"
