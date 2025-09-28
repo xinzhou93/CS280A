@@ -334,12 +334,22 @@ I implemented both a standard grayscale version following the original paper (`p
 
 For the bells and whistles component, I created an extensive library of blending masks beyond simple vertical seams, including horizontal transitions, circular masks with controllable feathering, various gradient patterns (radial, diagonal), and mathematically-defined custom shapes like hearts and stars. I also implemented an interactive mask creation tool allowing users to define arbitrary blending boundaries by clicking points to create polygonal regions. This comprehensive mask library demonstrates how different boundary shapes can create vastly different artistic effects while using the same underlying multi-resolution blending algorithm.
 
-**Results:**
+##  Part 2.4B: Bells and Whistles
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P9_1.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
 
-[Add your blending results here - mask library visualization, blending results for different masks, comparison between grayscale and color approaches]
-
----
-
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P9_2.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
   
 
 ## Technical Implementation and Learnings
