@@ -10,6 +10,24 @@ tags: [project, cs280a]
 ## Part 1.1: Convolutions From Scratch
 For this section, I implemented basic edge detection using finite difference operators to compute image gradients. My approach involved applying simple convolution kernels `[1, -1]` for horizontal differences and `[[1], [-1]]` for vertical differences to detect edges by finding regions of rapid intensity change. I computed the gradient magnitude using the formula `√(dx² + dy²)` to combine both horizontal and vertical edge information into a single edge strength map. To create clean edge maps, I experimented with different threshold values to binarize the gradient magnitude, finding that higher thresholds produced cleaner but potentially incomplete edge detection while lower thresholds captured more detail but introduced noise.
 
+```python
+# Four nested loops  
+for i in range(img_height):  
+    for j in range(img_width): 
+        for ki in range(kernel_height): 
+            for kj in range(kernel_width): 
+                output[i, j] += padded_image[i + ki, j + kj] * kernel_2d[ki, kj]
+```
+
+```python
+# two nested loop
+for i in range(img_height):
+    for j in range(img_width):  
+        if direction == 'x':  
+            output[i, j] = np.sum(padded_image[i + pad_size, j:j+filter_size] * filter_1d)  
+        else:  
+            output[i, j] = np.sum(padded_image[i:i+filter_size, j + pad_size] * filter_1d)
+```
 The implementation in `part11_finite_difference.py` includes functions for computing directional gradients, combining them into magnitude maps, and applying thresholds for edge detection. I found that the raw finite difference approach, while simple and fast, was quite sensitive to image noise, which motivated the need for the more sophisticated approach in the next section.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
@@ -43,7 +61,24 @@ The implementation in `part11_finite_difference.py` includes functions for compu
   </figure>
 </div>
 
-## Part 1.2: Derivative of Gaussian (DoG) Filter
+## Part 1.2: Finite Difference Operator
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P2_x.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dx
+    </figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P2/P2_y.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dy
+    </figcaption>
+  </figure>
+</div>
+
+## Part 1.3: Derivative of Gaussian (DoG) Filter
 
 Building on the limitations observed in Part 1.1, I implemented Derivative of Gaussian filters to achieve more robust edge detection by combining smoothing and differentiation in a single operation. My approach involved first creating 2D Gaussian kernels with controllable sigma values to determine the amount of smoothing, then applying these to blur the image before computing finite differences. This two-step process significantly reduced noise sensitivity while preserving important edge information.
 
