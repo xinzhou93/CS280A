@@ -90,14 +90,16 @@ The implementation in `part11_finite_difference.py` includes functions for compu
   <figure style="margin: 0;">
     <img src="/P2/P2_p90.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    Dy
+	    Top 10%<br>
+	    Thresh = 0.161
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P2/P2_p92.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    Dy
+	    Top 8%<br>
+	    Thresh = 0.199
     </figcaption>
   </figure>
 </div>
@@ -106,21 +108,24 @@ The implementation in `part11_finite_difference.py` includes functions for compu
   <figure style="margin: 0;">
     <img src="/P2/P2_p95.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    Dx
+	    Top 5%<br>
+	    Thresh = 0.315
     </figcaption>
   </figure>
   
   <figure style="margin: 0;">
     <img src="/P2/P2_p97.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    Dy
+	    Top 3%<br>
+	    Thresh = 0.424
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P2/P2_p99.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    Dy
+	    Top 1%<br>
+	    Thresh = 0.612
     </figcaption>
   </figure>
 </div>
