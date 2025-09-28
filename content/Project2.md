@@ -374,7 +374,29 @@ For the bells and whistles component, I created an extensive library of blending
   </figure>
 </div>
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P10_1.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P10_2.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P10_3.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
 
 ## Technical Implementation and Learnings
 Throughout this project, I encountered several technical challenges that deepened my understanding of image processing fundamentals. The pyramid construction required careful attention to dimension handling, particularly ensuring that upsampling operations correctly reconstructed the expected sizes when dealing with odd and even dimensions. I solved broadcasting issues when applying 2D masks to 3D color images by expanding mask dimensions appropriately.
