@@ -256,12 +256,7 @@ The implementation involved experimenting with different Gaussian blur sigma val
   </figure>
 </div>
   
-
-
-
-
-
-### Part 2.2: Hybrid Images
+## Part 2.2: Hybrid Images
 
 The hybrid images section involved creating images that appear different depending on viewing distance by combining the low-frequency content of one image with the high-frequency content of another. My approach required careful frequency separation: I extracted low frequencies using Gaussian blur with a large sigma value and obtained high frequencies by subtracting a Gaussian-blurred version from the original image using a smaller sigma. The key challenge was finding the optimal sigma values for each image to create a convincing hybrid effect.
 
@@ -269,9 +264,14 @@ Image alignment proved crucial for successful hybrid images, so I implemented an
 
 For the bells and whistles component, I extended the basic grayscale approach to explore color hybrid images by testing four different combinations: standard grayscale, high-frequency component in color, low-frequency component in color, and both components in color. This exploration revealed that different color strategies can enhance or diminish the hybrid effect, with some combinations making the transition between near and far viewing more dramatic. I implemented this in `part22_color_hybrid_bells_whistles.py` with comprehensive analysis of which color approaches work best for different image pairs.
 
-**Results:**
-
-[Add your hybrid results here - aligned images, low/high frequency components, final hybrid images, frequency analysis plots, color variations]
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P7_1.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Image Gradient Orientations with HSV color space
+    </figcaption>
+  </figure>
+</div>
 
 ---
 ## Part 2.3: Gaussian and Laplacian Stacks
