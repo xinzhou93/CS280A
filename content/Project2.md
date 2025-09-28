@@ -151,6 +151,36 @@ I also demonstrated the mathematical principle that convolution is associative b
   </figure>
 </div>
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P3_x_twostep.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dx -- two step DoG
+    </figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P2/P3_x_dog.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dx -- one step DoG
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P3_y_twostep.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dy -- two step DoG
+    </figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P2/P3_y_dog.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dy -- one step DoG
+    </figcaption>
+  </figure>
+</div>
+
 # Part 2: Fun with Frequencies
 ## Part 2.1: Image "Sharpening"
 
