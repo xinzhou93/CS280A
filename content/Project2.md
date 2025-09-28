@@ -7,7 +7,7 @@ tags: [project, cs280a]
  This project explores fundamental image processing techniques including finite difference operators, derivative of Gaussian filters, image sharpening, hybrid images, and multi-resolution blending using Gaussian and Laplacian pyramids. Through implementing these classic computer vision algorithms, I gained hands-on experience with frequency domain analysis and multi-scale image processing techniques.     
 
 # Part 1: Fun with Filters
-## Part 1.1: Finite Difference Operator
+## Part 1.1: Convolutions From Scratch
 For this section, I implemented basic edge detection using finite difference operators to compute image gradients. My approach involved applying simple convolution kernels `[1, -1]` for horizontal differences and `[[1], [-1]]` for vertical differences to detect edges by finding regions of rapid intensity change. I computed the gradient magnitude using the formula `√(dx² + dy²)` to combine both horizontal and vertical edge information into a single edge strength map. To create clean edge maps, I experimented with different threshold values to binarize the gradient magnitude, finding that higher thresholds produced cleaner but potentially incomplete edge detection while lower thresholds captured more detail but introduced noise.
 
 The implementation in `part11_finite_difference.py` includes functions for computing directional gradients, combining them into magnitude maps, and applying thresholds for edge detection. I found that the raw finite difference approach, while simple and fast, was quite sensitive to image noise, which motivated the need for the more sophisticated approach in the next section.
@@ -16,18 +16,14 @@ The implementation in `part11_finite_difference.py` includes functions for compu
   <figure style="margin: 0;">
     <img src="/P2/P1_smaller.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Best Shift:<br>
-      G(2, 3), R(2, -3)<br>
-      Runtime: 0.68 sec
+      Original Image
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P2/P1_smaller_box_filtered.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Best Shift:<br>
-      G(2, 5), R(3, 12)<br>
-      Runtime: 0.49 sec
+      9*9 box filter
     </figcaption>
   </figure>
 </div>
@@ -36,17 +32,13 @@ The implementation in `part11_finite_difference.py` includes functions for compu
   <figure style="margin: 0;">
     <img src="/P2/P1_smaller_dx_edges.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Best Shift:<br>
-      G(2, 3), R(3, 6)<br>
-      Runtime: 0.55 sec
+	    Dx
     </figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/P2/P1_smaller_dy_edges.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-      Best Shift:<br>
-      G(2, 3), R(3, 6)<br>
-      Runtime: 0.55 sec
+	    Dy
     </figcaption>
   </figure>
 </div>
