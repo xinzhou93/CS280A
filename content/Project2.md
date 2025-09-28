@@ -78,6 +78,52 @@ The implementation in `part11_finite_difference.py` includes functions for compu
   </figure>
 </div>
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P2_p85.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dx
+    </figcaption>
+  </figure>
+  
+  <figure style="margin: 0;">
+    <img src="/P2/P2_p90.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dy
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P2_p92.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dy
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P2_p95.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dx
+    </figcaption>
+  </figure>
+  
+  <figure style="margin: 0;">
+    <img src="/P2/P2_p97.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dy
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P2_p99.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Dy
+    </figcaption>
+  </figure>
+</div>
+
 ## Part 1.3: Derivative of Gaussian (DoG) Filter
 
 Building on the limitations observed in Part 1.1, I implemented Derivative of Gaussian filters to achieve more robust edge detection by combining smoothing and differentiation in a single operation. My approach involved first creating 2D Gaussian kernels with controllable sigma values to determine the amount of smoothing, then applying these to blur the image before computing finite differences. This two-step process significantly reduced noise sensitivity while preserving important edge information.
