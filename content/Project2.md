@@ -80,7 +80,7 @@ The implementation in `part11_finite_difference.py` includes functions for compu
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P2_p85.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P2_p85.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
 	    Top 15%<br>
 	    Thresh = 0.108
@@ -88,14 +88,14 @@ The implementation in `part11_finite_difference.py` includes functions for compu
   </figure>
   
   <figure style="margin: 0;">
-    <img src="/P2/P2_p90.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P2_p90.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
 	    Dy
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
-    <img src="/P2/P2_p92.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P2_p92.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
 	    Dy
     </figcaption>
@@ -104,21 +104,21 @@ The implementation in `part11_finite_difference.py` includes functions for compu
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P2_p95.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P2_p95.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
 	    Dx
     </figcaption>
   </figure>
   
   <figure style="margin: 0;">
-    <img src="/P2/P2_p97.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P2_p97.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
 	    Dy
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
-    <img src="/P2/P2_p99.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P2_p99.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
 	    Dy
     </figcaption>
