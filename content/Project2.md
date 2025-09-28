@@ -202,8 +202,6 @@ I also demonstrated the mathematical principle that convolution is associative b
   </figure>
 </div>
 
-
-
 # Part 2: Fun with Frequencies
 ## Part 2.1: Image "Sharpening"
 
@@ -211,11 +209,32 @@ In this section, I implemented the unsharp masking technique to enhance image sh
 
 The implementation involved experimenting with different Gaussian blur sigma values to control which frequencies are considered "high frequency" and testing various alpha multipliers to achieve the desired level of enhancement without introducing artifacts. I discovered that moderate alpha values (typically 0.5-2.0) provided pleasing enhancement while higher values could create unrealistic over-sharpening or ringing artifacts around edges. To validate the technique's effectiveness, I also tested it on intentionally blurred images to demonstrate that sharpening could partially recover lost detail, though it cannot fully restore information that was eliminated by the original blurring process.
 
-**Results:**
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P5_o.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Original
+    </figcaption>
+  </figure>
+  
+  <figure style="margin: 0;">
+    <img src="/P2/P5_blur.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Blurred
+    </figcaption>
+  </figure>
 
-[Add your sharpening results here - original images, sharpened versions with different alphas, blur-then-sharpen experiments]
+  <figure style="margin: 0;">
+    <img src="/P2/P5_s.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Sharpened
+    </figcaption>
+  </figure>
+</div>
 
----
+
+
+
 ### Part 2.2: Hybrid Images
 
 The hybrid images section involved creating images that appear different depending on viewing distance by combining the low-frequency content of one image with the high-frequency content of another. My approach required careful frequency separation: I extracted low frequencies using Gaussian blur with a large sigma value and obtained high frequencies by subtracting a Gaussian-blurred version from the original image using a smaller sigma. The key challenge was finding the optimal sigma values for each image to create a convincing hybrid effect.
