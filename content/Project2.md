@@ -233,6 +233,32 @@ The implementation involved experimenting with different Gaussian blur sigma val
 </div>
 
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P1_smaller.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Original
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P6_o.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Blurred
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P6_s.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Sharpened
+    </figcaption>
+  </figure>
+</div>
+  
+
+
+
 
 
 ### Part 2.2: Hybrid Images
