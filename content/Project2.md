@@ -136,11 +136,20 @@ Building on the limitations observed in Part 1.1, I implemented Derivative of Ga
 
 I also demonstrated the mathematical principle that convolution is associative by showing that blurring an image first and then applying difference operators produces identical results to convolving the image with pre-computed derivative of Gaussian kernels. This insight led me to implement both approaches in `part12_derivative_gaussian.py`, allowing for either sequential processing or direct application of DoG filters. The Gaussian pre-smoothing proved essential for practical edge detection, as it eliminated high-frequency noise that would otherwise dominate the gradient computation while preserving the structural edges that define object boundaries.
 
-**Results:**
-
-[Add your DoG results here - blurred gradients, comparison with Part 1.1, demonstration of associativity]
-
----
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P3.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    Original
+    </figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P2/P3_smooth.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    DoG filter applied
+    </figcaption>
+  </figure>
+</div>
 
 # Part 2: Fun with Frequencies
 ## Part 2.1: Image "Sharpening"
