@@ -71,6 +71,7 @@ for i in range(img_height):
             output[i, j] = np.sum(padded_image[i:i+filter_size, j + pad_size] * filter_1d)
 ```
 
+The method `scipy.signal.convolve2d` is way faster than both four-loop and the two-loop I implemented. In addition, it provides different boundary handling methods such as `fill, symm, wrap` in addition to the zero padding.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
