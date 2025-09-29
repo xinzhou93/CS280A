@@ -50,6 +50,8 @@ for i in range(img_height):
   Instead of applying a 2D filter in one step, we can apply two 1D filters sequentially:
   - Step 1: Apply 1D filter horizontally (along rows)
   - Step 2: Apply 1D filter vertically (along columns)
+
+This is great for Part 1.2 where we need to do convolution using $D_x$ and $D_y$ respectively.
  
 ```python
 # Get dimensions  
