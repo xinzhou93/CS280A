@@ -377,7 +377,9 @@ I followed the steps of image blending with the Laplacian stack:
 - Collapse $L$ to obtain the blended image.
 
 The image below shows the image blending at each Laplacian level.
-The Laplacian level 0 shows the clear edges of the apple and orange that represent the highest frequencies. There is clear seam in the mask, indicating the window size of the mask is relatively short since high frequency details do not need a wide transition. In contrast, level 3 demonstrates the blurred images of apple, orange and mask. 
+The Laplacian level 0 shows the clear edges of the apple and orange that represent the highest frequencies. There is a clear seam in the mask, indicating the window size of the mask is relatively short since high frequency details do not need a wide transition. In contrast, level 3 demonstrates the blurred images of apple, orange and mask because low frequency needs more window size to create a natural blending effect.
+
+In the visualization process, I had difficulty imitating the colors of Laplacian stack in the paper since the values of Laplacian stack can be negative. To show it in RGB, I just clamp the value to $[0,1]$, resulting in a grayscale style.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -387,6 +389,8 @@ The Laplacian level 0 shows the clear edges of the apple and orange that represe
     </figcaption>
   </figure>
 </div>
+
+Using multiresolution blending, even there is a mask with a hard boundary in the middle, the result can still create a nice transition effect when blending two images.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
