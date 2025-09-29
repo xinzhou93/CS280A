@@ -223,7 +223,8 @@ The implementation has 3 steps:
 - Sharpen the image.
 	- Add amplified high frequencies back to original using $\text{sharpened = original + } \alpha \times \text{(original - blurred)}$
 
-The images below show that image sharpening can effectively recover the original image from a blurred version.
+The images below show that the technique of image sharpening can effectively recover the original image from a blurred version with the specific $\alpha$ value.
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P5_o.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
@@ -271,7 +272,7 @@ The images below show that image sharpening can effectively recover the original
   </figure>
 </div>
 
-The implementation involved experimenting with different alpha multipliers to achieve the desired level of enhancement without introducing artifacts. I discovered that moderate alpha values (typically 0.5-2.0) provided pleasing enhancement while higher values could create unrealistic over-sharpening or ringing artifacts around edges. To validate the technique's effectiveness, I also tested it on intentionally blurred images to demonstrate that sharpening could partially recover lost detail, though it cannot fully restore information that was eliminated by the original blurring process.
+The implementation involved experimenting with different alpha multipliers to achieve the desired level of enhancement without introducing artifacts. I found that moderate $\alpha$ values (typically $0.5-2.0$) provided improvement while higher values could create artifacts around edges. For example, with $\alpha = 5$, the bumpy wall in the background stands out and the dark circles around my eyes become obvious, which made me really sad.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
