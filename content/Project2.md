@@ -287,9 +287,9 @@ I used the starter code, which includes an interactive alignment feature for the
   </figure>
 </div>
 
-The image above demonstrates the relationship between each image and the corresponding Fourier transform visualization. I use the default values for the two images. (Me: $\sigma = 10$, Tiger: $\sigma = 5$)
+The image above demonstrates the relationship between each image and the corresponding Fourier transform visualization. I use the default values for the two images. (Me: $\sigma = 10$, Tiger: $\sigma = 5$). In the input images, due to alignment, there are sharp black boundaries. As a result, in the FFT visualizations, we can see bright lines both horizontally and vertically and noisy white dots scattered in the images. The low-pass filter (column 3) preserves the center frequencies and wipes out the high frequency noise, creating a blurry version of me. The bright lines in FFT are also blurred.(I do not understand why the background becomes black). However, the high-pass filter (column 4) removes center frequencies but keeps edge information from the tiger. The FFT of it is really bright, indicating the high frequency information kept in the image. When combined in the hybrid image (column 5), the center frequencies from me and peripheral frequencies from the tiger coexist in the same image. 
 
-The key challenge was finding the optimal sigma values for each image to create a smooth hybrid effect. I tested several combinations.
+The key challenge was finding the optimal sigma values for each image to create a smooth hybrid effect. I tested several combinations. From my perspective, the bottom right image is the worse than others since the low frequency image is too blurry and the hybrid image is dominant by the tiger whatever the distance is. I prefer the default combo (top left) because I can clearly see me when looking at it a bit far away.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -331,17 +331,8 @@ Here are some other hybrid images I tested.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P7_3.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P7_1.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    </figcaption>
-  </figure>
-</div>
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
-  <figure style="margin: 0;">
-    <img src="/P2/P7_2.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    The hybrid Image of the samples
     </figcaption>
   </figure>
 </div>
@@ -350,13 +341,22 @@ Here are some other hybrid images I tested.
   <figure style="margin: 0;">
     <img src="/P2/P7_4.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    The hybrid Image of the samples
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P7_2.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
 </div>
 
 ## Part 2.2B: Bells and Whistles
 
-For the bells and whistles component, I extended the basic grayscale approach to explore color hybrid images by testing four different combinations: standard grayscale, high-frequency component in color, low-frequency component in color, and both components in color. This exploration revealed that different color strategies can enhance or diminish the hybrid effect, with some combinations making the transition between near and far viewing more dramatic. I implemented this in `part22_color_hybrid_bells_whistles.py` with comprehensive analysis of which color approaches work best for different image pairs.
+For the bells and whistles component, I extended the basic grayscale approach to explore color hybrid images.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
