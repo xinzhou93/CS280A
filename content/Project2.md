@@ -23,7 +23,8 @@ $$
 For this section, I implemented convolution using cross-correlation instead since I do not need to worry about the flipping operations.
 
 $$
-G[i,j] = \sum_{u = -k}^{k} \sum_{v = -k}^{k} H[u,v] \, F[i+u, j+v]$$
+G[i,j] = \sum_{u = -k}^{k} \sum_{v = -k}^{k} H[u,v] \, F[i+u, j+v]
+$$
 
 To compute the output pixel at location $(i, j)$:
 1. Place the kernel $H$ centered at that location.
