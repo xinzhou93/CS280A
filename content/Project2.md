@@ -401,31 +401,54 @@ Using multiresolution blending, even there is a mask with a hard boundary in the
   </figure>
 </div>
 
-
-##  Part 2.4B: Bells and Whistles
+I also tried some other masks including irregular ones:
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/blend_horizontal.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Original
+    mask - horizontal
     </figcaption>
   </figure>
   
   <figure style="margin: 0;">
     <img src="/P2/blend_vertical.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Blurred
+    mask - vertical
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P2/blend_wave.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Sharpened
+    mask - vertical wave
     </figcaption>
   </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/blend_heart.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    mask - heart
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/blend_circular.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    mask - circle
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/blend_star.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    mask - star
+    </figcaption>
+  </figure>
+  
 </div>
+
+##  Part 2.4B: Bells and Whistles
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
