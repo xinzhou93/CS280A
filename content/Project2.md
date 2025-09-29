@@ -377,7 +377,7 @@ I followed the steps of image blending with the Laplacian stack:
 - Collapse $L$ to obtain the blended image.
 
 The image below shows the image blending at each Laplacian level.
-
+The Laplacian level 0 shows the clear edges of the apple and orange that represent the highest frequencies. There is clear seam in the mask, indicating the window size of the mask is relatively short since high frequency details do not need a wide transition. In contrast, level 3 demonstrates the blurred images of apple, orange and mask. 
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
