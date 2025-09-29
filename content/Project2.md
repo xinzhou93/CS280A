@@ -339,7 +339,7 @@ Here are some other hybrid images I tested.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P7_4.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P7_44.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
 	    The hybrid Image of the samples
     </figcaption>
@@ -356,7 +356,7 @@ Here are some other hybrid images I tested.
 
 ## Part 2.2B: Bells and Whistles
 
-For the bells and whistles component, I extended the basic grayscale approach to explore color hybrid images.
+For the bells and whistles component, I extended the basic grayscale approach to explore color hybrid images. In my opinion, the hybrid image works better to use color for both the high-frequency and the low-frequency component since colors bring us another layer of information, such as texture and areas of highlight.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
