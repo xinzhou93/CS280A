@@ -321,8 +321,43 @@ For the stacks implementation, I built multi-scale image representations without
 
 The implementation required careful handling of the mathematical relationship `L[i] = G[i] - G[i+1]` to ensure perfect reconstruction when summing all Laplacian levels plus the final Gaussian residual. I validated this by verifying that reconstructed images matched the originals within numerical precision. Applying these stacks to hybrid images revealed fascinating insights about how the hybrid effect manifests at different scales - typically, one source image dominates at finer scales while the other becomes more apparent at coarser scales, providing a quantitative explanation for why hybrid images work.
 
-**Results:**
-[Add your stack results here - Gaussian stacks, Laplacian stacks, reconstruction verification, hybrid image stack analysis]
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P9_1.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Apple Gaussian Stack
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P9_2.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Apple Laplacian Stack
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P9_3.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Orange Gaussian Stack
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P9_4.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Orange Laplacian Stack
+    </figcaption>
+  </figure>
+</div>
+
+
 
 ---
 ## Part 2.4: Multi-resolution Blending
@@ -335,21 +370,6 @@ I implemented both a standard grayscale version following the original paper (`p
 For the bells and whistles component, I created an extensive library of blending masks beyond simple vertical seams, including horizontal transitions, circular masks with controllable feathering, various gradient patterns (radial, diagonal), and mathematically-defined custom shapes like hearts and stars. I also implemented an interactive mask creation tool allowing users to define arbitrary blending boundaries by clicking points to create polygonal regions. This comprehensive mask library demonstrates how different boundary shapes can create vastly different artistic effects while using the same underlying multi-resolution blending algorithm.
 
 ##  Part 2.4B: Bells and Whistles
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
-  <figure style="margin: 0;">
-    <img src="/P2/P9_1.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    </figcaption>
-  </figure>
-</div>
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
-  <figure style="margin: 0;">
-    <img src="/P2/P9_2.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    </figcaption>
-  </figure>
-</div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
