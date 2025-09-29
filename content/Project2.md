@@ -342,6 +342,7 @@ The total level of the stack is $5$ and I start the $\sigma$ at $2$. In a for lo
 </div>
 
 A Laplacian stack is derived from the Gaussian stack by subtracting the blurred image at the coarser level ($G_{i+1}$) from the current image ($G_i$), which gives the band pass filtered image at the specific level.
+
 $$L_i = G_i - G_{i+1}$$
 
 In the implementation, I create a function that passes the `Gaussian_stack` list as a parameter and use a for loop to store the differences between the current and next image. The result `Laplacian_stack` list has 4 band-pass filtered images and the most blurred image at the last Gaussian level since we need all of them to retrieve the original image by collapsing the stack, mentioned in the lecture.
@@ -365,17 +366,34 @@ In the implementation, I create a function that passes the `Gaussian_stack` list
   </figure>
 </div>
 
-
-
----
 ## Part 2.4: Multi-resolution Blending
-The multi-resolution blending section implemented the classic Burt and Adelson 1983 algorithm for seamlessly combining images using Laplacian pyramid decomposition. My approach involved building Laplacian pyramids for both input images through iterative Gaussian smoothing and downsampling, creating a multi-scale representation where each level captures different frequency bands. Simultaneously, I constructed a Gaussian pyramid for the blending mask, allowing the transition boundary to be represented at multiple scales.
+I followed the steps of image blending with the Laplacian stack:
+- Build Laplacian stack for both images
+	- I directly use Part 2.3 to get the Laplacian stacks for both images.
+- Build Gaussian stack for a mask.
+	- I directly use Gaussian stack from Part 2.3 for the masks.
+- Build a combined Laplacian stack $L$.
+	- The blending function is applied from the lecture: $l_k = l_k^A * m_k + l_i^B * (1-m_k)$
+- Collapse $L$ to obtain the blended image
 
-The blending process occurred at each pyramid level using the formula `Blended[i] = Mask[i] × Image1[i] + (1-Mask[i]) × Image2[i]`, where the mask values smoothly interpolate between the two source images. The final result was obtained by reconstructing the image from the blended Laplacian pyramid through a series of upsample and add operations. This multi-scale approach eliminates the harsh transitions that would occur with simple alpha blending while preserving fine details at boundaries.
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P11_1.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Orange Laplacian Stack
+    </figcaption>
+  </figure>
+</div>
 
-I implemented both a standard grayscale version following the original paper (`part24_multiresolution_blending_grayscale.py`) and an advanced color version with extensive mask options (`part24_advanced_blending.py`). The grayscale version converts all inputs to luminance values before processing, maintaining the classic single-channel approach, while the color version processes each RGB channel independently to preserve color information throughout the blending process.
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P11_2.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Orange Laplacian Stack
+    </figcaption>
+  </figure>
+</div>
 
-For the bells and whistles component, I created an extensive library of blending masks beyond simple vertical seams, including horizontal transitions, circular masks with controllable feathering, various gradient patterns (radial, diagonal), and mathematically-defined custom shapes like hearts and stars. I also implemented an interactive mask creation tool allowing users to define arbitrary blending boundaries by clicking points to create polygonal regions. This comprehensive mask library demonstrates how different boundary shapes can create vastly different artistic effects while using the same underlying multi-resolution blending algorithm.
 
 ##  Part 2.4B: Bells and Whistles
 
