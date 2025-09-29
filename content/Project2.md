@@ -105,6 +105,17 @@ The method `scipy.signal.convolve2d` is way faster than both four-loop and the t
 </div>
 
 ## Part 1.2: Finite Difference Operator
+This section uses the `scipy.signal.convolve2d` to show the partial derivative in $x$ and $y$ by convolving the images with finite difference operators $D_x$ and $D_y$:
+
+$$D_x = \begin{bmatrix} 1 & 0 & -1 \end{bmatrix} \quad \text{and} \quad D_y = \begin{bmatrix} 1 \\ 0 \\ -1
+  \end{bmatrix}$$
+  
+where the filter implements the central difference $f(x+1) - f(x-1)$ for approximation.
+
+```python
+edges_x = convolve2d(image, Dy, mode='same') 
+edges_y = convolve2d(image, Dx, mode='same')
+```
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -120,6 +131,16 @@ The method `scipy.signal.convolve2d` is way faster than both four-loop and the t
     </figcaption>
   </figure>
 </div>
+
+$∂f/∂x$
+- Sensitive to changes **along the x-axis** (horizontal direction).  
+- Highlights **vertical edges**, because vertical edges cause strong intensity changes when moving left–right.  
+- Example: vertical stripes on a zebra or tiger become bright in the derivative image.
+
+$∂f/∂y$
+- Sensitive to changes **along the y-axis** (vertical direction).  
+- Highlights **horizontal edges**, because horizontal edges cause strong intensity changes when moving up–down.  
+- Example: features like the tiger’s mouth line or horizontal wrinkles show up.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
