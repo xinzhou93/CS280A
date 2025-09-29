@@ -317,15 +317,27 @@ For the bells and whistles component, I extended the basic grayscale approach to
 </div>
 
 ## Part 2.3: Gaussian and Laplacian Stacks
-For the stacks implementation, I built multi-scale image representations without downsampling to analyze how image content varies across different frequency bands. My approach involved creating Gaussian stacks by iteratively applying Gaussian blur with increasing sigma values, effectively removing progressively higher frequencies at each level. The corresponding Laplacian stack was computed by taking differences between consecutive Gaussian stack levels, isolating specific frequency bands at each scale.
+Gaussian stack is a sequence of progressively blurred images at the same resolution as the original. Different from the pyramid structure, there is no need to subsample the image in each level. However, to effectively blur the images, we do need to apply the Gaussian kernels with increasing $\sigma$ values that have wider spread outs.
 
-The implementation required careful handling of the mathematical relationship `L[i] = G[i] - G[i+1]` to ensure perfect reconstruction when summing all Laplacian levels plus the final Gaussian residual. I validated this by verifying that reconstructed images matched the originals within numerical precision. Applying these stacks to hybrid images revealed fascinating insights about how the hybrid effect manifests at different scales - typically, one source image dominates at finer scales while the other becomes more apparent at coarser scales, providing a quantitative explanation for why hybrid images work.
+In the kernel implementation, I double the $\sigma$ in each level ($\sigma, 2\sigma, 4\sigma,..$) and use the rule of thumb `kernel size = 6 * sigma + 1` from the lecture and make sure the size is odd. Then, I use the customized function `create_gaussian_kernel(kernel_size, current_sigma)` from Part 1 to create the new wider Gaussian kernel.
+
+The total level of the stack is $5$ and I start the $\sigma$ at $2$. In a for loop, I create a Gaussian kernel for the current $\sigma$ and use convolution from Part 1 to get the target blurred image. The result in each level is saved into a list `gaussian_stack` for Laplacian stack implementation.
+
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P9_1.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     Apple Gaussian Stack
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P9_3.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Orange Gaussian Stack
     </figcaption>
   </figure>
 </div>
@@ -339,14 +351,6 @@ The implementation required careful handling of the mathematical relationship `L
   </figure>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
-  <figure style="margin: 0;">
-    <img src="/P2/P9_3.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Orange Gaussian Stack
-    </figcaption>
-  </figure>
-</div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
