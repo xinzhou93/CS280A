@@ -244,9 +244,17 @@ When the DoG filter is applied, the original image can be effectively blurred.
   <figure style="margin: 0;">
     <img src="/P2/P3_smooth.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    DoG filter applied
+	    Two-step convolutions
     </figcaption>
   </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P3_smooth.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    One-step convolution
+    </figcaption>
+  </figure>
+  
 </div>
 
 To show partial derivatives in $x$ and $y$ , I use `convolve2d` to convolve the Gaussian kernel and $D_x, D_y$ respectively.
@@ -256,7 +264,7 @@ dog_x = convolve2d(gaussian_kernel, Dy, mode='same', boundary='symm')
 dog_y = convolve2d(gaussian_kernel, Dx, mode='same', boundary='symm')
 ```
 
-However, I got some issues in proving that two-step and one-step DoG filter can offer the same results. In the pictures below, it is noticeable that partial derivatives in $x$ and $y$ are a bit different although I used the same mode and boundary.
+However, I got some issues in proving that two-step and one-step DoG filter can offer the same results even if the blurred images look the same above. In the pictures below, it is noticeable that partial derivatives in $x$ and $y$ are a bit different although I used the same mode and boundary. Any advice would be appreciated.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -290,6 +298,7 @@ However, I got some issues in proving that two-step and one-step DoG filter can 
 
 
 ## Part1.4: Bells and Whistles
+
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
