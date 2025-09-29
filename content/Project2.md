@@ -261,9 +261,23 @@ The hybrid images section intends to guide us how to create a famous special eff
 
 This part involves creating images exactly the same way that appear different depending on viewing distance by combining the low-frequency content of one image with the high-frequency content of another. 
 
-I extracted low frequencies using Gaussian blur with a large sigma value and obtained high frequencies by subtracting a Gaussian-blurred version from the original image. 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P7_3.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
 
-$$\text{High Frequency = Original - Low Frequency}$$
+Take the images of me and a tiger for example, I want myself to be visible from far away and the tiger to show up close. The steps are shown as follows:
+- Get low frequency image from me.
+	- I create a function that passes my photo and an abstract $\sigma$ as the parameters. Then through the rule of thumb from the lecture `kernel size = 6 * sigma + 1` and `create_gaussian_kernel(kernel_size1, sigma1)` from Part 1, I can get a Gaussian kernel and convolve it with the image to get the target low frequency version.
+- Get high frequency image from the tiger.
+	- Using the same process to get a low frequency tiger, the high frequency image can be obtained by subtracting a Gaussian-blurred version from the original image: $\text{High Frequency = Original - Low Frequency}$.
+- Combine two images.
+	- for the result hybrid image, we use `hybrid = low_frequencies + high_frequencies`.
+
+I used the starter code, which includes a interactive alignment feature for the two images.
 
 The key challenge was finding the optimal sigma values for each image to create a smooth hybrid effect.
 
