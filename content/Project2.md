@@ -202,11 +202,11 @@ I also tested gradient magnitude with different thresholds to make minor tradeof
   </figure>
 </div>
 
+The pictures above demonstrate the gradient magnitude with `percentile = 85, 90, 92, 95, 97, 99`. It is obvious that `top 8%` can effectively keep all edges of the cameraman and the tripod while minimize the noise from the background. `top 5%` can successfully remove the unnecessary background information at the expense of some edge losses, such as the legs for the man.
+
 ## Part 1.3: Derivative of Gaussian (DoG) Filter
 
-Building on the limitations observed in Part 1.1, I implemented Derivative of Gaussian filters to achieve more robust edge detection by combining smoothing and differentiation in a single operation. My approach involved first creating 2D Gaussian kernels with controllable sigma values to determine the amount of smoothing, then applying these to blur the image before computing finite differences. This two-step process significantly reduced noise sensitivity while preserving important edge information.
 
-I also demonstrated the mathematical principle that convolution is associative by showing that blurring an image first and then applying difference operators produces identical results to convolving the image with pre-computed derivative of Gaussian kernels. This insight led me to implement both approaches in `part12_derivative_gaussian.py`, allowing for either sequential processing or direct application of DoG filters. The Gaussian pre-smoothing proved essential for practical edge detection, as it eliminated high-frequency noise that would otherwise dominate the gradient computation while preserving the structural edges that define object boundaries.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
