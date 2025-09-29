@@ -8,18 +8,56 @@ tags: [project, cs280a]
 
 # Part 1: Fun with Filters
 ## Part 1.1: Convolutions From Scratch
-For this section, I implemented basic edge detection using finite difference operators to compute image gradients. My approach involved applying simple convolution kernels `[1, -1]` for horizontal differences and `[[1], [-1]]` for vertical differences to detect edges by finding regions of rapid intensity change. I computed the gradient magnitude using the formula `√(dx² + dy²)` to combine both horizontal and vertical edge information into a single edge strength map. To create clean edge maps, I experimented with different threshold values to binarize the gradient magnitude, finding that higher thresholds produced cleaner but potentially incomplete edge detection while lower thresholds captured more detail but introduced noise.
+Let $F$ be the image, $H$ be the kernel($2k+1 \times 2k+1$) and $G$ be the output image. A convolution operation is a cross-correlation where the filter is flipped both horizontally and vertically before being applied to the image:
+
+$$
+G[i,j] = \sum_{u=-k}^{k} \sum_{v=-k}^{k} H[u,v] \, F[i-u, \, j-v]
+$$
+
+It is written:
+
+$$
+G = H \star F
+$$
+
+For this section, I implemented convolution using cross-correlation instead since I do not need to worry about the flipping operations.
+
+$$
+G[i,j] = \sum_{u = -k}^{k} \sum_{v = -k}^{k} H[u,v] \, F[i+u, j+v]$$
+
+To compute the output pixel at location $(i, j)$:
+1. Place the kernel $H$ centered at that location.
+2. Multiply each kernel value $H[u, v]$ with the corresponding image pixel $F[i+u, j+v]$.
+3. Add up all those products.
+
+To get convolution work for each pixel of the image, I firstly implemented zero padding by using the formula `pad size = (kernel_height/width - 1) // 2` and add the pad to each side of the image using `np.pad()`.
+
+ For the four-loop convolution, the first two loops iterate through each position $[i,j]$ in the output image. For each output position, the inner two loops iterate through all kernel positions $[ki,kj]$, accumulating the sum of element-wise products between the kernel and the corresponding image patch `padded_image[i+ki, j+kj]`. I was confused about finding the correct neighboring pixels but the zero padding does the shift for us. For example, assume the pad size is 1, after padding, the starting pixel of the padded image is $(0,0)$ but in the original image, that position is mapped to $(1,1)$ and it is easier for us to find the top left, top right ..... pixels.
 
 ```python
+padded_image = add_zero_padding(image, kernel_2d)
 # Four nested loops  
+output = np.zeros((img_height, img_width))
+
 for i in range(img_height):  
     for j in range(img_width): 
         for ki in range(kernel_height): 
             for kj in range(kernel_width): 
                 output[i, j] += padded_image[i + ki, j + kj] * kernel_2d[ki, kj]
 ```
-
+  Instead of applying a 2D filter in one step, we can apply two 1D filters sequentially:
+  - Step 1: Apply 1D filter horizontally (along rows)
+  - Step 2: Apply 1D filter vertically (along columns)
+ 
 ```python
+# Get dimensions  
+img_height, img_width = image.shape  
+filter_size = len(filter_1d)  
+  
+# Use padding function  
+padded_image = add_zero_padding(image, filter_1d)  
+pad_size = (filter_size - 1) // 2
+
 # two nested loop
 for i in range(img_height):
     for j in range(img_width):  
