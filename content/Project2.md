@@ -448,8 +448,7 @@ I also tried some other masks including irregular ones:
   
 </div>
 
-##  Part 2.4B: Bells and Whistles
-
+Here are some blended images I found interesting.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P10_1.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
@@ -474,9 +473,4 @@ I also tried some other masks including irregular ones:
   </figure>
 </div>
 
-## Technical Implementation and Learnings
-Throughout this project, I encountered several technical challenges that deepened my understanding of image processing fundamentals. The pyramid construction required careful attention to dimension handling, particularly ensuring that upsampling operations correctly reconstructed the expected sizes when dealing with odd and even dimensions. I solved broadcasting issues when applying 2D masks to 3D color images by expanding mask dimensions appropriately.
-
-The interactive components taught me about building user-friendly tools for computer vision tasks, as precise alignment and custom mask creation significantly impact final results. I learned that successful hybrid images require not just technical implementation but also artistic intuition about which features should be emphasized at different viewing distances.
-
-The frequency domain analysis revealed how different processing techniques affect various scales of image content, providing insight into why multi-resolution approaches often outperform single-scale methods for complex image processing tasks like seamless blending and hybrid image creation.
+##  Part 2.4B: Bells and Whistles
