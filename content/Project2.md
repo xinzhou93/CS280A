@@ -277,12 +277,22 @@ Take the images of me and a tiger for example, I want myself to be visible from 
 - Combine two images.
 	- for the result hybrid image, we use `hybrid = low_frequencies + high_frequencies`.
 
-I used the starter code, which includes a interactive alignment feature for the two images.
+I used the starter code, which includes an interactive alignment feature for the two images.
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P12_1.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
+
 
 The key challenge was finding the optimal sigma values for each image to create a smooth hybrid effect.
 
 
 
+Here are some other hybrid images I tested.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P7_5.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
