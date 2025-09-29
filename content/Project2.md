@@ -45,6 +45,7 @@ for i in range(img_height):
             for kj in range(kernel_width): 
                 output[i, j] += padded_image[i + ki, j + kj] * kernel_2d[ki, kj]
 ```
+  
   Instead of applying a 2D filter in one step, we can apply two 1D filters sequentially:
   - Step 1: Apply 1D filter horizontally (along rows)
   - Step 2: Apply 1D filter vertically (along columns)
@@ -66,7 +67,7 @@ for i in range(img_height):
         else:  
             output[i, j] = np.sum(padded_image[i:i+filter_size, j + pad_size] * filter_1d)
 ```
-The implementation in `part11_finite_difference.py` includes functions for computing directional gradients, combining them into magnitude maps, and applying thresholds for edge detection. I found that the raw finite difference approach, while simple and fast, was quite sensitive to image noise, which motivated the need for the more sophisticated approach in the next section.
+
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
