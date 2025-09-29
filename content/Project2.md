@@ -205,9 +205,25 @@ I also demonstrated the mathematical principle that convolution is associative b
 # Part 2: Fun with Frequencies
 ## Part 2.1: Image "Sharpening"
 
-In this section, I implemented the unsharp masking technique to enhance image sharpness by amplifying high-frequency details. My approach was based on the principle that subtracting a blurred version of an image from itself isolates the high-frequency components, which can then be added back to the original image with increased amplitude. I used the formula `sharpened = original + α × (original - blurred)` where α controls the strength of the sharpening effect.
+In this section, I implemented the unsharp masking technique to enhance image sharpness by amplifying high-frequency details. My approach was based on the principle that subtracting a blurred version of an image from itself isolates the high-frequency components, which can then be added back to the original image with increased amplitude. 
 
-The implementation involved experimenting with different Gaussian blur sigma values to control which frequencies are considered "high frequency" and testing various alpha multipliers to achieve the desired level of enhancement without introducing artifacts. I discovered that moderate alpha values (typically 0.5-2.0) provided pleasing enhancement while higher values could create unrealistic over-sharpening or ringing artifacts around edges. To validate the technique's effectiveness, I also tested it on intentionally blurred images to demonstrate that sharpening could partially recover lost detail, though it cannot fully restore information that was eliminated by the original blurring process.
+$$\text{High Frequency = Original - Low Frequency}$$
+
+Then I used the formula 
+
+$$\text{sharpened = original + } \alpha \times \text{(original - blurred)}$$
+
+where $\alpha$ controls the strength of the sharpening effect.
+
+The implementation has 3 steps:
+- Get low frequency image:
+	- I create a function that passes an image and an abstract $\sigma$ as the parameters. Then through the rule of thumb from the lecture `kernel size = 6 * sigma + 1` and `create_gaussian_kernel(kernel_size1, sigma1)` from Part 1, I can get a Gaussian kernel and convolve it with the image to get the target low frequency version.
+- Get high frequency image.
+	- The high frequency image can be obtained by subtracting a Gaussian-blurred version from the original image: $\text{High Frequency = Original - Low Frequency}$.
+- Sharpen the image.
+	- Add amplified high frequencies back to original using $\text{sharpened = original + } \alpha \times \text{(original - blurred)}$
+
+The implementation involved experimenting with different alpha multipliers to achieve the desired level of enhancement without introducing artifacts. I discovered that moderate alpha values (typically 0.5-2.0) provided pleasing enhancement while higher values could create unrealistic over-sharpening or ringing artifacts around edges. To validate the technique's effectiveness, I also tested it on intentionally blurred images to demonstrate that sharpening could partially recover lost detail, though it cannot fully restore information that was eliminated by the original blurring process.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -220,14 +236,14 @@ The implementation involved experimenting with different Gaussian blur sigma val
   <figure style="margin: 0;">
     <img src="/P2/P5_blur.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Blurred
+    Blurred with sigma = 2.0
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P2/P5_s.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Sharpened
+    Sharpened with alpha = 1.5
     </figcaption>
   </figure>
 </div>
@@ -244,14 +260,14 @@ The implementation involved experimenting with different Gaussian blur sigma val
   <figure style="margin: 0;">
     <img src="/P2/P6_o.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Blurred
+    Blurred with sigma = 2.0
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P2/P6_s.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Sharpened
+    Sharpened with alpha = 1.5
     </figcaption>
   </figure>
 </div>
@@ -341,7 +357,6 @@ Here are some other hybrid images I tested.
   <figure style="margin: 0;">
     <img src="/P2/P7_44.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    The hybrid Image of the samples
     </figcaption>
   </figure>
 </div>
