@@ -146,7 +146,7 @@ For gradient magnitude, we use the formula below:
   $$|\nabla f| = \sqrt{G_x^2 + G_y^2} = \sqrt{\left(\frac{\partial f}{\partial x}\right)^2 + \left(\frac{\partial
   f}{\partial y}\right)^2}$$
 
-I also tested gradient magnitude with different thresholds to make minor tradeoffs between finding all edges and removing all noise.
+I also tested gradient magnitude with different thresholds to make minor tradeoffs between finding all edges and removing all noise. To be specific, I used `threshold = np.percentile(gradient_magnitude, percentile)`. For example, `percentile=90` means keeping only pixels with gradient magnitude in the top 10%.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
