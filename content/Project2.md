@@ -223,6 +223,24 @@ kernel = gaussian_1d @ gaussian_1d.T
 ```
 
 This method `create_gaussian_kernel(size, sigma)` will also be used several times in Part 2.
+
+To get the DoG filter, I use `convolve2d` to convolve the Gaussian kernel and $Dx, D_y$ respectively.
+
+```python
+dog_x = convolve2d(gaussian_kernel, Dy, mode='same', boundary='symm')  
+dog_y = convolve2d(gaussian_kernel, Dx, mode='same', boundary='symm')
+```
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P3_filters.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+	    DoG filters
+    </figcaption>
+  </figure>
+</div>
+
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P3.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
@@ -234,15 +252,6 @@ This method `create_gaussian_kernel(size, sigma)` will also be used several time
     <img src="/P2/P3_smooth.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
 	    DoG filter applied
-    </figcaption>
-  </figure>
-</div>
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
-  <figure style="margin: 0;">
-    <img src="/P2/P3_filters.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-	    DoG filters
     </figcaption>
   </figure>
 </div>
