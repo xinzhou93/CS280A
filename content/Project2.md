@@ -135,13 +135,18 @@ edges_y = convolve2d(image, Dx, mode='same')
 
 $∂f/∂x$
 - Sensitive to changes **along the x-axis** (horizontal direction).  
-- Highlights **vertical edges**, because vertical edges cause strong intensity changes when moving left–right.  
-- Example: vertical stripes on a zebra or tiger become bright in the derivative image.
+- Highlights **vertical edges** of the person and tripod, because vertical edges cause strong intensity changes when moving left–right.  
 
 $∂f/∂y$
 - Sensitive to changes **along the y-axis** (vertical direction).  
-- Highlights **horizontal edges**, because horizontal edges cause strong intensity changes when moving up–down.  
-- Example: features like the tiger’s mouth line or horizontal wrinkles show up.
+- Highlights **horizontal edges** of the hands, clouds, water surfaces, because horizontal edges cause strong intensity changes when moving up–down.  
+
+For gradient magnitude, we use the formula below:
+
+  $$|\nabla f| = \sqrt{G_x^2 + G_y^2} = \sqrt{\left(\frac{\partial f}{\partial x}\right)^2 + \left(\frac{\partial
+  f}{\partial y}\right)^2}$$
+
+I also tested gradient magnitude with different thresholds to make minor tradeoffs between finding all edges and removing all noise.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
