@@ -344,7 +344,7 @@ The total level of the stack is $5$ and I start the $\sigma$ at $2$. In a for lo
 A Laplacian stack is derived from the Gaussian stack by subtracting the blurred image at the coarser level ($G_{i+1}$) from the current image ($G_i$), which gives the band pass filtered image at the specific level.
 $$L_i = G_i - G_{i+1}$$
 
-
+In the implementation, I create a function that passes the `Gaussian_stack` list as a parameter and use a for loop to store the differences between the current and next image. The result `Laplacian_stack` list has 4 band-pass filtered images and the most blurred image at the last Gaussian level since we need all of them to retrieve the original image by collapsing the stack, mentioned in the lecture.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
