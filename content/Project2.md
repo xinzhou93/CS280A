@@ -287,19 +287,47 @@ I used the starter code, which includes an interactive alignment feature for the
   </figure>
 </div>
 
+The image above demonstrates the relationship between each image and the corresponding Fourier transform visualization. I use the default values for the two images. (Me: $\sigma = 10$, Tiger: $\sigma = 5$)
 
-The key challenge was finding the optimal sigma values for each image to create a smooth hybrid effect.
+The key challenge was finding the optimal sigma values for each image to create a smooth hybrid effect. I tested several combinations.
 
-
-
-Here are some other hybrid images I tested.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P7_5.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P12_2.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      sigma1 = 10 <br>
+      sigma2 = 5
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P12_8_4.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      sigma1 = 8 <br>
+      sigma2 = 4
     </figcaption>
   </figure>
 </div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P12_12_6.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      sigma1 = 12 <br>
+      sigma2 = 6
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P12_15_3.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+      sigma1 = 15 <br>
+      sigma2 = 3
+    </figcaption>
+  </figure>
+</div>
+
+Here are some other hybrid images I tested.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
