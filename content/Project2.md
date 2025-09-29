@@ -323,7 +323,6 @@ In the kernel implementation, I double the $\sigma$ in each level ($\sigma, 2\si
 
 The total level of the stack is $5$ and I start the $\sigma$ at $2$. In a for loop, I create a Gaussian kernel for the current $\sigma$ and use convolution from Part 1 to get the target blurred image. The result in each level is saved into a list `gaussian_stack` for Laplacian stack implementation.
 
-
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P9_1.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
@@ -341,6 +340,11 @@ The total level of the stack is $5$ and I start the $\sigma$ at $2$. In a for lo
     </figcaption>
   </figure>
 </div>
+
+A Laplacian stack is derived from the Gaussian stack by subtracting the blurred image at the coarser level ($G_{i+1}$) from the current image ($G_i$), which gives the band pass filtered image at the specific level.
+$$L_i = G_i - G_{i+1}$$
+
+
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
