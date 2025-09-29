@@ -206,8 +206,23 @@ The pictures above demonstrate the gradient magnitude with `percentile = 85, 90,
 
 ## Part 1.3: Derivative of Gaussian (DoG) Filter
 
+From the lecture, I understood that differentiation is very sensitive to noise and thus we cannot directly use raw derivatives. To minimize the effects of noise, we have two methods:
+- Two-step convolutions:
+	- Apply Gaussian smoothing to reduce noise
+	- Take the derivative: another convolution using derivative operator
+- One-step convolution:
+	- Precompute the derivative of the Gaussian and convolve just once using the commutative property of differentiation and convolution $$\frac{d}{dx} (f * g) = f * \frac{d}{dx} g$$
 
+In the implementation, I followed the instructions to create a 2D gaussian kernel using `cv2.getGaussianKernel()`. In details, we need to ensure the size is odd and then we can create a 1D Gaussian kernel which returns a column vector.
+```python
+gaussian_1d = cv2.getGaussianKernel(size, sigma)
+```
+Then we take outer product with its transpose.
+```python
+kernel = gaussian_1d @ gaussian_1d.T
+```
 
+This method `create_gaussian_kernel(size, sigma)` will also be used several times in Part 2.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P3.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
