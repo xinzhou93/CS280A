@@ -223,6 +223,7 @@ The implementation has 3 steps:
 - Sharpen the image.
 	- Add amplified high frequencies back to original using $\text{sharpened = original + } \alpha \times \text{(original - blurred)}$
 
+The images below show that image sharpening can effectively recover the original image from a blurred version.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P2/P5_o.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
@@ -274,7 +275,7 @@ The implementation involved experimenting with different alpha multipliers to ac
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P6_com.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P6_com.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
