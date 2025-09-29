@@ -134,12 +134,12 @@ edges_y = convolve2d(image, Dx, mode='same')
 </div>
 
 $∂f/∂x$
-- Sensitive to changes **along the x-axis** (horizontal direction).  
-- Highlights **vertical edges** of the person and tripod, because vertical edges cause strong intensity changes when moving left–right.  
+- Sensitive to changes along the x-axis (horizontal direction).  
+- Highlights vertical edges of the person and tripod, because vertical edges cause strong intensity changes when moving left–right.  
 
 $∂f/∂y$
-- Sensitive to changes **along the y-axis** (vertical direction).  
-- Highlights **horizontal edges** of the hands, clouds, water surfaces, because horizontal edges cause strong intensity changes when moving up–down.  
+- Sensitive to changes along the y-axis (vertical direction).  
+- Highlights horizontal edges of the hands, clouds, water surfaces, because horizontal edges cause strong intensity changes when moving up–down.  
 
 For gradient magnitude, we use the formula below:
 
