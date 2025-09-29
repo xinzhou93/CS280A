@@ -374,7 +374,10 @@ I followed the steps of image blending with the Laplacian stack:
 	- I directly use Gaussian stack from Part 2.3 for the masks.
 - Build a combined Laplacian stack $L$.
 	- The blending function is applied from the lecture: $l_k = l_k^A * m_k + l_i^B * (1-m_k)$
-- Collapse $L$ to obtain the blended image
+- Collapse $L$ to obtain the blended image.
+
+The image below shows the image blending at each Laplacian level.
+
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
