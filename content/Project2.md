@@ -255,14 +255,18 @@ The implementation involved experimenting with different Gaussian blur sigma val
     </figcaption>
   </figure>
 </div>
-  
+
 ## Part 2.2: Hybrid Images
+The hybrid images section intends to guide us how to create a famous special effect from "Gala Contemplating the Mediterranean Sea, which at 30 meters becomes the portrait of Abraham Lincoln”, 1976". In the lecture, we knew that from a distance a portrait of Lincoln appeared whereas Gala showed up when looking at it closely.
 
-The hybrid images section involved creating images that appear different depending on viewing distance by combining the low-frequency content of one image with the high-frequency content of another. My approach required careful frequency separation: I extracted low frequencies using Gaussian blur with a large sigma value and obtained high frequencies by subtracting a Gaussian-blurred version from the original image using a smaller sigma. The key challenge was finding the optimal sigma values for each image to create a convincing hybrid effect.
+This part involves creating images exactly the same way that appear different depending on viewing distance by combining the low-frequency content of one image with the high-frequency content of another. 
 
-Image alignment proved crucial for successful hybrid images, so I implemented an interactive alignment system using matplotlib's ginput functionality, allowing precise manual registration of corresponding features between the two source images. This involved geometric transformations including translation, rotation, and scaling to ensure that key features like eyes, mouth, or other structural elements were properly aligned before frequency mixing.
+I extracted low frequencies using Gaussian blur with a large sigma value and obtained high frequencies by subtracting a Gaussian-blurred version from the original image. 
 
-For the bells and whistles component, I extended the basic grayscale approach to explore color hybrid images by testing four different combinations: standard grayscale, high-frequency component in color, low-frequency component in color, and both components in color. This exploration revealed that different color strategies can enhance or diminish the hybrid effect, with some combinations making the transition between near and far viewing more dramatic. I implemented this in `part22_color_hybrid_bells_whistles.py` with comprehensive analysis of which color approaches work best for different image pairs.
+$$\text{High Frequency = Original - Low Frequency}$$
+
+The key challenge was finding the optimal sigma values for each image to create a smooth hybrid effect.
+
 
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
@@ -299,6 +303,8 @@ For the bells and whistles component, I extended the basic grayscale approach to
 </div>
 
 ## Part 2.2B: Bells and Whistles
+
+For the bells and whistles component, I extended the basic grayscale approach to explore color hybrid images by testing four different combinations: standard grayscale, high-frequency component in color, low-frequency component in color, and both components in color. This exploration revealed that different color strategies can enhance or diminish the hybrid effect, with some combinations making the transition between near and far viewing more dramatic. I implemented this in `part22_color_hybrid_bells_whistles.py` with comprehensive analysis of which color approaches work best for different image pairs.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
