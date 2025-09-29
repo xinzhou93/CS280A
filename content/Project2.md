@@ -107,8 +107,9 @@ The method `scipy.signal.convolve2d` is way faster than both four-loop and the t
 ## Part 1.2: Finite Difference Operator
 This section uses the `scipy.signal.convolve2d` to show the partial derivative in $x$ and $y$ by convolving the images with finite difference operators $D_x$ and $D_y$:
 
-$$D_x = \begin{bmatrix} 1 & 0 & -1 \end{bmatrix} \quad \text{and} \quad D_y = \begin{bmatrix} 1 \\ 0 \\ -1
-  \end{bmatrix}$$
+$$
+D_x = \begin{bmatrix} 1 & 0 & -1 \end{bmatrix} \quad \text{and} \quad D_y = \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}
+$$
   
 where the filter implements the central difference $f(x+1) - f(x-1)$ for approximation.
 
