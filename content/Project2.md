@@ -682,14 +682,30 @@ Here are some blended images I found interesting.
   <figure style="margin: 0;">
     <img src="/P2/P13_2.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    The result of Image blending with Laplacian stack
+    RGB Blending
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P2/P13_1.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    The result of Image blending with Laplacian stack
+    LAB Blending
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P13_3.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    RGB Blending
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P13_4.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    LAB Blending
     </figcaption>
   </figure>
 </div>
