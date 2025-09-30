@@ -690,16 +690,70 @@ Here are some blended images I found interesting.
 </div>
 
 ##  Part 2.4B: Bells and Whistles
+This section tries LAB color space blending, where the RGB channels are converted to `L, A, B` channels instead.
+- The L channel represents luminance from 0 to 100.
+- The A channel represents Green-Red axis.
+- The B channel represents Blue-Yellow axis.
+
+The implementation is similar to multiresolution blending in Part 2.4:
+- Convert both images from RGB to LAB:
+	- `img1_lab = rgb2lab(img1)`
+- For each LAB channel:
+	- Build Laplacian stack for both images
+	- Build Gaussian stack for a mask.
+	- Blend at each level using $l_k = l_k^A * m_k + l_i^B * (1-m_k)$
+	- Reconstruct the blended channel and get back to LAB range
+	- Convert back to RGB using `blended_rgb = lab2rgb(blended_lab)`
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P13_8.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P14_1.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    LAB processing
+    img1 - blended L channel
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P14_2.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    img2 - blended L channel
     </figcaption>
   </figure>
 </div>
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P14_3.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    img1 - blended A channel
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P14_4.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    img2 - blended A channel
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P2/P14_5.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    img1 - blended B channel
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P2/P14_6.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    img2 - blended B channel
+    </figcaption>
+  </figure>
+</div>
+
+From the comparisons side by side, the LAB blending can create slightly softer color transitions at the sacrifice of some details. The result images are more blurry than RGB blending.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
