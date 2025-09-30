@@ -655,8 +655,18 @@ I also tried some other masks including irregular ones:
 Here are some blended images I found interesting.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
+    <img src="/P2/P13_7.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Blending with a vertical mask
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
     <img src="/P2/P10_1.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Blending with a horizontal mask
     </figcaption>
   </figure>
 </div>
@@ -665,6 +675,7 @@ Here are some blended images I found interesting.
   <figure style="margin: 0;">
     <img src="/P2/P10_2.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Blending with a circular mask
     </figcaption>
   </figure>
 </div>
@@ -673,6 +684,7 @@ Here are some blended images I found interesting.
   <figure style="margin: 0;">
     <img src="/P2/P10_3.jpg" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Blending with a vertical mask
     </figcaption>
   </figure>
 </div>
