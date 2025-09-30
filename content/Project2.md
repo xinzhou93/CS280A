@@ -299,6 +299,20 @@ However, I got some issues in proving that two-step and one-step DoG filter can 
 
 ## Part1.4: Bells and Whistles
 
+In addition to image gradient telling us how strong the edge is, the gradient direction can specify the angle of the edge.
+
+The gradient orientation is calculated as
+$$\theta = \tan^{-1}\bigg(\frac{\partial f / \partial y}{\partial f / \partial x}\bigg)$$
+
+In the implementation, I still applied Gaussian smoothing to reduce noise. Then, I compute gradients and the gradient direction:
+```python
+gradient_direction = np.arctan2(grad_y, grad_x) * 180 / np.pi
+```
+We also need to convert direction from $[-180°, 180°]$ to $[0°, 360°]$.
+
+  In the HSV representation, I represented gradient information using all three channels: Hue (H) represents the gradient direction, normalized as `H = gradient_direction / 360` to map the full range of orientations $[0°, 360°]$ to $[0, 1]$; Saturation (S) is set to 1.0 for full color, ensuring clear visualization of orientation differences; and Value (V) encodes the normalized edge strength as `V = gradient_magnitude / max_magnitude`, where brighter regions indicate stronger edges and darker regions represent weaker gradients. 
+  
+  This creates an intuitive color mapping where horizontal edges appear red (0°), diagonal edges from yellow-green (45°-90°), vertical edges appear cyan (180°), opposite diagonals show blue-purple (225°-270°), and the cycle completes back to red at 360°. 
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
