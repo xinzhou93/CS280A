@@ -707,14 +707,14 @@ The implementation is similar to multiresolution blending in Part 2.4:
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P2/P14_1.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P14_2.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     img1 - blended L channel
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
-    <img src="/P2/P14_2.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
+    <img src="/P2/P14_1.png" alt="Image 3" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     img2 - blended L channel
     </figcaption>
