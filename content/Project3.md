@@ -66,6 +66,16 @@ tags: [project, cs280a]
   </figure>
 </div>
 
+Assume 
+$$
+H = \begin{bmatrix}
+a & b & c \\
+d & e & f \\
+g & h & 1
+\end{bmatrix}
+$$
+where the lower right corner is a scaling factor set to 1. We also have 8 points for both the original image $M_1$ and the target image $M_2$ respectively.
+
 $$
 M_1=
 \begin{bmatrix}
@@ -89,6 +99,56 @@ M_2=
 3426.45 & 1376.60 \\
 3434.39 & 1642.43 \\
 3180.47 & 1638.46 \\
+\end{bmatrix}
+$$
+
+However, to get the $3*3$ homography matrix, we need to transfer them into homogeneous coordinates. Thus the matrices become
+$$
+M_1=
+\begin{bmatrix}
+64.96 & 1019.53 & 1 \\
+37.19 & 2721.60 & 1 \\
+517.26 & 1955.86 & 1 \\
+1108.42 & 1864.61 & 1 \\
+1747.20 & 1475.79 & 1 \\
+1957.47 & 1479.76 & 1 \\
+1965.41 & 1721.78 & 1 \\
+1743.23 & 1717.81 & 1 \\
+\end{bmatrix}
+
+M_2=
+\begin{bmatrix}
+1605.36 & 1031.43 & 1 \\
+1656.93 & 2554.96 & 1 \\
+2006.08 & 1868.58 & 1 \\
+2545.66 & 1793.19 & 1 \\
+3176.50 & 1392.47 & 1 \\
+3426.45 & 1376.60 & 1 \\
+3434.39 & 1642.43 & 1 \\
+3180.47 & 1638.46 & 1 \\
+\end{bmatrix}
+$$
+If we start with point in $M_1$, the first point is $p_1 = [64.96, 1019.53, 1]^T$ and the target point is $p_1' = [1605.36, 1031.43, 1]^T$ and we want to solve
+$$
+Hp_1 = p_1'
+$$
+
+Expanding the equation we can get
+$$
+\begin{bmatrix}
+a & b & c \\
+d & e & f \\
+g & h & 1
+\end{bmatrix} 
+\begin{bmatrix}
+64.96 \\
+1019.53 \\
+1
+\end{bmatrix} =
+\begin{bmatrix}
+1605.36 \\
+1031.43 \\
+1
 \end{bmatrix}
 $$
 
