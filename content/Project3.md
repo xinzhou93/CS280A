@@ -183,6 +183,41 @@ I also tested other images.
   </figure>
 </div>
 
+$$
+M_1=
+\begin{bmatrix}
+791.02 & 2217.72 \\
+1243.32 & 1860.64 \\
+2762.88 & 1876.51 \\
+3155.67 & 2110.60 \\
+3084.25 & 452.17 \\
+3262.79 & 317.27 \\
+3068.38 & 793.38 \\
+3064.42 & 971.92
+\end{bmatrix}
+
+M_2=
+\begin{bmatrix}
+6.44 & 2459.74 \\
+534.12 & 2003.47 \\
+2204.45 & 1852.71 \\
+2502.02 & 2007.44 \\
+2386.96 & 646.58 \\
+2517.89 & 567.23 \\
+2414.73 & 940.18 \\
+2414.73 & 1083.01
+\end{bmatrix}
+$$
+The recovered homography matrix is
+$$
+H = 
+\begin{bmatrix}
+1.426295 & 0.009679 & -1163.549961 \\
+0.091272 & 1.063630 & 133.598303 \\
+0.000118 & -0.000021 & 1.000000
+
+\end{bmatrix}
+$$
 ## Part 1.3: Warp the Images
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
