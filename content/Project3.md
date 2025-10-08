@@ -66,16 +66,6 @@ tags: [project, cs280a]
   </figure>
 </div>
 
-Assume 
-$$
-H = \begin{bmatrix}
-a & b & c \\
-d & e & f \\
-g & h & 1
-\end{bmatrix}
-$$
-where the lower right corner is a scaling factor set to 1. We also have 8 points for both the original image $M_1$ and the target image $M_2$ respectively.
-
 $$
 M_1=
 \begin{bmatrix}
@@ -101,59 +91,7 @@ M_2=
 3180.47 & 1638.46 \\
 \end{bmatrix}
 $$
-
-However, to get the $3*3$ homography matrix, we need to transfer them into homogeneous coordinates. Thus the matrices become
-$$
-M_1=
-\begin{bmatrix}
-64.96 & 1019.53 & 1 \\
-37.19 & 2721.60 & 1 \\
-517.26 & 1955.86 & 1 \\
-1108.42 & 1864.61 & 1 \\
-1747.20 & 1475.79 & 1 \\
-1957.47 & 1479.76 & 1 \\
-1965.41 & 1721.78 & 1 \\
-1743.23 & 1717.81 & 1 \\
-\end{bmatrix}
-
-M_2=
-\begin{bmatrix}
-1605.36 & 1031.43 & 1 \\
-1656.93 & 2554.96 & 1 \\
-2006.08 & 1868.58 & 1 \\
-2545.66 & 1793.19 & 1 \\
-3176.50 & 1392.47 & 1 \\
-3426.45 & 1376.60 & 1 \\
-3434.39 & 1642.43 & 1 \\
-3180.47 & 1638.46 & 1 \\
-\end{bmatrix}
-$$
-If we start with point in $M_1$, the first point is $p_1 = [64.96, 1019.53, 1]^T$ and the target point is $p_1' = [1605.36, 1031.43, 1]^T$ and we want to solve
-$$
-Hp_1 = p_1'
-$$
-
-Expanding the equation we can get
-$$
-\begin{bmatrix}
-a & b & c \\
-d & e & f \\
-g & h & 1
-\end{bmatrix} 
-\begin{bmatrix}
-64.96 \\
-1019.53 \\
-1
-\end{bmatrix} =
-\begin{bmatrix}
-1605.36 \\
-1031.43 \\
-1
-\end{bmatrix}
-$$
-
-We want to solve for $M_1H = M2$
-
+The recovered homography matrix is
 $$
 H = 
 \begin{bmatrix}
@@ -163,6 +101,78 @@ H =
 \end{bmatrix}
 $$
 
+### System of equations
+Assume 
+$$
+H = \begin{bmatrix}
+a & b & c \\
+d & e & f \\
+g & h & 1
+\end{bmatrix}
+$$
+where the lower right corner is a scaling factor set to 1. We also have 8 points for both the original image $M_1$ and the target image $M_2$ respectively. However, to get the $3*3$ homography matrix, we need to transfer each point $[x,y]$ into homogeneous coordinates. For example, If we start with point in $M_1$, the first point is $p_1 = [64.96, 1019.53, 1]^T$ and the target point is $p_1' = [1605.36, 1031.43, 1]^T$.
+
+To derive the system of equations, assume $p = [x, y, 1]^T$ and 
+$p' = [x', y', 1]^T$. Then we have the transformation
+$$
+Hp_1 = wp_1'
+$$
+where $w$ is a scaling factor and $w \ne 0$.
+
+Expanding the equation we can get
+$$
+\begin{bmatrix}
+a & b & c \\
+d & e & f \\
+g & h & 1
+\end{bmatrix} 
+\begin{bmatrix}
+x \\
+y \\
+1
+\end{bmatrix} =
+\begin{bmatrix}
+wx' \\
+wy'\\
+w
+\end{bmatrix}
+$$
+
+Then we can get three equations:
+$$
+\begin{align*}
+ax + by + c = wx' \\
+dx + ey + f = wy' \\
+gx + hy + 1 = w
+\end{align*}
+$$
+
+Rearrange the equation, we can get
+$$
+\begin{align*}
+ax + by + c = (gx + hy + 1)x' \\
+dx + ey + f = (gx + hy + 1)y' \\
+ax + by + c - gxx' - hyx' = x'\\
+dx + ey + f - gxy' - hyy' = y'
+\end{align*}
+$$
+
+put the 2 equations into the matrix form, we get
+$$
+\overbrace{
+\begin{bmatrix}
+x & y & 1 & 0 & 0 & 0 & -xx' & -yx' & -x' \\
+0 & 0 & 0 & x & y & 1 & -xy' & -yy' & -y'
+\end{bmatrix}}^{\text{Matrix M}}
+\begin{bmatrix}
+a \\b \\c \\d \\e \\ f\\g\\h
+\end{bmatrix} = 
+\begin{bmatrix}
+x'\\y'
+\end{bmatrix}
+$$
+
+From the system of equation above for one point, we can see that each point can contribute 2 rows. If we have 8 points, the left matrix $M$ will expand to a $16 * 8$ matrix. Then we can solve it with least squares: $$\mathbf{h} = (M^T M)^{-1} M^T \mathbf{b}$$
 
 ## Part 1.3: Warp the Images
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
