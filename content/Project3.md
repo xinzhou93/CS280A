@@ -219,6 +219,47 @@ H =
 \end{bmatrix}
 $$
 ## Part 1.3: Warp the Images
+From A2, we get the parameters of the homography. Assume $p = [x, y, 1]^T$ and $p' = [x', y', 1]^T$ are points using homogeneous coordinates. Then if homography $H$ is known, we can have $Hp_1 = wp_1'$, which is known as forward warping. Nevertheless, forward warping can leave holes in the output image if several input pixels map to the same output pixel or some output pixels do not receive any input pixel colors.
+
+Instead, we can use inverse warping. For each pixel location $[x', y', 1]^T$ in the output image, we find the corresponding location in the input image by computing:
+
+$$
+\begin{bmatrix} u \\ v \\  w \end{bmatrix} = H^{-1} \begin{bmatrix} x' \\  y' \\ 1 \end{bmatrix}
+$$
+
+Since we iterate through each pixel of the output image, there is a guarantee that we can find a corresponding value.
+
+Then we can convert the homogeneous coordinates by doing 
+$$
+\begin{bmatrix} 
+x \\ y
+\end{bmatrix} = 
+\begin{bmatrix} 
+u \over w \\
+v \over w
+\end{bmatrix}
+$$
+
+If the updated pixel location is in-between, we need to interpolate pixel values from neighbors using Nearest Neighbor  or Bilinear Interpolation.
+
+### Nearest Neighbor Interpolation
+Nearest Neighbor is relatively easy, we just need to round the floating number and take the integer of it. Besides, it is always good to check the valid bounds.
+```python
+x_in = int(round(x_in))
+y_in = int(round(y_in))
+
+# Check if within bounds
+if 0 <= x_in < width and 0 <= y_in < height:
+warped[y_out, x_out] = img[y_in, x_in]
+```
+
+For pixel location that is outside the bound, the pixel color will be black.
+
+### Bilinear Interpolation
+If the pixel location lands inside a pixel, for bilinear interpolation, we need to find the 4 surrounding integer pixel vertices and interpolate between them.
+
+
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/IMG_1895.jpeg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
