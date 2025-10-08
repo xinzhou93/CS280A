@@ -66,6 +66,44 @@ tags: [project, cs280a]
   </figure>
 </div>
 
+$$
+M_1=
+\begin{bmatrix}
+64.96 & 1019.53 \\
+37.19 & 2721.60 \\
+517.26 & 1955.86 \\
+1108.42 & 1864.61 \\
+1747.20 & 1475.79 \\
+1957.47 & 1479.76 \\
+1965.41 & 1721.78 \\
+1743.23 & 1717.81 \\
+\end{bmatrix}
+
+M_2=
+\begin{bmatrix}
+1605.36 & 1031.43 \\
+1656.93 & 2554.96 \\
+2006.08 & 1868.58 \\
+2545.66 & 1793.19 \\
+3176.50 & 1392.47 \\
+3426.45 & 1376.60 \\
+3434.39 & 1642.43 \\
+3180.47 & 1638.46 \\
+\end{bmatrix}
+$$
+
+We want to solve for $M_1H = M2$
+
+$$
+H = 
+\begin{bmatrix}
+0.000401 & 0.000023 & 0.995941 \\
+-0.000108 & 0.000577 & 0.090006 \\
+-0.000000 & -0.000000 & 0.000658
+\end{bmatrix}
+$$
+
+
 ## Part 1.3: Warp the Images
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
