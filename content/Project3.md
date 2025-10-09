@@ -256,11 +256,33 @@ warped[y_out, x_out] = img[y_in, x_in]
 For pixel location that is outside the bound, the pixel color will be black.
 
 ### Bilinear Interpolation
-Assume $(0,0)$ is at the "top-left" of the first pixel, If the pixel location lands inside a pixel, for bilinear interpolation, we need to find the 4 surrounding integer pixel vertices and interpolate between them.
+Assume $(0,0)$ is at the "top-left" of the first pixel, If the pixel location lands inside a pixel, for bilinear interpolation, we need to find the 4 surrounding integer pixel vertices and interpolate between them as the diagram shown below.
 
-![[Pasted image 20251008014319.png]]
+![[Pasted image 20251008224616.png]]
 
+Then we can firstly apply 1D linear interpolation
+Linear interpolation formula:
+$$
+\text{lerp}(t, v_0, v_1) = v_0 + t(v_1 - v_0) = (1-t)v_0 + t \cdot v_1
+$$
 
+Horizontally (along y=y0), interpolate between top-left and top-right:
+$$
+u_0 = \text{lerp}(dx, \text{img}[y_0, x_0], \text{img}[y_0, x_1])
+$$
+
+Horizontally (along y=y1), interpolate between bottom-left and bottom-right:
+$$
+u_1 = \text{lerp}(dx, \text{img}[y_1, x_0], \text{img}[y_1, x_1])
+$$
+where $dx = x - x_0$
+
+Vertically, interpolate between $u_0$ and $u_1$:
+$$
+\text{result} = \text{lerp}(dy, u_0, u_1)
+$$
+
+where $dy = y - y_0$
 ### Rectification
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -338,6 +360,40 @@ Assume $(0,0)$ is at the "top-left" of the first pixel, If the pixel location la
 </div>
 
 ## Part 1.4: Blend the Images into a Mosaic
+Following A3, we want to blend the images into a single mosaic.
+- Similar to A3, we manually select 8 correspondence points for both images and calculate homography using 
+`H = computeH(im1_pts,im2_pts)`.
+- Then I use the one-shot procedure to determine the final mosaic canvas.
+	- For both the original image and the target images, I find the 4 corners and determine the warped corners using `H @ 4_corners`. Then we can get 8 warped corners.
+	- For those corners, we can find a bounding box by finding `min_x, min_y, max_x, max_y` and the output mosaic size is `max_y-min_y, max_x-min_x`.
+	- We also need to calculate the offset $(tx, ty)$ from the bounding box to shift all coordinates to positive values. We also use this offset in the translation transformation. Since the image starts from $(0,0)$, we can get that 
+	  $$
+  \begin{align*}
+  t_x &= -\min_x(\text{bbox}) \\
+  t_y &= -\min_y(\text{bbox})
+  \end{align*}
+  $$
+- After that, we need warp each image to the ouput mosaic:
+	- For image 1, which is the reference image, we only need to apply a translation for offset since the homography is just an identity matrix.
+	$$
+	H_T= T\cdot H = T\cdot I = T = 
+	\begin{bmatrix}
+	1 & 0 & t_x \\ 
+	0 & 1 & t_y \\ 
+	0 & 0 & 1
+	\end{bmatrix}
+	$$
+	- For image 2, we need to apply both homography and translation.
+	$$H_T= T \cdot H$$
+	- Similar to A3, we still use the inverse warping technique to avoid holes. For each pixel location $[x', y', 1]^T$ in the output image, we find the corresponding location in the input image by computing:$$\begin{bmatrix} u \\ v \\  w \end{bmatrix} = H_T^{-1} \begin{bmatrix} x' \\  y' \\ 1 \end{bmatrix}$$
+	- For identitfying the overlapped area of the two images, we also have a binary variable to keep track if the pixel has a color(255) or it is black(0) since each warped image only occupies small part of the output image. This is helpful to do blending in the next step.
+- Finally, we need to blend the overlapped area with weighted averaging. 
+	- We normalize the binary variable: black = 0, color = 1.
+	- If the pixel location receives color from only one image, then that pixel gets that single color from that image.
+	- If the pixel location get colors from both images, then we need to average the both colors in RGB respectively. 
+	- If the pixel location get black colors, then it remains black.
+
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/7_1.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
@@ -405,6 +461,8 @@ In this task, I tried to extend A4 by using cylindrical projection. I firstly at
   </figure>
 </div>
 
+However, we can see that the images are not stitched correctly since there are black areas between inside the warped images. I choose focal length of 800 pixels but this value may not represent the actual camera length. In addition, I assume the cylindrical coordination implementation is wrong and thus the subsequent homography cannot be computed correctly. 
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/9_21.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
@@ -414,16 +472,7 @@ In this task, I tried to extend A4 by using cylindrical projection. I firstly at
   </figure>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
-  <figure style="margin: 0;">
-    <img src="/P3/9_31.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Warped images
-    </figcaption>
-  </figure>
-</div>
-
-Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher_create(cv2.Stitcher_PANORAMA)`.
+Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher_create(cv2.Stitcher_PANORAMA)` and the result is pretty good. I will look into my code to figure out what caused the mismatches.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/9_41.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
