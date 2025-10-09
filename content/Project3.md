@@ -258,6 +258,14 @@ For pixel location that is outside the bound, the pixel color will be black.
 ### Bilinear Interpolation
 Assume $(0,0)$ is at the "top-left" of the first pixel, If the pixel location lands inside a pixel, for bilinear interpolation, we need to find the 4 surrounding integer pixel vertices and interpolate between them as the diagram shown below.
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/d.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
+
 ![[Pasted image 20251008224616.png]]
 
 Then we can firstly apply 1D linear interpolation
