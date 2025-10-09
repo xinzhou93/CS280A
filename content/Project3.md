@@ -256,7 +256,56 @@ warped[y_out, x_out] = img[y_in, x_in]
 For pixel location that is outside the bound, the pixel color will be black.
 
 ### Bilinear Interpolation
-If the pixel location lands inside a pixel, for bilinear interpolation, we need to find the 4 surrounding integer pixel vertices and interpolate between them.
+Assume $(0,0)$ is at the "top-left" of the first pixel, If the pixel location lands inside a pixel, for bilinear interpolation, we need to find the 4 surrounding integer pixel vertices and interpolate between them.
+
+![[Pasted image 20251008014319.png]]
+
+
+### Rectification
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/4_2.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Original Image 1
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P3/sq.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Original Image 2 (target)
+    </figcaption>
+  </figure>
+  
+  <figure style="margin: 0;">
+    <img src="/P3/4_1.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Original Image 2 (target)
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/4_b.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Warped - Bilinear
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P3/4_n.jpg" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Warped - Nearest Neighbor
+    </figcaption>
+  </figure>
+</div>
+
+
+
+
+
+
 
 
 
