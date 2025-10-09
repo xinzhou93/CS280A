@@ -371,7 +371,10 @@ Following A3, we want to blend the images into a single mosaic.
 	- For those corners, we can find a bounding box by finding `min_x, min_y, max_x, max_y` and the output mosaic size is `max_y-min_y, max_x-min_x`.
 	- We also need to calculate the offset $(tx, ty)$ from the bounding box to shift all coordinates to positive values. We also use this offset in the translation transformation. Since the image starts from $(0,0)$, we can get that 
 	  $$
-	\begin{align*}t_x &= -\min_x(\text{bbox}) \\t_y &= \min_y(\text{bbox})\end{align*}
+	\begin{align*}
+	t_x &= \min_x(\text{bbox}) \\
+	t_y &= \min_y(\text{bbox})
+	\end{align*}
 	$$
 - After that, we need warp each image to the ouput mosaic:
 	- For image 1, which is the reference image, we only need to apply a translation for offset since the homography is just an identity matrix.
