@@ -369,7 +369,7 @@ Following A3, we want to blend the images into a single mosaic.
 - Then I use the one-shot procedure to determine the final mosaic canvas.
 	- For both the original image and the target images, I find the 4 corners and determine the warped corners using `H @ 4_corners`. Then we can get 8 warped corners.
 	- For those corners, we can find a bounding box by finding `min_x, min_y, max_x, max_y` and the output mosaic size is `max_y-min_y, max_x-min_x`.
-	- We also need to calculate the offset $(tx, ty)$ from the bounding box to shift all coordinates to positive values. We also use this offset in the translation transformation. Since the image starts from $(0,0)$, we can get that 
+	- We also need to calculate the offset $(tx, ty)$ from the bounding box to shift all coordinates to positive values. We also use this offset in the translation transformation. 
 	  $$
 	\begin{align*}
 	t_x &= \min_x(\text{bbox}) \\
