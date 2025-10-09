@@ -4,7 +4,7 @@ tags: [project, cs280a]
 ---
 
 # Overview
- This project explores fundamental image processing techniques including finite difference operators, derivative of Gaussian filters, image sharpening, hybrid images, and multi-resolution blending using Gaussian and Laplacian pyramids. Through implementing these classic computer vision algorithms, I gained hands-on experience with frequency domain analysis and multi-scale image processing techniques.     
+ This project builds a image warping and mosaic pipeline using homography transformations. We compute homographies from manually selected point correspondences (A2), warp images using bilinear/Nearest Neighbor interpolation (A3), and stitch images into planar mosaics with weighted averaging (A4). 
 
 # Part 1: 
 ## Part 1.1: Shoot the Pictures
@@ -283,6 +283,9 @@ $$
 $$
 
 where $dy = y - y_0$
+
+When testing the both interpolation methods, I found that bilinear interpolation takes longer time since it needs to find four neighbors and interpolate among them. 
+
 ### Rectification
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
