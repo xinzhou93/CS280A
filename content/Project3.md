@@ -390,6 +390,13 @@ Assume $(0,0)$ is at the "top-left" of the first pixel, If the pixel location la
 </div>
 
 ## Part 1.5: Bells & Whistles
+In this task, I tried to extend A4 by using cylindrical projection. I firstly attempted manual implementation based on A4 code:
+- Select points on the original image and target images.
+- Then project images to cylindrical coordinates
+- Transform the points to cylindrical coordinates
+- Compute homography between projected points
+- Finally warp and blend the images as A4 does
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/9_11.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
@@ -412,6 +419,16 @@ Assume $(0,0)$ is at the "top-left" of the first pixel, If the pixel location la
     <img src="/P3/9_31.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     Warped images
+    </figcaption>
+  </figure>
+</div>
+
+Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher_create(cv2.Stitcher_PANORAMA)`.
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/9_41.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Cylindrical mapping using OpenCV's built in method
     </figcaption>
   </figure>
 </div>
