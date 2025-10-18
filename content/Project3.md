@@ -498,6 +498,33 @@ Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher
 
 ## Part B.2: Feature Descriptor Extraction
 ## Part B.3: Feature Matching
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/B3_1.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Cylindrical mapping using OpenCV's built in method
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/B3_2.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Cylindrical mapping using OpenCV's built in method
+    </figcaption>
+  </figure>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/B3_3.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Cylindrical mapping using OpenCV's built in method
+    </figcaption>
+  </figure>
+</div>
 ## Part B.4: RANSAC for Robust Homography
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
@@ -541,8 +568,4 @@ Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher
     </figcaption>
   </figure>
 </div>
-
-
-
-
 ## Part B.5: Bells & Whistles
