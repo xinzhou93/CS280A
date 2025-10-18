@@ -496,7 +496,31 @@ Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher
 # Part 2: 
 ## Part B.1: Harris Corner Detection
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/B1_1.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P3/B1_2.png" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
+
 ## Part B.2: Feature Descriptor Extraction
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/B2_1.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Cylindrical mapping using OpenCV's built in method
+    </figcaption>
+  </figure>
+</div>
+
 ## Part B.3: Feature Matching
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
