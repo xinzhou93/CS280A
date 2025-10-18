@@ -549,17 +549,12 @@ Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher
     </figcaption>
   </figure>
 </div>
+
 ## Part B.4: RANSAC for Robust Homography
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P3/7_2.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    </figcaption>
-  </figure>
-
-  <figure style="margin: 0;">
-    <img src="/P3/B4_3.png" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <img src="/P3/B4f_1.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
@@ -567,13 +562,7 @@ Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P3/8_2.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    </figcaption>
-  </figure>
-
-  <figure style="margin: 0;">
-    <img src="/P3/B4_2.png" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <img src="/P3/B4f_2.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
@@ -581,15 +570,10 @@ Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P3/9_2.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    </figcaption>
-  </figure>
-
-  <figure style="margin: 0;">
-    <img src="/P3/B4_1.png" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <img src="/P3/B4f_3.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
 </div>
+
 ## Part B.5: Bells & Whistles
