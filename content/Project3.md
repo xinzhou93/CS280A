@@ -546,8 +546,17 @@ Ensuring to get corner points rather than clusters of corner regions, I also use
   </figure>
 </div>
 
-To distribute points evenly over the image, Adaptive Non-maximal Suppression is applied.
+To distribute points evenly over the image, Adaptive Non-maximal Suppression is applied. Different from the method of local maxima to find the strongest ones, we want to compute suppression radius for each detected corner. 
+```python
+# pseudocode
+for each corner i:
+	suppression_rad[i] = minimum distance to any corner j
+	where R_j > R_i
+```
 
+Here, I use some optimizations to speed up the calculation. According to `dist2` in the sample code, I pre-calculate all pairwise distances once, then just pick the smallest distance to any stronger corner in the loop using array indexing.
+
+After that, we need to sort corners by suppression radius in descending order. Large suppression radius comes first and get selected because there is no strong neighbors nearby. However, small suppression radius goes to the end and ends up being discarded since there is stronger neighbor nearby. This technique can effectively avoid corners to be clustered together.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
