@@ -660,3 +660,29 @@ In the RANSAC algorithm,
 </div>
 
 ## Part B.5: Bells & Whistles
+
+This section focuses on Rotation Invariance. The implementation from B2 is vulnerable to rotation since the descriptor will be totally different. When a corner is rotated, the pixels inside the `8*8`patch will be totally different as well. To make rotation invariant, we want to rotate the patch to the same direction.
+
+- For each corner, I find the dominant direction of gradients in the patch using Sobel and compute magnitude and orientation of each pixel.
+- Similar to assignment 2, I create an orientation histogram - 36 bins covering 0-360 degree and weigh each bin by the magnitude. Thus, we have a mapping system like: `Bin 0-10 -> magnitude: X`. According to this, we can find the bin with the highest total magnitude and convert it to the dominant angle for the patch.
+- Since we get the dominant orientation, we need to rotate the patch by negative angle to undo the rotation. This method can make sure all patches are aligned to the standard orientation, which is 0.
+- Finally, we can extract descriptor from the normalized patch, achieving rotation invariance.
+
+I tested the image 2 with rotations and the implementation of Rotation Invariance can give stable feature matches.
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/B5_1.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
+
+I also tested the automatic stitching with this added feature, the mosaic works well except for some weird light leakage in the result image.
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P3/B5_2.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    </figcaption>
+  </figure>
+</div>
