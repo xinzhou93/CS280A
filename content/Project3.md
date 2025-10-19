@@ -588,11 +588,21 @@ Local features are invariant to translations, rotation, scale and other imaging 
 
 ## Part B.3: Feature Matching
 
+The section focuses on finding which features from image 1 correspond to features in image 2. From B2, we can get descriptors from both images and here we want to find pairs that represent the same point in the scene.
+
+- For each descriptor in image 1, I compute Euclidean distance to all descriptors in image 2. `distances = sqrt(sum((d2 - d1)^2, axis=1))`
+	- The smaller distance indicates similar features in both images.
+- Then, we need to find two Nearest Neighbors: 
+	- For calculated distances, I sort it in the ascending order and get the distances of the best match and the second best match.
+	- Then, we can use the Lowe of thresholding on the ratio between the first and the second nearest neighbors. `ratio = nearest_dist / second_nearest_dist`. If the ratio `ratio < 0.8`, the best match is found.
+	- From the implementation, I understand that why Lowe's test can reject feature space outliers. Let's say we have some repetitive features in the image such as grasses. The nearest and second-nearest can have similar distances. But with Lowe's test, similar distances can get larger ratio approaching 1, which is larger than the threshold. In this case, we reject this feature matching.
+
+One question for this section is that multiple corners from image 1 can share the same match in image 2, creating a many-to-one relationship. 
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/B3_1.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Cylindrical mapping using OpenCV's built in method
     </figcaption>
   </figure>
 </div>
@@ -601,7 +611,6 @@ Local features are invariant to translations, rotation, scale and other imaging 
   <figure style="margin: 0;">
     <img src="/P3/B3_2.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Cylindrical mapping using OpenCV's built in method
     </figcaption>
   </figure>
 </div>
@@ -610,7 +619,6 @@ Local features are invariant to translations, rotation, scale and other imaging 
   <figure style="margin: 0;">
     <img src="/P3/B3_3.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Cylindrical mapping using OpenCV's built in method
     </figcaption>
   </figure>
 </div>
