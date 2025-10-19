@@ -544,7 +544,12 @@ Ensuring to get corner points rather than clusters of corner regions, I also use
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
+</div>
 
+To distribute points evenly over the image, Adaptive Non-maximal Suppression is applied.
+
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/B1_2.png" alt="Image 2" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
