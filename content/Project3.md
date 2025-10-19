@@ -677,7 +677,7 @@ I tested the image 2 with rotations and the implementation of Rotation Invarianc
   </figure>
 </div>
 
-I also tested the automatic stitching with this added feature, the mosaic works well except for some weird light leakage in the result image.
+I also tested the automatic stitching with this added feature, the mosaic works well except for some weird light leakage in the result image. I guess there is something wrong with the blending since we rotate the image, leaving dark areas and the blending take these areas into consideration.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
