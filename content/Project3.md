@@ -497,7 +497,9 @@ Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher
 ## Part B.1: Harris Corner Detection
 
 From the lecture, we know that if we have a window $W$ for the shift $[u,v]$, only the corner can have significant change in all directions and the change can be expressed as 
+
 $$E(u,v) = \sum_{x,y \in W}[I(x+u, y+v) - I(x,y)]^2$$
+
 Using the first-order Taylor approximation, we can simplify the equation:
 $$
 E(u,v) = \sum_{x,y \in W}
@@ -568,11 +570,18 @@ After that, we need to sort corners by suppression radius in descending order. L
 
 ## Part B.2: Feature Descriptor Extraction
 
+Local features are invariant to translations, rotation, scale and other imaging parameters. This section wants to convert corner locations into vectors that can be compared for matching. The steps are as follows:
+
+- I center a `40 * 40` patch at a corner `(x,y)`
+- Then the path is downsampled to `8*8` using Bilinear Interpolation for fast matching.
+	- I sample at center of each `5*5` cell and interpolate from the 4 neighbors.
+	- Bias/Gain Normalization: We need to calculate `mean/std` of the patch and get the result vector `(descriptor - mean) / std`.
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/B2_1.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Cylindrical mapping using OpenCV's built in method
+    Feature Descriptor Extraction from the Image in B1
     </figcaption>
   </figure>
 </div>
