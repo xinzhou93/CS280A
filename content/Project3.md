@@ -625,6 +625,16 @@ One question for this section is that multiple corners from image 1 can share th
 
 ## Part B.4: RANSAC for Robust Homography
 
+Even we get paired matched features from B3, there are still potential outliers. For example in the lecture, a window in image 1 is incorrectly matched to a different window in image 2.  RANSAC can find the homography that fits the majority of matches, ignoring the transformation that is not consistent.
+
+In the RANSAC algorithm,
+- The RANSAC repeats many different random samples.
+	- I randomly select 4 matches since we need at least 4 correspondences to get 8 equations to solve for the homography.
+	- Then I calculate homography using `H = computeH(pt1, pt2)` from Part 1.
+	- For each match, I compute inliers where `dist(p_i, HP_i) < e` and count the number of inliers.
+		- If `num_inliers > max_inliers`, we also need to update the best inliers and homography.
+- Finally, we can use all inliers to compute final homography.
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/B4f_1.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
