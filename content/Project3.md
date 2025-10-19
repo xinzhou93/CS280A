@@ -496,6 +496,48 @@ Then I tried to use OpenCV's built in stitcher function `stitcher = cv2.Stitcher
 # Part 2: 
 ## Part B.1: Harris Corner Detection
 
+From the lecture, we know that if we have a window $W$ for the shift $[u,v]$, only the corner can have significant change in all directions and the change can be expressed as 
+$$E(u,v) = \sum_{x,y \in W}[I(x+u, y+v) - I(x,y)]^2$$
+Using the first-order Taylor approximation, we can simplify the equation:
+$$
+E(u,v) = \sum_{x,y \in W}
+\begin{bmatrix}
+u & v
+\end{bmatrix}
+\begin{bmatrix}
+I_x^2 & I_xI_y \\
+I_xI_y & I_y^2
+\end{bmatrix}
+\begin{bmatrix}
+u \\ v
+\end{bmatrix}
+$$
+
+The quadratic approximation further simplifies to
+$$
+E(u,v) \approx 
+\begin{bmatrix}
+u & v
+\end{bmatrix} M
+\begin{bmatrix}
+u \\ v
+\end{bmatrix}
+$$
+
+Where $M$ is a second moment matrix computed from image derivatives:
+$$
+M = \sum_{x,y \in W}
+\begin{bmatrix}
+I_x^2 & I_xI_y \\
+I_xI_y & I_y^2
+\end{bmatrix}
+$$
+
+Then, we use the Measure of corner response
+$$R = \frac{\text{det} M}{\text{Trace} M + \epsilon}$$
+to find points with larger corner response $R> \text{Threshold}$
+
+Ensuring to get corner points rather than clusters of corner regions, I also use `local maxima` with window size `10`to find the peaks.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P3/B1_1.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
