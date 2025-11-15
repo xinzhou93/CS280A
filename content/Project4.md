@@ -296,7 +296,6 @@ Classical volume rendering with alpha compositing:
 </div>
 
 
-
 # Part 2.6: Training with Your Own Data
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
@@ -385,11 +384,6 @@ Classical volume rendering with alpha compositing:
     </figcaption>
   </figure>
 
-  <figure style="margin: 0;">
-    <img src="/P4/frame_003.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    </figcaption>
-  </figure>
   <figure style="margin: 0;">
     <img src="/P4/frame_005.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
