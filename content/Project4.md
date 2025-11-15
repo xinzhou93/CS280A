@@ -129,7 +129,7 @@ Hyperparameters:
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P4/mlp_nerf1.png" alt="Image 1" style="width: 70%; height: auto; display: block;" />
+    <img src="/P4/mlp_nerf1.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     image source: CS180 website: https://cal-cs180.github.io/fa25/hw/proj4/index.html
     </figcaption>
@@ -140,11 +140,11 @@ Hyperparameters:
 
 NeRF represents a 3D scene as a continuous volumetric field that maps 5D coordinates (3D position + 2D viewing direction) to volume density and view-dependent color.
 
-**Key Implementation Components:**
+Key Implementation Components:
 
 1. **Dataset & Camera Setup:**
    - Dataset: Lego bulldozer (200×200 resolution)
-   - 100 training views with known camera poses (c2w matrices) and focal length
+   - 100 training views with known camera poses (`c2w` matrices) and focal length
    - Camera-to-world transformations enable ray generation from each pixel
 
 2. **NeRF Model Architecture:**
