@@ -294,7 +294,7 @@ I captured my own dataset using an iPhone camera, photographing a toy duck on a 
   </figure>
 </div>
 
-After poses estimation, I discovered a critical issue from the Viser interface: cameras at varying distances from the object caused training instability. The outer loop of captures (farther from object) had significantly different distances than the inner loop. Thus I filtered the dataset to keep only cameras with uniform distance, resulting in 74 training images shown in the section of Part 0, with mean distance of $0.192$ m ($19.2$cm) and standard deviation of only $0.048$m. This filtering dramatically improved training stability and reconstruction quality.
+After poses estimation, I discovered a critical issue from the Viser interface: cameras at varying distances from the object caused training instability. The outer loop of captures (farther from object) had significantly different distances than the inner loop. Thus I filtered the dataset to keep only cameras with uniform distance, resulting in $74$ training images shown in the section of Part 0, with mean distance of $0.192$ m ($19.2$cm) and standard deviation of only $0.048$m. This filtering dramatically improved training stability and reconstruction quality.
 
 ## Hyperparameter Tuning
 
@@ -302,11 +302,11 @@ After poses estimation, I discovered a critical issue from the Viser interface: 
 
 Finding the correct near/far bounds was the most challenging aspect:
 
-1. **Initial attempt** (near=0.07, far=0.31): Based on computed camera distances, but resulted in poor PSNR (~14-17 dB). The bounds were too tight and clipped important parts of the scene.
+1. **Initial attempt** (near=$0.07$, far=$0.31$): Based on computed camera distances, but resulted in poor PSNR (~$14-17$ dB). The bounds were too tight and clipped important parts of the scene.
 
-2. **Instructor's suggestion** (near=0.02, far=0.5): Still produced suboptimal results for my scene.
+2. **Instructor's suggestion** (near=$0.02$, far=$0.5$): Still produced suboptimal results for my scene.
 
-3. **Final solution** (near=0.01, far=1.0): Counterintuitively, using very wide bounds worked best, achieving ~20 dB PSNR. This allows the network to learn the actual scene boundaries rather than being constrained by potentially inaccurate estimates.
+3. **Final solution** (near=$0.01$, far=$1.0$): Counterintuitively, using very wide bounds worked best, achieving ~$20$ dB PSNR. This allows the network to learn the actual scene boundaries rather than being constrained by potentially inaccurate estimates.
 
 **Training Configuration:**
 
