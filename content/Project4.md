@@ -294,9 +294,7 @@ I captured my own dataset using an iPhone camera, photographing a toy duck on a 
   </figure>
 </div>
 
-After poses estimation, I discovered a critical issue from the Viser interface: cameras at varying distances from the object caused training instability. The outer loop of captures (farther from object) had significantly different distances than the inner loop.
-
-**Solution:** I filtered the dataset to keep only cameras with uniform distance, resulting in 74 training images with mean distance of 0.192m (19.2cm) and standard deviation of only 0.048m. This filtering dramatically improved training stability and reconstruction quality.
+After poses estimation, I discovered a critical issue from the Viser interface: cameras at varying distances from the object caused training instability. The outer loop of captures (farther from object) had significantly different distances than the inner loop. Thus I filtered the dataset to keep only cameras with uniform distance, resulting in 74 training images shown in the section of Part 0, with mean distance of $0.192$ m ($19.2$cm) and standard deviation of only $0.048$m. This filtering dramatically improved training stability and reconstruction quality.
 
 ## Hyperparameter Tuning
 
