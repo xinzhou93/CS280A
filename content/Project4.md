@@ -318,16 +318,6 @@ Finding the correct near/far bounds was the most challenging aspect:
 | Learning rate | 5e-4 | Standard Adam learning rate |
 | Near/far bounds | 0.01 - 1.0 | Wide bounds to avoid clipping |
 
-## Novel View Rendering Challenges
-
-Generating the 360° novel view video required solving coordinate system issues:
-
-**Coordinate System Fix:** Initial implementation used Y-up coordinate system (rotating in XZ plane), which produced incorrect camera orientations. I switched to Z-up coordinate system matching the Lego dataset (rotating in XY plane around Z-axis).
-
-**Camera Height Adjustment:** After fixing the coordinate system, cameras were positioned too high. I adjusted the height to z=-0.06m to match the training camera positions.
-
-**Final Configuration:** Circular path in XY plane with radius=0.22m (matching mean training camera distance) and height z=-0.06m.
-
 ## Results and Discussion
 
 **Final Performance:** Training achieved ~20 dB PSNR (target was 23 dB). The reconstruction is recognizable but blurrier than the synthetic Lego dataset.
