@@ -127,6 +127,12 @@ learning rate: 1e-2
     iter = 4000
     </figcaption>
   </figure>
+ <figure style="margin: 0;">
+    <img src="/P4/val_iter_4500.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    iter = 4500
+    </figcaption>
+  </figure>
   <figure style="margin: 0;">
     <img src="/P4/val_iter_4999.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
