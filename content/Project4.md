@@ -45,8 +45,8 @@ Network Structure:
 
 Positional Encoding:
 - Frequency levels: L = 10
-- Input dimension: 42D = 2D original coordinates + 40D encoding
-- Formula: $γ(x) = [x, sin(2⁰πx), cos(2⁰πx), ..., sin(2⁹πx), cos(2⁹πx)]$
+- Input dimension: $42D = 2D original coordinates + 40D encoding (2 * 2 * L + 2)$
+- Formula: $$PE(x) = \{x, sin(2^0 \pi x), cos(2^0 \pi x), sin(2^1 \pi x), cos(2^1 \pi x), ..., sin(2^{L-1} \pi x), cos(2^{L-1} \pi x)\}$$
 - High-frequency components enable the network to capture fine details that would otherwise be difficult to represent with a simple coordinate-based MLP
 
 Training Configuration:
