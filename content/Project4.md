@@ -119,14 +119,14 @@ Hyperparameters:
   <figure style="margin: 0;">
     <img src="/P4/P14.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Training progression showing reconstruction quality improving over iterations
+    PSNR for my portrait
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P4/P16.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Final reconstruction results and metrics
+    PSNR for the fox image
     </figcaption>
   </figure>
 </div>
