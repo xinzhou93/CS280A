@@ -140,52 +140,39 @@ Hyperparameters:
 
 NeRF represents a 3D scene as a continuous volumetric field that maps 5D coordinates (3D position + 2D viewing direction) to volume density and view-dependent color.
 
-### Part 2.1-2.2: Ray Generation and Sampling
-
 **Creating Rays from Cameras:**
-- For each pixel (i, j) in the image, I construct a ray originating from the camera center
-- Ray direction is computed using the camera intrinsics (focal length) and pixel coordinates
-- The camera-to-world matrix (c2w) transforms rays from camera space to world space
-- Each ray is defined by origin **o** and direction **d**: $r(t) = o + td$
+- For each pixel `(i, j)` in the image, I construct a ray originating from the camera center.
+- Ray direction is computed using the camera intrinsics (focal length) and pixel coordinates.
+- The camera-to-world matrix (`c2w`) transforms rays from camera space to world space.
+- Each ray is defined by origin `o` and direction `d`: $r(t) = o + td$
 
 **Sampling Points Along Rays:**
-- Sample N=64 points uniformly between near and far bounds along each ray
-- Use stratified sampling: divide the ray into N bins and randomly sample within each bin
-- This perturbation prevents aliasing and improves rendering quality
-- Sampled points: $t_i \sim U[t_{near} + \frac{i}{N}(t_{far}-t_{near}), t_{near} + \frac{i+1}{N}(t_{far}-t_{near})]$
+- Sample `N=64` points uniformly between near and far bounds along each ray.
+- Use stratified sampling: divide the ray into N bins and randomly sample within each bin to avoid fixed set of 3D points. This perturbation prevents overfitting and improves rendering quality
 
-### Part 2.3: Positional Encoding
-
+**Positional Encoding:**
 High-frequency positional encoding enables the MLP to represent fine details:
-- Position encoding: $\gamma(x) = [x, \sin(2^0\pi x), \cos(2^0\pi x), ..., \sin(2^{L-1}\pi x), \cos(2^{L-1}\pi x)]$
-- L=10 for 3D positions → 63D features (3 + 3×2×10)
-- L=4 for viewing directions → 27D features (3 + 3×2×4)
-- Without encoding, the network struggles to capture high-frequency geometric details
+- L=10 for 3D positions → 63D features ($3 + 3×2×10$)
+- L=4 for viewing directions → 27D features ($3 + 3×2×4$)
 
-### Part 2.4: NeRF Model Architecture
-
+**NeRF Model Architecture**
 8-layer MLP with skip connections:
 - **Layers 1-4**: Process encoded 3D position (63D → 256D)
 - **Layer 5**: Skip connection concatenates original position encoding with layer 4 output
 - **Layers 6-7**: Further process combined features
 - **Layer 8**: Split into two heads:
-  - Density head: Outputs volume density σ (1D, view-independent)
+  - Density head: Outputs volume density (1D, view-independent)
   - Feature head: Outputs 256D feature vector
 - **Direction processing**: Concatenate feature vector with encoded direction (27D)
 - **Final layer**: Outputs view-dependent RGB color (3D)
 
-### Part 2.5: Volume Rendering
-
-Classical volume rendering with alpha compositing:
+**Volume Rendering**
 - Query NeRF at each sampled point along the ray to get $(rgb_i, \sigma_i)$
 - Compute alpha values: $\alpha_i = 1 - \exp(-\sigma_i \delta_i)$ where $\delta_i$ is distance between samples
-- Compute transmittance: $T_i = \prod_{j=1}^{i-1}(1-\alpha_j)$ (light transmission up to point i)
+- Compute transmittance: $T_i = \prod_{j=1}^{i-1}(1-\alpha_j)$ 
 - Final pixel color: $C(r) = \sum_{i=1}^{N} T_i \alpha_i c_i$
 - This accumulates colors from front to back, properly handling occlusion and transparency
 
-### Part 2.6: Training Process
-
-**Dataset:** Lego bulldozer with 100 training views (200×200 resolution)
 
 **Training Configuration:**
 
@@ -193,13 +180,6 @@ Classical volume rendering with alpha compositing:
 |---------------|-----------|---------------|------------|------------------|-------------------|
 | MSE | Adam | 5e-4 | 4096 rays | 5000 | Random rays from all images |
 
-**Training Procedure:**
-1. Randomly sample 4096 rays from all training images
-2. For each ray, sample 64 points and query NeRF
-3. Render pixel colors using volume rendering
-4. Compute MSE loss between rendered and ground truth RGB
-5. Backpropagate and update network weights
-6. Monitor PSNR on validation view to track reconstruction quality
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -211,6 +191,8 @@ Classical volume rendering with alpha compositing:
 </div>
 
 ## Training progression visualization with predicted images across iterations
+
+During each training iteration, I randomly sample 4096 rays from all training images to ensure diverse coverage of the scene. For each ray, 64 points are sampled along its length and queried through the NeRF model to obtain color and density values. These values are then accumulated using volume rendering to produce the final pixel colors. The MSE loss is computed between the rendered colors and ground truth RGB values from the training images. This loss is backpropagated through the network to update the model weights via the Adam optimizer. Throughout training, I monitor the PSNR on a validation view to track reconstruction quality and ensure the model is learning effectively.
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/val_iter_0000.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
@@ -294,7 +276,6 @@ Classical volume rendering with alpha compositing:
     </figcaption>
   </figure>
 </div>
-
 
 # Part 2.6: Training with Your Own Data
 
