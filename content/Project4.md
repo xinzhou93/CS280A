@@ -19,27 +19,25 @@ This project explores Neural Radiance Fields (NeRF), a powerful technique for sy
 
 # Part 0: Camera Calibration and 3D Scanning
 
-To create my own NeRF dataset, I captured a 3D scan of a rubber duck using an iPhone camera. The process involved:
+To create my own NeRF dataset, I captured a 3D scan of a duck using an iPhone camera. The process involved:
 
-1. **Scene Setup**: Placed a rubber duck on a table with an ArUco marker for automatic scale calibration and coordinate system alignment
+1. **Scene Setup**: Used 6 ArUco markers to calibrate the camera and placed a duck on a table with an ArUco marker for automatic scale calibration and coordinate system alignment
 2. **Image Capture**: Walked 360° around the object, capturing approximately 90 images from all angles to ensure complete coverage
-3. **Camera Pose Estimation**: Used COLMAP's structure-from-motion pipeline to automatically estimate camera intrinsics (focal length) and extrinsics (camera-to-world poses) from the image sequence
+3. **Camera Pose Estimation**: Estimated camera intrinsics (focal length) and extrinsics (camera-to-world poses) from the image sequence
 4. **Dataset Filtering**: Analyzed camera positions using Viser's 3D visualization interface and filtered to keep only cameras at uniform distance from the object (74 images retained)
 
-The visualizations below show the reconstructed camera poses and 3D point cloud from COLMAP, displayed in Viser. The left image shows the full initial dataset with cameras at varying distances, while the right image shows the filtered dataset with uniform camera distances, which was used for NeRF training.
+The visualizations below show the reconstructed camera poses and 3D point cloud in Viser. 
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/P01.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Initial dataset: Camera poses and sparse 3D reconstruction from COLMAP
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P4/P02.png" alt="Image 2" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Filtered dataset: 74 cameras at uniform distance (mean=0.192m, std=0.048m)
     </figcaption>
   </figure>
 </div>
