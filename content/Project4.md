@@ -174,38 +174,33 @@ learning rate: 1e-2
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P4/depth_frame_001.png" alt="Image 1" style="width: 50%; height: auto; display: block;" />
+    <img src="/P4/depth_frame_001.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
   <figure style="margin: 0;">
-    <img src="/P4/depth_frame_010.png" alt="Image 1" style="width: 50%; height: auto; display: block;" />
+    <img src="/P4/depth_frame_010.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
   <figure style="margin: 0;">
-    <img src="/P4/depth_frame_020.png" alt="Image 1" style="width: 50%; height: auto; display: block;" />
+    <img src="/P4/depth_frame_020.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
   <figure style="margin: 0;">
-    <img src="/P4/depth_frame_030.png" alt="Image 1" style="width: 50%; height: auto; display: block;" />
+    <img src="/P4/depth_frame_030.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
   <figure style="margin: 0;">
-    <img src="/P4/depth_frame_040.png" alt="Image 1" style="width: 50%; height: auto; display: block;" />
+    <img src="/P4/depth_frame_040.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
-    <img src="/P4/depth_frame_050.png" alt="Image 1" style="width: 50%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    </figcaption>
-  </figure>
-  <figure style="margin: 0;">
-    <img src="/P4/depth_frame_060.png" alt="Image 1" style="width: 50%; height: auto; display: block;" />
+    <img src="/P4/depth_frame_050.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
