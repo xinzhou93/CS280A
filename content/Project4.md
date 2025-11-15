@@ -140,31 +140,66 @@ Hyperparameters:
 
 NeRF represents a 3D scene as a continuous volumetric field that maps 5D coordinates (3D position + 2D viewing direction) to volume density and view-dependent color.
 
-Key Implementation Components:
+### Part 2.1-2.2: Ray Generation and Sampling
 
-NeRF Model Architecture:
-   - Input: 5D coordinates (x, y, z position + θ, φ viewing direction)
-   - Positional encoding: L=10 for position (63D), L=4 for direction (27D)
-   - Network: 8-layer MLP with 256 hidden units
-   - Skip connection at layer 5 concatenates input features
-   - Outputs: RGB color (view-dependent) + volume density σ (view-independent)
+**Creating Rays from Cameras:**
+- For each pixel (i, j) in the image, I construct a ray originating from the camera center
+- Ray direction is computed using the camera intrinsics (focal length) and pixel coordinates
+- The camera-to-world matrix (c2w) transforms rays from camera space to world space
+- Each ray is defined by origin **o** and direction **d**: $r(t) = o + td$
 
-Ray Sampling & Marching:
-   - Cast rays through each pixel from camera center
-   - Sample N=64 points uniformly along each ray between near/far bounds
-   - Stratified sampling with random perturbation for anti-aliasing
+**Sampling Points Along Rays:**
+- Sample N=64 points uniformly between near and far bounds along each ray
+- Use stratified sampling: divide the ray into N bins and randomly sample within each bin
+- This perturbation prevents aliasing and improves rendering quality
+- Sampled points: $t_i \sim U[t_{near} + \frac{i}{N}(t_{far}-t_{near}), t_{near} + \frac{i+1}{N}(t_{far}-t_{near})]$
 
-Volume Rendering:
-   - Query NeRF at each sampled point to get (RGB, σ)
-   - Accumulate colors using alpha compositing: $C(r) = \sum_{i=1}^{N} T_i \alpha_i c_i$
-   - where $T_i$ is transmittance and $\alpha_i$ is opacity from density
+### Part 2.3: Positional Encoding
 
-Training Configuration:
-   - Loss: MSE between rendered and ground truth RGB
-   - Optimizer: Adam (lr=5e-4)
-   - Batch size: 4096 rays per iteration
-   - Training iterations: 5000
-   - Random ray sampling from all training images
+High-frequency positional encoding enables the MLP to represent fine details:
+- Position encoding: $\gamma(x) = [x, \sin(2^0\pi x), \cos(2^0\pi x), ..., \sin(2^{L-1}\pi x), \cos(2^{L-1}\pi x)]$
+- L=10 for 3D positions → 63D features (3 + 3×2×10)
+- L=4 for viewing directions → 27D features (3 + 3×2×4)
+- Without encoding, the network struggles to capture high-frequency geometric details
+
+### Part 2.4: NeRF Model Architecture
+
+8-layer MLP with skip connections:
+- **Layers 1-4**: Process encoded 3D position (63D → 256D)
+- **Layer 5**: Skip connection concatenates original position encoding with layer 4 output
+- **Layers 6-7**: Further process combined features
+- **Layer 8**: Split into two heads:
+  - Density head: Outputs volume density σ (1D, view-independent)
+  - Feature head: Outputs 256D feature vector
+- **Direction processing**: Concatenate feature vector with encoded direction (27D)
+- **Final layer**: Outputs view-dependent RGB color (3D)
+
+### Part 2.5: Volume Rendering
+
+Classical volume rendering with alpha compositing:
+- Query NeRF at each sampled point along the ray to get $(rgb_i, \sigma_i)$
+- Compute alpha values: $\alpha_i = 1 - \exp(-\sigma_i \delta_i)$ where $\delta_i$ is distance between samples
+- Compute transmittance: $T_i = \prod_{j=1}^{i-1}(1-\alpha_j)$ (light transmission up to point i)
+- Final pixel color: $C(r) = \sum_{i=1}^{N} T_i \alpha_i c_i$
+- This accumulates colors from front to back, properly handling occlusion and transparency
+
+### Part 2.6: Training Process
+
+**Dataset:** Lego bulldozer with 100 training views (200×200 resolution)
+
+**Training Configuration:**
+
+| Loss Function | Optimizer | Learning Rate | Batch Size | Total Iterations | Sampling Strategy |
+|---------------|-----------|---------------|------------|------------------|-------------------|
+| MSE | Adam | 5e-4 | 4096 rays | 5000 | Random rays from all images |
+
+**Training Procedure:**
+1. Randomly sample 4096 rays from all training images
+2. For each ray, sample 64 points and query NeRF
+3. Render pixel colors using volume rendering
+4. Compute MSE loss between rendered and ground truth RGB
+5. Backpropagate and update network weights
+6. Monitor PSNR on validation view to track reconstruction quality
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
