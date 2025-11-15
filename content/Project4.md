@@ -88,21 +88,49 @@ learning rate: 1e-2
   <figure style="margin: 0;">
     <img src="/P4/val_iter_0000.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    </figcaption>
-  </figure>
-  <figure style="margin: 0;">
-    <img src="/P4/val_iter_0200.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
-    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    iter = 0
     </figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/P4/val_iter_0400.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    iter = 400
     </figcaption>
   </figure>
   <figure style="margin: 0;">
-    <img src="/P4/val_iter_0500.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
+    <img src="/P4/val_iter_0800.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    iter = 800
+    </figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P4/val_iter_1000.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    iter = 1000
+    </figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P4/val_iter_2000.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    iter = 2000
+    </figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P4/val_iter_3000.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    iter = 3000
+    </figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P4/val_iter_4000.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    iter = 4000
+    </figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P4/val_iter_4999.png" alt="Image 1" style="width: 50; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    iter = 4999
     </figcaption>
   </figure>
 </div>
