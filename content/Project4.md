@@ -281,11 +281,20 @@ During each training iteration, I randomly sample 4096 rays from all training im
 
 ## Dataset Creation and Preprocessing
 
-I captured my own dataset using an iPhone camera, photographing a rubber duck on a table with an ArUco marker for scale reference. The capture process involved 360° coverage by walking around the object, capturing approximately 90 images from all angles. I used COLMAP structure-from-motion to estimate camera poses and intrinsics from the images.
+I captured my own dataset using an iPhone camera, photographing a rubber duck on a table with an ArUco marker for scale reference. The capture process involved 360° coverage by walking around the object, capturing approximately 90 images from all angles. 
 
 **Dataset Filtering Challenge:**
 
-After initial COLMAP processing, I discovered a critical issue: cameras at varying distances from the object caused training instability. The outer loop of captures (farther from object) had significantly different distances than the inner loop.
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P4/w.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Spherical rendering video of the Lego using provided test cameras
+    </figcaption>
+  </figure>
+</div>
+
+After poses estimation, I discovered a critical issue from the Viser interface: cameras at varying distances from the object caused training instability. The outer loop of captures (farther from object) had significantly different distances than the inner loop.
 
 **Solution:** I filtered the dataset to keep only cameras with uniform distance, resulting in 74 training images with mean distance of 0.192m (19.2cm) and standard deviation of only 0.048m. This filtering dramatically improved training stability and reconstruction quality.
 
@@ -463,6 +472,28 @@ Generating the 360° novel view video required solving coordinate system issues:
 
 # Bells and Whistles
 
+## Depth Map Rendering for Lego Scene
+
+I implemented depth map visualization to reveal the 3D geometric structure of the Lego scene. Depth maps show the distance from the camera to each surface point, providing clear insight into the spatial layout learned by NeRF.
+
+**Implementation:**
+
+NeRF's volume rendering can be extended to render depth values using the same accumulation principle as color rendering. Instead of accumulating RGB colors, we accumulate the expected depth along each ray:
+
+$$D(r) = \sum_{i=1}^{N} T_i \alpha_i t_i$$
+
+where $D(r)$ is the expected depth, $T_i$ is transmittance, $\alpha_i$ is opacity, and $t_i$ is the distance from camera to sample point $i$.
+
+**Visualization Process:**
+1. Query the trained NeRF model to get density values along each ray
+2. Compute depth using weighted sum (closer points with higher opacity contribute more)
+3. Normalize depth values based on scene bounds
+4. Apply colormap: warmer colors (red/yellow) = closer surfaces, cooler colors (blue/cyan) = farther surfaces
+
+I generated a 360° rotating depth map video using the same spherical camera trajectory as the RGB rendering, clearly visualizing the Lego bulldozer's 3D geometry from all angles.
+
+**Sample Depth Frames:**
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/depth_frame_001.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
@@ -497,11 +528,13 @@ Generating the 360° novel view video required solving coordinate system issues:
   </figure>
 </div>
 
+**360° Depth Map Video:**
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/BW2.gif" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Complete 360° rotation showing depth map from all viewing angles
     </figcaption>
   </figure>
 </div>
