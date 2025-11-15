@@ -281,7 +281,7 @@ During each training iteration, I randomly sample 4096 rays from all training im
 
 ## Dataset Creation and Preprocessing
 
-I captured my own dataset using an iPhone camera, photographing a rubber duck on a table with an ArUco marker for scale reference. The capture process involved 360° coverage by walking around the object, capturing approximately 90 images from all angles. 
+I captured my own dataset using an iPhone camera, photographing a toy duck on a table with an ArUco marker for scale reference. The capture process involved 360° coverage by walking around the object, capturing approximately 90 images from all angles. 
 
 **Dataset Filtering Challenge:**
 
@@ -289,7 +289,7 @@ I captured my own dataset using an iPhone camera, photographing a rubber duck on
   <figure style="margin: 0;">
     <img src="/P4/w.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Spherical rendering video of the Lego using provided test cameras
+    Dataset with varying distances
     </figcaption>
   </figure>
 </div>
