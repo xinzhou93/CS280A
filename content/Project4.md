@@ -320,17 +320,11 @@ Finding the correct near/far bounds was the most challenging aspect:
 
 ## Results and Discussion
 
-**Final Performance:** Training achieved ~20 dB PSNR (target was 23 dB). The reconstruction is recognizable but blurrier than the synthetic Lego dataset.
+The final model achieved approximately 20 dB PSNR, which falls short of the target 23 dB but represents a reasonable result for real-world data. The reconstruction is recognizable and captures the overall shape and appearance of the duck, though it appears noticeably blurrier compared to the synthetic Lego dataset.
 
-**Why lower quality?**
-- Real-world complexity: varying lighting, potential motion blur, reflective surfaces
-- Limited training data: 74 views vs. 100 for Lego
-- Camera calibration uncertainty: COLMAP estimates have some error unlike perfect synthetic poses
+Several factors contribute to this lower quality compared to synthetic datasets. First, real-world complexity introduces challenges such as varying lighting conditions across captures, potential motion blur from hand-held photography, and reflective surfaces on the table that create inconsistent appearances. Second, the limited training data of 74 views, while sufficient for basic reconstruction, provides less coverage than the 100 views available for the Lego dataset. Finally, camera calibration uncertainty from COLMAP pose estimation introduces small errors in camera positions and orientations, unlike the perfect synthetic poses used for Lego.
 
-**Key Lessons:**
-- Uniform camera distances matter more than total number of images
-- Wide near/far bounds are safer for real-world scenes
-- Real-world NeRF is significantly more challenging than synthetic datasets
+This project yielded several important lessons about real-world NeRF training. Most significantly, uniform camera distances proved more critical than simply maximizing the total number of images—filtering out the outer camera loop dramatically improved results despite reducing image count. Additionally, wide near/far bounds (0.01-1.0) proved safer for real-world scenes where exact depth ranges are uncertain, allowing the network to learn scene boundaries rather than being constrained by potentially inaccurate estimates. Overall, this experience demonstrated that real-world NeRF reconstruction is significantly more challenging than working with synthetic datasets, requiring careful attention to data quality and hyperparameter tuning to achieve acceptable results.
 
 ## Training Progression
 
