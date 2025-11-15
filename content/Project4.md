@@ -487,7 +487,7 @@ where $D(r)$ is the expected depth, $T_i$ is transmittance, $\alpha_i$ is opacit
 3. Normalize depth values based on scene bounds
 4. Apply grayscale mapping: darker values = closer surfaces, lighter values = farther surfaces
 
-I generated a 360° rotating depth map video using the same spherical camera trajectory as the RGB rendering, clearly visualizing the Lego bulldozer's 3D geometry from all angles.
+I generated a 360° rotating depth map video using the same spherical camera trajectory as the RGB rendering.
 
 **Sample Depth Frames:**
 
