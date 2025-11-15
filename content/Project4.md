@@ -5,6 +5,16 @@ tags: [project, cs280a]
 
 # Overview
 
+This project explores Neural Radiance Fields (NeRF), a powerful technique for synthesizing novel views of 3D scenes from 2D images. The project is divided into several parts, progressively building understanding from simple 2D image fitting to complex 3D scene reconstruction.
+
+**Part 1** begins with fitting a neural field to represent a 2D image, demonstrating how MLPs with positional encoding can learn continuous functions mapping pixel coordinates to RGB colors. I implemented a 4-layer network with L=10 positional encoding and explored how different hyperparameters (frequency levels and network width) affect reconstruction quality.
+
+**Part 2** extends these concepts to 3D by implementing a full NeRF pipeline for the Lego bulldozer dataset. This involved implementing ray generation from cameras, stratified sampling along rays, an 8-layer NeRF architecture with skip connections, and volume rendering with alpha compositing. The model successfully reconstructs the 3D scene and enables rendering from novel camera viewpoints.
+
+**Part 2.6** applies NeRF to my own real-world dataset: a rubber duck photographed with an iPhone. This required camera pose estimation using COLMAP, careful dataset filtering to ensure uniform camera distances, and extensive hyperparameter tuning (particularly near/far bounds). Despite challenges from real-world complexity, the model achieved ~20 dB PSNR and produces recognizable novel views.
+
+**Bells and Whistles** implements depth map rendering for the Lego scene, visualizing the 3D geometric structure learned by NeRF through grayscale depth maps that show distance from camera to surfaces.
+
 # Part 0: Camera Calibration and 3D Scanning
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -318,14 +328,6 @@ Finding the correct near/far bounds was the most challenging aspect:
 | Learning rate | 5e-4 | Standard Adam learning rate |
 | Near/far bounds | 0.01 - 1.0 | Wide bounds to avoid clipping |
 
-## Results and Discussion
-
-The final model achieved approximately $20$ dB PSNR, which falls short of the target $23$ dB but represents a reasonable result for real-world data. The reconstruction is recognizable and captures the overall shape and appearance of the duck, though it appears noticeably blurrier compared to the Lego dataset.
-
-Several factors contribute to this lower quality. First, real-world complexity introduces challenges such as varying lighting conditions across captures, potential motion blur from hand-held photography, and reflective surfaces on the table that create inconsistent appearances. Second, the limited training data of $74$ views, while sufficient for basic reconstruction, provides less coverage. Finally, camera calibration uncertainty from pose estimation introduces small errors in camera positions and orientations, unlike the perfect poses used for Lego.
-
-This project yielded several important lessons about real-world NeRF training. Most significantly, uniform camera distances proved more critical than simply maximizing the total number of images—filtering out the outer camera loop dramatically improved results despite reducing image count. Additionally, wide near/far bounds $(0.01-1.0)$ proved safer for real-world scenes where exact depth ranges are uncertain, allowing the network to learn scene boundaries rather than being constrained by potentially inaccurate estimates. Overall, this experience demonstrated that real-world NeRF reconstruction is significantly more challenging, requiring careful attention to data quality and hyperparameter tuning to achieve acceptable results.
-
 ## Training Progression
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
@@ -457,6 +459,13 @@ This project yielded several important lessons about real-world NeRF training. M
   </figure>
 </div>
 
+## Results and Discussion
+
+The final model achieved approximately $20$ dB PSNR, which falls short of the target $23$ dB but represents a reasonable result for real-world data. The reconstruction is recognizable and captures the overall shape and appearance of the duck, though it appears noticeably blurrier compared to the Lego dataset.
+
+Several factors contribute to this lower quality. First, real-world complexity introduces challenges such as varying lighting conditions across captures, potential motion blur from hand-held photography, and reflective surfaces on the table that create inconsistent appearances. Second, the limited training data of $74$ views, while sufficient for basic reconstruction, provides less coverage. Finally, camera calibration uncertainty from pose estimation introduces small errors in camera positions and orientations, unlike the perfect poses used for Lego.
+
+This project yielded several important lessons about real-world NeRF training. Most significantly, uniform camera distances proved more critical than simply maximizing the total number of images—filtering out the outer camera loop dramatically improved results despite reducing image count. Additionally, wide near/far bounds $(0.01-1.0)$ proved safer for real-world scenes where exact depth ranges are uncertain, allowing the network to learn scene boundaries rather than being constrained by potentially inaccurate estimates. Overall, this experience demonstrated that real-world NeRF reconstruction is significantly more challenging, requiring careful attention to data quality and hyperparameter tuning to achieve acceptable results.
 
 # Bells and Whistles
 
@@ -476,7 +485,7 @@ where $D(r)$ is the expected depth, $T_i$ is transmittance, $\alpha_i$ is opacit
 1. Query the trained NeRF model to get density values along each ray
 2. Compute depth using weighted sum (closer points with higher opacity contribute more)
 3. Normalize depth values based on scene bounds
-4. Apply colormap: warmer colors (red/yellow) = closer surfaces, cooler colors (blue/cyan) = farther surfaces
+4. Apply grayscale mapping: darker values = closer surfaces, lighter values = farther surfaces
 
 I generated a 360° rotating depth map video using the same spherical camera trajectory as the RGB rendering, clearly visualizing the Lego bulldozer's 3D geometry from all angles.
 
