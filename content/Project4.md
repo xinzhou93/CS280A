@@ -1,12 +1,9 @@
 ---
-title: "IMAGE WARPING and MOSAICING"
+title: "Neural Radiance Field"
 tags: [project, cs280a]
 ---
 
 # Overview
- This project builds a image warping and mosaic pipeline using homography transformations. We compute homographies from manually selected point correspondences (A2), warp images using bilinear/Nearest Neighbor interpolation (A3), and stitch images into planar mosaics with weighted averaging (A4). 
-
-In the second part, the project focuses on automatic feature based stitching. We first implement Harris corners detection with ANMS for spatial distributed features. Then the pipeline extracts feature descriptors with bias/gain normalization. In B3, we match features using the descriptors and Lowe's test. Finally the system estimates the homography using RANSAC. The final mosaic image can be obtained using weighted averaging blending again.
 
 # Part 0: Camera Calibration and 3D Scanning
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
