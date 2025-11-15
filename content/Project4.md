@@ -73,29 +73,47 @@ Training Configuration:
   </figure>
 </div>
 
-## Hyperparameter Analysis
+The training progression shows that the image reconstruction quality improves over iterations.
 
-To understand the impact of network capacity and positional encoding frequency, I trained 4 models with different configurations in a 2×2 grid (2 choices of L × 2 choices of hidden_dim):
+## Hyperparameter Comparisons
+
+To understand the impact of network width and positional encoding frequency, I trained 4 models with different configurations in a 2×2 grid:
+
+Hyperparameters:
+
+| Configuration | L (Positional Encoding) | Hidden Dimension |
+| ------------- | ----------------------- | ---------------- |
+| Config 1      | 5                       | 128              |
+| Config 2      | 5                       | 256              |
+| Config 3      | 10                      | 128              |
+| Config 4      | 10                      | 256              |
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/P13.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    Hyperparameter Grid: Comparison of different L and hidden_dim values
     </figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/P4/P15.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    PSNR curves showing convergence for different hyperparameters
     </figcaption>
   </figure>
 </div>
 
+**Hyperparameter Comparison Results:**
+
+| Configuration | L (Positional Encoding) | Hidden Dimension | Final PSNR (dB) |
+|---------------|-------------------------|------------------|-----------------|
+| Config 1 | 5 | 128 | 34.2 |
+| Config 2 | 5 | 256 | 34.9 |
+| Config 3 | 10 | 128 | 33.6 |
+| **Config 4 (Best)** | **10** | **256** | **36.8** |
+
 **Key Observations:**
 - **Higher L (more frequency components)** → Better capture of fine details and textures
 - **Larger hidden_dim (more network capacity)** → Improved reconstruction quality and higher PSNR
-- **Best configuration**: L=10, hidden_dim=256 achieves the highest quality (shown in Results section above)
+- **Best configuration**: L=10, hidden_dim=256 achieves the highest PSNR of 36.8 dB
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
