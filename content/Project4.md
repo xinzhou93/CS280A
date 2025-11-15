@@ -22,6 +22,8 @@ tags: [project, cs280a]
 
 # Part 1: Fit a Neural Field to a 2D Image
 
+## Model Architecture
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/mlp_img.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
@@ -30,13 +32,31 @@ tags: [project, cs280a]
   </figure>
 </div>
 
-Default setting:
-L = 10
-hidden dimension = 256
-layer numbers = 4
-batch size = 10000
-num of iterations: 2000
-learning rate: 1e-2
+The neural field model learns a continuous representation of a 2D image by mapping pixel coordinates to RGB colors through a fully-connected MLP network.
+
+Network Structure:
+- Architecture: 4-layer fully-connected MLP
+  - Input layer: 42D → 256D
+  - Hidden layers: 256D → 256D (×2)
+  - Output layer: 256D → 3D (RGB)
+- Width: 256 neurons per hidden layer
+- Activation functions: ReLU for hidden layers, Sigmoid for output (ensures RGB ∈ [0,1])
+
+Positional Encoding:
+- Frequency levels: L = 10
+- Input dimension: 42D = 2D original coordinates + 40D encoding
+- Formula: $γ(x) = [x, sin(2⁰πx), cos(2⁰πx), ..., sin(2⁹πx), cos(2⁹πx)]$
+- High-frequency components enable the network to capture fine details that would otherwise be difficult to represent with a simple coordinate-based MLP
+
+Training Configuration:
+- Optimizer: Adam
+- Learning rate: 1e-2
+- Loss function: Mean Squared Error (MSE)
+- Batch size: 10,000 pixels per iteration
+- Total iterations: 2,000
+- Training strategy: Random pixel sampling per iteration
+
+## Results
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -54,29 +74,42 @@ learning rate: 1e-2
   </figure>
 </div>
 
+## Hyperparameter Analysis
+
+To understand the impact of network capacity and positional encoding frequency, I trained 4 models with different configurations in a 2×2 grid (2 choices of L × 2 choices of hidden_dim):
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/P13.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Hyperparameter Grid: Comparison of different L and hidden_dim values
     </figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/P4/P15.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    PSNR curves showing convergence for different hyperparameters
     </figcaption>
   </figure>
 </div>
+
+**Key Observations:**
+- **Higher L (more frequency components)** → Better capture of fine details and textures
+- **Larger hidden_dim (more network capacity)** → Improved reconstruction quality and higher PSNR
+- **Best configuration**: L=10, hidden_dim=256 achieves the highest quality (shown in Results section above)
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/P14.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Training progression showing reconstruction quality improving over iterations
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P4/P16.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Final reconstruction results and metrics
     </figcaption>
   </figure>
 </div>
