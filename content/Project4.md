@@ -142,29 +142,24 @@ NeRF represents a 3D scene as a continuous volumetric field that maps 5D coordin
 
 Key Implementation Components:
 
-1. **Dataset & Camera Setup:**
-   - Dataset: Lego bulldozer (200×200 resolution)
-   - 100 training views with known camera poses (`c2w` matrices) and focal length
-   - Camera-to-world transformations enable ray generation from each pixel
-
-2. **NeRF Model Architecture:**
+NeRF Model Architecture:
    - Input: 5D coordinates (x, y, z position + θ, φ viewing direction)
    - Positional encoding: L=10 for position (63D), L=4 for direction (27D)
    - Network: 8-layer MLP with 256 hidden units
    - Skip connection at layer 5 concatenates input features
    - Outputs: RGB color (view-dependent) + volume density σ (view-independent)
 
-3. **Ray Sampling & Marching:**
+Ray Sampling & Marching:
    - Cast rays through each pixel from camera center
    - Sample N=64 points uniformly along each ray between near/far bounds
    - Stratified sampling with random perturbation for anti-aliasing
 
-4. **Volume Rendering:**
+Volume Rendering:
    - Query NeRF at each sampled point to get (RGB, σ)
    - Accumulate colors using alpha compositing: $C(r) = \sum_{i=1}^{N} T_i \alpha_i c_i$
    - where $T_i$ is transmittance and $\alpha_i$ is opacity from density
 
-5. **Training Configuration:**
+Training Configuration:
    - Loss: MSE between rendered and ground truth RGB
    - Optimizer: Adam (lr=5e-4)
    - Batch size: 4096 rays per iteration
