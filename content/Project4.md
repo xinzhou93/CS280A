@@ -50,12 +50,10 @@ Positional Encoding:
 - High-frequency components enable the network to capture fine details that would otherwise be difficult to represent with a simple coordinate-based MLP
 
 Training Configuration:
-- Optimizer: Adam
-- Learning rate: 1e-2
-- Loss function: Mean Squared Error (MSE)
-- Batch size: 10,000 pixels per iteration
-- Total iterations: 2,000
-- Training strategy: Random pixel sampling per iteration
+
+| Optimizer | Learning Rate | Loss Function | Batch Size | Total Iterations | Training Strategy |
+|-----------|---------------|---------------|------------|------------------|-------------------|
+| Adam | 1e-2 | MSE | 10,000 pixels | 2,000 | Random pixel sampling |
 
 ## Results
 
