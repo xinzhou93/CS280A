@@ -7,25 +7,39 @@ tags: [project, cs280a]
 
 This project explores Neural Radiance Fields (NeRF), a powerful technique for synthesizing novel views of 3D scenes from 2D images. The project is divided into several parts, progressively building understanding from simple 2D image fitting to complex 3D scene reconstruction.
 
+**Part 0** establishes the foundation by calibrating an iPhone camera and capturing a 3D scan of a real-world object (rubber duck). Using an ArUco marker for scale reference, I captured approximately 90 images from 360° around the object. COLMAP was used for structure-from-motion to estimate camera poses and intrinsics, creating the dataset used later in Part 2.6.
+
 **Part 1** begins with fitting a neural field to represent a 2D image, demonstrating how MLPs with positional encoding can learn continuous functions mapping pixel coordinates to RGB colors. I implemented a 4-layer network with L=10 positional encoding and explored how different hyperparameters (frequency levels and network width) affect reconstruction quality.
 
-**Part 2** extends these concepts to 3D by implementing a full NeRF pipeline for the Lego bulldozer dataset. This involved implementing ray generation from cameras, stratified sampling along rays, an 8-layer NeRF architecture with skip connections, and volume rendering with alpha compositing. The model successfully reconstructs the 3D scene and enables rendering from novel camera viewpoints.
+**Part 2** extends these concepts to 3D by implementing a full NeRF pipeline for the Lego dataset. This involved implementing ray generation from cameras, stratified sampling along rays, an 8-layer NeRF architecture with skip connections, and volume rendering with alpha compositing. The model successfully reconstructs the 3D scene and enables rendering from novel camera viewpoints.
 
-**Part 2.6** applies NeRF to my own real-world dataset: a rubber duck photographed with an iPhone. This required camera pose estimation using COLMAP, careful dataset filtering to ensure uniform camera distances, and extensive hyperparameter tuning (particularly near/far bounds). Despite challenges from real-world complexity, the model achieved ~20 dB PSNR and produces recognizable novel views.
+**Part 2.6** applies NeRF to my own real-world dataset: a duck photographed with an iPhone. This required camera pose estimation , careful dataset filtering to ensure uniform camera distances, and extensive hyperparameter tuning (particularly near/far bounds). Despite challenges from real-world complexity, the model achieved ~20 dB PSNR and produces recognizable novel views.
 
 **Bells and Whistles** implements depth map rendering for the Lego scene, visualizing the 3D geometric structure learned by NeRF through grayscale depth maps that show distance from camera to surfaces.
 
 # Part 0: Camera Calibration and 3D Scanning
+
+To create my own NeRF dataset, I captured a 3D scan of a rubber duck using an iPhone camera. The process involved:
+
+1. **Scene Setup**: Placed a rubber duck on a table with an ArUco marker for automatic scale calibration and coordinate system alignment
+2. **Image Capture**: Walked 360° around the object, capturing approximately 90 images from all angles to ensure complete coverage
+3. **Camera Pose Estimation**: Used COLMAP's structure-from-motion pipeline to automatically estimate camera intrinsics (focal length) and extrinsics (camera-to-world poses) from the image sequence
+4. **Dataset Filtering**: Analyzed camera positions using Viser's 3D visualization interface and filtered to keep only cameras at uniform distance from the object (74 images retained)
+
+The visualizations below show the reconstructed camera poses and 3D point cloud from COLMAP, displayed in Viser. The left image shows the full initial dataset with cameras at varying distances, while the right image shows the filtered dataset with uniform camera distances, which was used for NeRF training.
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/P01.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Initial dataset: Camera poses and sparse 3D reconstruction from COLMAP
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P4/P02.png" alt="Image 2" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    Filtered dataset: 74 cameras at uniform distance (mean=0.192m, std=0.048m)
     </figcaption>
   </figure>
 </div>
