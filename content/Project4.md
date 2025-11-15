@@ -38,7 +38,7 @@ learning rate: 1e-2
   </figure>
 
   <figure style="margin: 0;">
-    <img src="/P4/P02.png" alt="Image 2" style="width: 100%; height: auto; display: block;" />
+    <img src="/P4/P12.png" alt="Image 2" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
     </figcaption>
   </figure>
