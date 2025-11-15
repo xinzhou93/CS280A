@@ -279,6 +279,64 @@ During each training iteration, I randomly sample 4096 rays from all training im
 
 # Part 2.6: Training with Your Own Data
 
+## Dataset Creation and Preprocessing
+
+I captured my own dataset using an iPhone camera, photographing a rubber duck on a table with an ArUco marker for scale reference. The capture process involved 360° coverage by walking around the object, capturing approximately 90 images from all angles. I used COLMAP structure-from-motion to estimate camera poses and intrinsics from the images.
+
+**Dataset Filtering Challenge:**
+
+After initial COLMAP processing, I discovered a critical issue: cameras at varying distances from the object caused training instability. The outer loop of captures (farther from object) had significantly different distances than the inner loop.
+
+**Solution:** I filtered the dataset to keep only cameras with uniform distance, resulting in 74 training images with mean distance of 0.192m (19.2cm) and standard deviation of only 0.048m. This filtering dramatically improved training stability and reconstruction quality.
+
+## Hyperparameter Tuning
+
+**Near/Far Bounds Experimentation:**
+
+Finding the correct near/far bounds was the most challenging aspect:
+
+1. **Initial attempt** (near=0.07, far=0.31): Based on computed camera distances, but resulted in poor PSNR (~14-17 dB). The bounds were too tight and clipped important parts of the scene.
+
+2. **Instructor's suggestion** (near=0.02, far=0.5): Still produced suboptimal results for my scene.
+
+3. **Final solution** (near=0.01, far=1.0): Counterintuitively, using very wide bounds worked best, achieving ~20 dB PSNR. This allows the network to learn the actual scene boundaries rather than being constrained by potentially inaccurate estimates.
+
+**Training Configuration:**
+
+| Parameter | Value | Reasoning |
+|-----------|-------|-----------|
+| Iterations | 10,000 | 2× longer than Lego due to real-world complexity |
+| Hidden dimension | 256 | Standard capacity, balanced quality vs. speed |
+| Batch size | 4096 rays | Same as Lego for fair comparison |
+| Learning rate | 5e-4 | Standard Adam learning rate |
+| Near/far bounds | 0.01 - 1.0 | Wide bounds to avoid clipping |
+
+## Novel View Rendering Challenges
+
+Generating the 360° novel view video required solving coordinate system issues:
+
+**Coordinate System Fix:** Initial implementation used Y-up coordinate system (rotating in XZ plane), which produced incorrect camera orientations. I switched to Z-up coordinate system matching the Lego dataset (rotating in XY plane around Z-axis).
+
+**Camera Height Adjustment:** After fixing the coordinate system, cameras were positioned too high. I adjusted the height to z=-0.06m to match the training camera positions.
+
+**Final Configuration:** Circular path in XY plane with radius=0.22m (matching mean training camera distance) and height z=-0.06m.
+
+## Results and Discussion
+
+**Final Performance:** Training achieved ~20 dB PSNR (target was 23 dB). The reconstruction is recognizable but blurrier than the synthetic Lego dataset.
+
+**Why lower quality?**
+- Real-world complexity: varying lighting, potential motion blur, reflective surfaces
+- Limited training data: 74 views vs. 100 for Lego
+- Camera calibration uncertainty: COLMAP estimates have some error unlike perfect synthetic poses
+
+**Key Lessons:**
+- Uniform camera distances matter more than total number of images
+- Wide near/far bounds are safer for real-world scenes
+- Real-world NeRF is significantly more challenging than synthetic datasets
+
+## Training Progression
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P4/intermediate_iter_0000.png" alt="Image 1" style="width: 100%; height: auto; display: block;" />
