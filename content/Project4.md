@@ -103,19 +103,10 @@ Hyperparameters:
   </figure>
 </div>
 
-**Hyperparameter Comparison Results:**
-
-| Configuration | L (Positional Encoding) | Hidden Dimension | Final PSNR (dB) |
-|---------------|-------------------------|------------------|-----------------|
-| Config 1 | 5 | 128 | 34.2 |
-| Config 2 | 5 | 256 | 34.9 |
-| Config 3 | 10 | 128 | 33.6 |
-| **Config 4 (Best)** | **10** | **256** | **36.8** |
-
 **Key Observations:**
-- **Higher L (more frequency components)** → Better capture of fine details and textures
-- **Larger hidden_dim (more network capacity)** → Improved reconstruction quality and higher PSNR
-- **Best configuration**: L=10, hidden_dim=256 achieves the highest PSNR of 36.8 dB
+- Higher L can better capture fine details and textures
+- Larger network width with more neurons can improve reconstruction quality and higher PSNR
+- The best configuration is $L=10, width=256$, which achieves the highest PSNR for both images.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
