@@ -745,6 +745,45 @@ Instead of using the generic prompt `"a high quality photo"`, we can guide the i
 - At low `i_start` values, the prompt dominates; at high values, the original structure is preserved with stylistic changes
 
 ## 1.8 Visual Anagrams
+
+[Visual Anagrams](https://dangeng.github.io/visual_anagrams/) create optical illusions where an image looks like one thing, but when flipped upside down reveals something completely different.
+
+The algorithm works by averaging two noise estimates:
+- $\epsilon_1$: Denoise normally with prompt $p_1$
+- $\epsilon_2$: Flip image, denoise with prompt $p_2$, flip the noise back
+- $\epsilon = (\epsilon_1 + \epsilon_2) / 2$
+
+### Illusion 1: "an oil painting of a wise old wizard" ↔ "an oil painting of a mysterious forest"
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_8_illusion1_normal.png" alt="Normal" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal (wizard)</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_8_illusion1_flipped.png" alt="Flipped" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Flipped (forest)</figcaption>
+  </figure>
+</div>
+
+### Illusion 2: "a watercolor painting of mountains" ↔ "a watercolor painting of ocean waves"
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_8_illusion2_normal.png" alt="Normal" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal (mountains)</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_8_illusion2_flipped.png" alt="Flipped" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Flipped (ocean waves)</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- The illusions work best when the two prompts have compatible structures (e.g., wizard beard → tree roots, mountain peaks → wave crests)
+- Using matching art styles ("oil painting", "watercolor") helps unify the two views
+- The averaged noise estimate forces the model to find a compromise that satisfies both prompts
+
 ## 1.9 Hybrid Images
 
 # Part 2: Bells & Whistles
