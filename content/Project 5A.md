@@ -359,7 +359,51 @@ Instead of denoising a noisy image, we can **generate images from scratch** by s
 - Each sample produces a completely different image since each starts from different random noise
 - The generic prompt "a high quality photo" produces varied natural-looking scenes
 - The images look reasonable but lack sharpness and detail—this is because we're using unconditional/weak guidance. Part 1.6 (CFG) will improve this!
+
 ## 1.6 Classifier-Free Guidance (CFG)
+
+To improve image quality, we use **Classifier-Free Guidance (CFG)**. The idea is to compute both:
+- **Conditional noise** $\epsilon_c$: using the text prompt
+- **Unconditional noise** $\epsilon_u$: using an empty prompt ""
+
+Then combine them:
+$$\epsilon = \epsilon_u + \gamma (\epsilon_c - \epsilon_u)$$
+
+where $\gamma$ controls guidance strength. With $\gamma = 7$, we push strongly toward the prompt direction, producing sharper, more faithful images.
+
+```python
+noise_final = noise_uncond + scale * (noise_cond - noise_uncond)
+```
+
+**5 CFG Samples** (prompt: "a high quality photo", $\gamma = 7$)
+
+<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_6_cfg_sample_1.png" alt="CFG Sample 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_6_cfg_sample_2.png" alt="CFG Sample 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 2</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_6_cfg_sample_3.png" alt="CFG Sample 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_6_cfg_sample_4.png" alt="CFG Sample 4" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 4</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_6_cfg_sample_5.png" alt="CFG Sample 5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 5</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- Compared to Part 1.5 (without CFG), these images are noticeably **sharper and more detailed**
+- CFG amplifies the "prompt direction" by overshooting ($\gamma > 1$), making the model commit more strongly to generating prompt-faithful content
+- The trade-off: higher $\gamma$ = better quality but less diversity
 ## 1.7 Image-to-image Translation
 ## 1.8 Visual Anagrams
 ## 1.9 Hybrid Images
