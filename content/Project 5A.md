@@ -552,6 +552,34 @@ The noise level (`i_start`) controls how much the image changes:
 - At **i_start=20** (least noise): The result is nearly identical to the original
 - The progression shows a smooth transition from "hallucinated" to "preserved"
 - Hand-drawn images work particularly well—the model transforms sketches into realistic images while preserving the basic structure
+
+## 1.7.2 Inpainting
+
+Using the **RePaint** algorithm, we can fill in masked regions of an image. At each denoising step, we keep the unmasked regions fixed (with appropriate noise added) and only let the model hallucinate inside the mask:
+
+$$x_t \leftarrow \textbf{m} \cdot x_t + (1 - \textbf{m}) \cdot \text{forward}(x_{orig}, t)$$
+
+### Campanile Inpainting
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_camp_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_camp_mask.png" alt="Mask" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Mask (white = inpaint)</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_camp_inpainted.png" alt="Inpainted" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Inpainted</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- The model generates new content inside the mask while seamlessly blending with the surrounding pixels
+- The inpainted region maintains consistency with the rest of the image (lighting, style, structure)
+
 ## 1.8 Visual Anagrams
 ## 1.9 Hybrid Images
 
