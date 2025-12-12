@@ -103,14 +103,46 @@ The prompts align well with the outputs—the model correctly interprets "cyberp
 
 ## 1.1 Implementing the Forward Process
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
+The forward process gradually adds Gaussian noise to a clean image according to a noise schedule. Given an image $x_0$, we can obtain a noisy version $x_t$ at any timestep $t$ using:
+
+$$x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1 - \bar{\alpha}_t} \epsilon$$
+
+where $\epsilon \sim \mathcal{N}(0, I)$ is random noise and $\bar{\alpha}_t$ is the cumulative product of $(1 - \beta_t)$ values from the noise schedule.
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P4/mlp_img.jpg" alt="Image 1" style="width: 100%; height: auto; display: block;" />
+    <img src="/P5A/part1_1_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    image source: CS180 website: https://cal-cs180.github.io/fa25/hw/proj4/index.html
+    Original (t=0)
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_noisy_t250.png" alt="t=250" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    t=250
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_noisy_t500.png" alt="t=500" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    t=500
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_noisy_t750.png" alt="t=750" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
+    t=750
     </figcaption>
   </figure>
 </div>
+
+**Observations:**
+- At $t=250$: The image retains most of its structure with slight noise—the Campanile is clearly recognizable
+- At $t=500$: Moderate noise level; major shapes are visible but details are obscured
+- At $t=750$: Heavy noise dominates; the image is barely recognizable, approaching pure noise
 
 ## 1.2 Classical Denoising
 ## 1.3 One-Step Denoising
