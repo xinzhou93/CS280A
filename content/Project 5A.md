@@ -404,7 +404,154 @@ noise_final = noise_uncond + scale * (noise_cond - noise_uncond)
 - Compared to Part 1.5 (without CFG), these images are noticeably **sharper and more detailed**
 - CFG amplifies the "prompt direction" by overshooting ($\gamma > 1$), making the model commit more strongly to generating prompt-faithful content
 - The trade-off: higher $\gamma$ = better quality but less diversity
+
 ## 1.7 Image-to-image Translation
+
+Using the **SDEdit** algorithm, we can edit existing images by:
+1. Adding noise to the original image (at different levels)
+2. Denoising with CFG to "force" it back onto the natural image manifold
+
+The noise level (`i_start`) controls how much the image changes:
+- **Low i_start (1, 3)**: Heavy noise → model hallucinates more → big changes
+- **High i_start (10, 20)**: Light noise → stays close to original
+
+### Campanile
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_camp_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_camp_i1.png" alt="i=1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_camp_i3.png" alt="i=3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_camp_i5.png" alt="i=5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_camp_i7.png" alt="i=7" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=7</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_camp_i10.png" alt="i=10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_camp_i20.png" alt="i=20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=20</figcaption>
+  </figure>
+</div>
+
+### Web Image
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_web_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_web_i1.png" alt="i=1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_web_i3.png" alt="i=3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_web_i5.png" alt="i=5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_web_i7.png" alt="i=7" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=7</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_web_i10.png" alt="i=10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_web_i20.png" alt="i=20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=20</figcaption>
+  </figure>
+</div>
+
+### Hand-drawn Image 1
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_draw_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_draw_i1.png" alt="i=1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_draw_i3.png" alt="i=3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_draw_i5.png" alt="i=5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_draw_i7.png" alt="i=7" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=7</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_draw_i10.png" alt="i=10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_draw_i20.png" alt="i=20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=20</figcaption>
+  </figure>
+</div>
+
+### Hand-drawn Image 2
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_hand_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_hand_i1.png" alt="i=1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_hand_i3.png" alt="i=3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_hand_i5.png" alt="i=5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_hand_i7.png" alt="i=7" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=7</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_hand_i10.png" alt="i=10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_hand_i20.png" alt="i=20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=20</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- At **i_start=1** (most noise): The model almost completely reimagines the image, keeping only vague color/structure hints
+- At **i_start=20** (least noise): The result is nearly identical to the original
+- The progression shows a smooth transition from "hallucinated" to "preserved"
+- Hand-drawn images work particularly well—the model transforms sketches into realistic images while preserving the basic structure
 ## 1.8 Visual Anagrams
 ## 1.9 Hybrid Images
 
