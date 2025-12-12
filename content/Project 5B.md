@@ -55,6 +55,7 @@ $$z = x + \sigma \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)$$
     <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">σ=1.0</figcaption>
   </figure>
 </div>
+
 ### 1.2.1 Training
 
 We train the UNet to denoise images with σ=0.5. The model learns to predict the clean image from the noisy input.
@@ -144,6 +145,78 @@ We train the UNet to denoise images with σ=0.5. The model learns to predict the
 - After epoch 5, the outputs are cleaner with sharper edges
 
 ### 1.2.2 Out-of-Distribution Testing
+
+The model was trained with σ=0.5. How does it perform on different noise levels?
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.0_noisy.png" alt="σ=0.0" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.0</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.2_noisy.png" alt="σ=0.2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.2</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.4_noisy.png" alt="σ=0.4" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.4</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.5_noisy.png" alt="σ=0.5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.6_noisy.png" alt="σ=0.6" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.6</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.8_noisy.png" alt="σ=0.8" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.8</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma1.0_noisy.png" alt="σ=1.0" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=1.0</figcaption>
+  </figure>
+</div>
+
+**Noisy inputs (top row) → Denoised outputs (bottom row):**
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.0_denoised.png" alt="σ=0.0" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.0</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.2_denoised.png" alt="σ=0.2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.2</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.4_denoised.png" alt="σ=0.4" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.4</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.5_denoised.png" alt="σ=0.5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.6_denoised.png" alt="σ=0.6" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.6</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma0.8_denoised.png" alt="σ=0.8" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=0.8</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_2_sigma1.0_denoised.png" alt="σ=1.0" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">σ=1.0</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- At σ=0.0 (no noise), the model slightly blurs the clean image
+- At σ=0.5 (trained level), the model performs best
+- At higher noise levels (σ=0.8, 1.0), the model struggles to recover details since it wasn't trained on those levels
+
 ### 1.2.3 Denoising Pure Noise
 
 # Part 2: Training a Flow Matching Model
