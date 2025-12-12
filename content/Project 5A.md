@@ -13,6 +13,8 @@ In this project, I explored diffusion models using DeepFloyd IF, a two-stage tex
 
 DeepFloyd IF is a two-stage diffusion model: Stage 1 generates 64×64 images from text prompts, and Stage 2 upsamples them to 256×256. I created custom prompt embeddings using the Huggingface T5 Encoder and experimented with different `num_inference_steps` values.
 
+**Random Seed: 100** (used for all subsequent parts)
+
 ### Generated Images with `num_inference_steps=5`
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
