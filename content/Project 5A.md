@@ -823,37 +823,109 @@ The algorithm combines low and high frequency components from two different nois
 
 Beyond the upside-down flip in Part 1.8, we can create visual anagrams with other transformations.
 
-### 90° Rotation Anagram: "an oil painting of a wise old wizard" ↔ "an oil painting of a mysterious forest"
+### 90° Rotation Anagram: "a photo of a dog" ↔ "a photo of a cat"
 
 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5A/part2_rotation_normal.png" alt="Normal" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal (wizard)</figcaption>
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal (dog)</figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/P5A/part2_rotation_rotated.png" alt="Rotated" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Rotated 90° (forest)</figcaption>
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Rotated 90° (cat)</figcaption>
   </figure>
 </div>
 
-### Horizontal Mirror Anagram: "an oil painting of a wise old wizard" ↔ "an oil painting of a mysterious forest"
+### Horizontal Mirror Anagram: "a photo of a dog" ↔ "a photo of a cat"
 
 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5A/part2_mirror_normal.png" alt="Normal" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal (wizard)</figcaption>
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal</figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/P5A/part2_mirror_mirrored.png" alt="Mirrored" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Mirrored (forest)</figcaption>
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Mirrored</figcaption>
   </figure>
 </div>
 
 **Observations:**
-- Different transformations create different types of illusions
-- 90° rotation works well for subjects with rotational ambiguity
-- Horizontal mirror works best when the prompts have left-right symmetry or asymmetry that can be exploited
+- 90° rotation works well—the dog face transforms into a cat-like appearance when rotated
+- Horizontal mirror is a more challenging transformation since most subjects look similar when flipped left-right, producing subtler results
+- The vertical flip (Part 1.8) remains the most effective transformation for visual anagrams
 
 ## Course Logo Design
 
-*Coming soon...*
+Using text-conditioned image-to-image translation (SDEdit) on a logo to create a creative course logo design.
+
+### Logo 1: "a cyberpunk city at night"
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo_i1.png" alt="i=1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo_i3.png" alt="i=3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo_i5.png" alt="i=5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo_i7.png" alt="i=7" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=7</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo_i10.png" alt="i=10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo_i20.png" alt="i=20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=20</figcaption>
+  </figure>
+</div>
+
+### Logo 2: "a California bear"
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo2_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo2_i1.png" alt="i=1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo2_i3.png" alt="i=3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo2_i5.png" alt="i=5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo2_i7.png" alt="i=7" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=7</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo2_i10.png" alt="i=10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_logo2_i20.png" alt="i=20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=20</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- The intermediate noise levels (i=3 to i=7) produce the best logo designs—they retain the original structure while adding creative elements from the prompt
+- At i=1, the logo is almost entirely replaced by the prompt's content
+- At i=20, the result is nearly identical to the original logo
+- The "California bear" prompt works well with the UCB logo, enhancing the bear mascot while preserving the circular badge structure
