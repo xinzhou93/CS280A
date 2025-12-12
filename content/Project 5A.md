@@ -298,7 +298,7 @@ $$x_{t'} = \frac{\sqrt{\bar\alpha_{t'}}\beta_t}{1 - \bar\alpha_t} x_0 + \frac{\s
   </figure>
 </div>
 
-**Comparison: Original vs Iterative vs One-Step vs Gaussian Blur**
+**Comparison: Original vs Iterative vs One-Step vs Gaussian Blur (all starting from t=690)**
 
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
   <figure style="margin: 0;">
@@ -311,19 +311,19 @@ $$x_{t'} = \frac{\sqrt{\bar\alpha_{t'}}\beta_t}{1 - \bar\alpha_t} x_0 + \frac{\s
   </figure>
   <figure style="margin: 0;">
     <img src="/P5A/part1_4_onestep.png" alt="One-Step" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">One-Step Denoise</figcaption>
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">One-Step (t=690)</figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/P5A/part1_4_blur.png" alt="Gaussian Blur" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Gaussian Blur</figcaption>
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Gaussian Blur (t=690)</figcaption>
   </figure>
 </div>
 
 **Observations:**
 - The gradual denoising shows the image progressively becoming cleaner as we step through timesteps
-- **Iterative denoising** recovers the Campanile faithfully, preserving structure and details
+- **Iterative denoising** (23 steps from t=690 to t=0) recovers the Campanile faithfully, preserving structure and details
 - **One-step denoising** at t=690 produces a blurry, distorted result—too much noise to handle in one step
-- **Gaussian blur** completely fails, producing an unrecognizable mess
+- **Gaussian blur** at t=690 completely fails, producing an unrecognizable mess
 - This demonstrates the power of iterative refinement: taking many small denoising steps yields far better results than one large step
 ## 1.5 Diffusion Model Sampling
 ## 1.6 Classifier-Free Guidance (CFG)
