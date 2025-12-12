@@ -145,6 +145,53 @@ where $\epsilon \sim \mathcal{N}(0, I)$ is random noise and $\bar{\alpha}_t$ is 
 - At $t=750$: Heavy noise dominates; the image is barely recognizable, approaching pure noise
 
 ## 1.2 Classical Denoising
+
+Can we recover the original image using classical methods? Let's try Gaussian blur filtering on the noisy images from Part 1.1.
+
+**Row 1: Noisy images (from 1.1) | Row 2: Gaussian blur denoised**
+
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_noisy_t250.png" alt="Noisy t=250" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Noisy t=250</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_noisy_t500.png" alt="Noisy t=500" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Noisy t=500</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_noisy_t750.png" alt="Noisy t=750" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Noisy t=750</figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: gray; font-size: 0.9em;">—</div>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_2_blur_t250.png" alt="Blur t=250" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Blur k=5, σ=2.0</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_2_blur_t500.png" alt="Blur t=500" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Blur k=7, σ=2.0</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_2_blur_t750.png" alt="Blur t=750" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Blur k=9, σ=3.0</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- Gaussian blur faces an impossible trade-off: reduce noise vs. preserve detail
+- At $t=250$: Blur removes some noise but softens edges—tower shape preserved but details lost
+- At $t=500$: Larger kernel needed; result is a blurry blob with vague structure
+- At $t=750$: No parameter choice can recover the image—classical denoising completely fails
+
+This demonstrates why learned denoisers (diffusion models) are so powerful: they can remove noise while preserving—or even hallucinating plausible—image structure.
 ## 1.3 One-Step Denoising
 ## 1.4 Iterative Denoising
 ## 1.5 Diffusion Model Sampling
