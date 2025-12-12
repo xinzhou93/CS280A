@@ -635,7 +635,7 @@ $$x_t \leftarrow \textbf{m} \cdot x_t + (1 - \textbf{m}) \cdot \text{forward}(x_
 
 Instead of using the generic prompt `"a high quality photo"`, we can guide the image transformation with a **specific text prompt**. This gives us creative control over the style and content of the output.
 
-### Campanile → "an oil painting of a snowy mountain village"
+### Campanile → "a cyberpunk city at night"
 
 <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
   <figure style="margin: 0;">
@@ -669,9 +669,9 @@ Instead of using the generic prompt `"a high quality photo"`, we can guide the i
 </div>
 
 **Observations:**
-- The text prompt completely changes the style—instead of preserving the Campanile's identity, the model transforms it into snowy mountain village scenes
-- At **i=1** (heavy noise): Almost fully reimagined as an oil painting landscape
-- At **i=20** (light noise): The tower structure is preserved but takes on an oil painting aesthetic
+- The text prompt completely changes the style—instead of preserving the Campanile's identity, the model transforms it into cyberpunk cityscapes
+- At **i=1** (heavy noise): Almost fully reimagined as a neon-lit city
+- At **i=20** (light noise): The tower structure is preserved but takes on a cyberpunk aesthetic with glowing lights
 
 ### Custom Image 1 → "a portrait of an ancient tree"
 
@@ -785,5 +785,36 @@ The algorithm works by averaging two noise estimates:
 - The averaged noise estimate forces the model to find a compromise that satisfies both prompts
 
 ## 1.9 Hybrid Images
+
+[Factorized Diffusion](https://dangeng.github.io/factorized_diffusion/) creates hybrid images—images that look like one thing from far away but reveal something different up close (just like in Project 2!).
+
+The algorithm combines low and high frequency components from two different noise estimates:
+- $\epsilon_1$: Denoise with prompt $p_1$ → apply low-pass filter
+- $\epsilon_2$: Denoise with prompt $p_2$ → apply high-pass filter
+- $\epsilon = f_{lowpass}(\epsilon_1) + f_{highpass}(\epsilon_2)$
+
+### Hybrid 1: "a cyberpunk city at night" (far) / "an astronaut riding a horse on mars" (close)
+
+<div style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 15px; text-align: center; max-width: 400px; margin: 0 auto;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_9_hybrid1.png" alt="Hybrid 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Squint or step back to see the cyberpunk city</figcaption>
+  </figure>
+</div>
+
+### Hybrid 2: "a magical library with floating books" (far) / "a Chinese garden with cherry blossoms" (close)
+
+<div style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 15px; text-align: center; max-width: 400px; margin: 0 auto;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_9_hybrid2.png" alt="Hybrid 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Squint or step back to see the magical library</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- The low-frequency content (large shapes, overall structure) comes from the first prompt
+- The high-frequency content (fine details, textures) comes from the second prompt
+- Using a Gaussian blur (kernel=33, σ=2) separates the frequency components during denoising
+- The effect works best when viewed at different distances or by squinting
 
 # Part 2: Bells & Whistles
