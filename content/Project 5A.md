@@ -321,11 +321,44 @@ $$x_{t'} = \frac{\sqrt{\bar\alpha_{t'}}\beta_t}{1 - \bar\alpha_t} x_0 + \frac{\s
 
 **Observations:**
 - The gradual denoising shows the image progressively becoming cleaner as we step through timesteps
-- **Iterative denoising** (23 steps from t=690 to t=0) recovers the Campanile faithfully, preserving structure and details
-- **One-step denoising** at t=690 produces a blurry, distorted result—too much noise to handle in one step
+- **Iterative denoising** (23 steps from t=690 to t=0) produces a clean, realistic tower—but notice it's not the original Campanile! At t=690, so much noise is present that the model can't recover the original; instead, it **hallucinates a plausible tower** based on the vague structure and the prompt "a high quality photo"
+- **One-step denoising** at t=690 also hallucinates a different tower, but the result is blurry and distorted—too much noise to handle in one step
 - **Gaussian blur** at t=690 completely fails, producing an unrecognizable mess
-- This demonstrates the power of iterative refinement: taking many small denoising steps yields far better results than one large step
+- This hallucination behavior is a key property of diffusion models: at low noise levels they recover the original; at high noise levels they "imagine" new content consistent with the noise pattern and prompt. This will be exploited in Part 1.7 for image-to-image translation!
+
 ## 1.5 Diffusion Model Sampling
+
+Instead of denoising a noisy image, we can **generate images from scratch** by starting from pure random noise and running `iterative_denoise` with `i_start=0`. The model "denoises" random noise into a coherent image guided by the prompt.
+
+**5 Sampled Images** (prompt: "a high quality photo")
+
+<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_5_sample_1.png" alt="Sample 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_5_sample_2.png" alt="Sample 2" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 2</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_5_sample_3.png" alt="Sample 3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_5_sample_4.png" alt="Sample 4" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 4</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_5_sample_5.png" alt="Sample 5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Sample 5</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- Each sample produces a completely different image since each starts from different random noise
+- The generic prompt "a high quality photo" produces varied natural-looking scenes
+- The images look reasonable but lack sharpness and detail—this is because we're using unconditional/weak guidance. Part 1.6 (CFG) will improve this!
 ## 1.6 Classifier-Free Guidance (CFG)
 ## 1.7 Image-to-image Translation
 ## 1.8 Visual Anagrams
