@@ -56,6 +56,93 @@ $$z = x + \sigma \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)$$
   </figure>
 </div>
 ### 1.2.1 Training
+
+We train the UNet to denoise images with σ=0.5. The model learns to predict the clean image from the noisy input.
+
+**Hyperparameters:**
+- Batch size: 256
+- Learning rate: 1e-4
+- Hidden dimension D: 128
+- Epochs: 5
+
+**Training Loss:**
+
+<img src="/P5B/part1_2_1_training_loss.png" alt="Training Loss" style="max-width: 600px;" />
+
+**Results after Epoch 1:**
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch1_sample1_input.png" alt="Input" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">Input</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch1_sample1_noisy.png" alt="Noisy" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">Noisy (σ=0.5)</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch1_sample1_denoised.png" alt="Denoised" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">Output</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch1_sample2_input.png" alt="Input" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch1_sample2_noisy.png" alt="Noisy" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch1_sample2_denoised.png" alt="Denoised" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch1_sample3_input.png" alt="Input" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch1_sample3_noisy.png" alt="Noisy" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch1_sample3_denoised.png" alt="Denoised" style="width: 100%; height: auto; display: block;" />
+  </figure>
+</div>
+
+**Results after Epoch 5:**
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch5_sample1_input.png" alt="Input" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">Input</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch5_sample1_noisy.png" alt="Noisy" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">Noisy (σ=0.5)</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch5_sample1_denoised.png" alt="Denoised" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray;">Output</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch5_sample2_input.png" alt="Input" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch5_sample2_noisy.png" alt="Noisy" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch5_sample2_denoised.png" alt="Denoised" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch5_sample3_input.png" alt="Input" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch5_sample3_noisy.png" alt="Noisy" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_1_epoch5_sample3_denoised.png" alt="Denoised" style="width: 100%; height: auto; display: block;" />
+  </figure>
+</div>
+
+**Observations:**
+- After epoch 1, the model already produces reasonable denoising results
+- After epoch 5, the outputs are cleaner with sharper edges
+
 ### 1.2.2 Out-of-Distribution Testing
 ### 1.2.3 Denoising Pure Noise
 
