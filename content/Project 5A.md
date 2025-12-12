@@ -262,7 +262,69 @@ pred_original = (im_noisy - torch.sqrt(1 - alpha_cumprod) * noise_est) / torch.s
 - At $t=750$: Even the UNet struggles with heavy noise; the result looks like a generic tower but loses the original's identity
 
 The UNet dramatically outperforms Gaussian blur because it has learned the structure of natural images. However, one-step denoising still degrades at high noise levels—this motivates **iterative denoising** in Part 1.4.
+
 ## 1.4 Iterative Denoising
+
+Instead of denoising in one step, we can iteratively denoise by taking small steps from $x_t$ to $x_{t'}$ where $t' < t$. Using strided timesteps (stride=30) starting from t=690 (`i_start=10`), we apply the DDPM formula:
+
+$$x_{t'} = \frac{\sqrt{\bar\alpha_{t'}}\beta_t}{1 - \bar\alpha_t} x_0 + \frac{\sqrt{\alpha_t}(1 - \bar\alpha_{t'})}{1 - \bar\alpha_t} x_t + v_\sigma$$
+
+**Gradual Denoising Process (every 5th step):**
+
+<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_noisy_t690.png" alt="t=690" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">t=690 (start)</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_denoise_t660.png" alt="t=660" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">t=660</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_denoise_t510.png" alt="t=510" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">t=510</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_denoise_t360.png" alt="t=360" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">t=360</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_denoise_t210.png" alt="t=210" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">t=210</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_denoise_t60.png" alt="t=60" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">t=60</figcaption>
+  </figure>
+</div>
+
+**Comparison: Original vs Iterative vs One-Step vs Gaussian Blur**
+
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_iterative_clean.png" alt="Iterative" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Iterative Denoise</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_onestep.png" alt="One-Step" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">One-Step Denoise</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_4_blur.png" alt="Gaussian Blur" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Gaussian Blur</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- The gradual denoising shows the image progressively becoming cleaner as we step through timesteps
+- **Iterative denoising** recovers the Campanile faithfully, preserving structure and details
+- **One-step denoising** at t=690 produces a blurry, distorted result—too much noise to handle in one step
+- **Gaussian blur** completely fails, producing an unrecognizable mess
+- This demonstrates the power of iterative refinement: taking many small denoising steps yields far better results than one large step
 ## 1.5 Diffusion Model Sampling
 ## 1.6 Classifier-Free Guidance (CFG)
 ## 1.7 Image-to-image Translation
