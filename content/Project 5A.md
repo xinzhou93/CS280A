@@ -407,6 +407,8 @@ noise_final = noise_uncond + scale * (noise_cond - noise_uncond)
 
 ## 1.7 Image-to-image Translation
 
+### 1.7.1 SDEdit
+
 Using the **SDEdit** algorithm, we can edit existing images by:
 1. Adding noise to the original image (at different levels)
 2. Denoising with CFG to "force" it back onto the natural image manifold
@@ -553,7 +555,7 @@ The noise level (`i_start`) controls how much the image changes:
 - The progression shows a smooth transition from "hallucinated" to "preserved"
 - Hand-drawn images work particularly well—the model transforms sketches into realistic images while preserving the basic structure
 
-## 1.7.2 Inpainting
+### 1.7.2 Inpainting
 
 Using the **RePaint** algorithm, we can fill in masked regions of an image. At each denoising step, we keep the unmasked regions fixed (with appropriate noise added) and only let the model hallucinate inside the mask:
 
@@ -561,17 +563,63 @@ $$x_t \leftarrow \textbf{m} \cdot x_t + (1 - \textbf{m}) \cdot \text{forward}(x_
 
 ### Campanile Inpainting
 
-<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;">
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5A/part1_7_2_camp_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Original</figcaption>
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Campanile</figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/P5A/part1_7_2_camp_mask.png" alt="Mask" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Mask (white = inpaint)</figcaption>
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Mask</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_camp_hole.png" alt="Hole to Fill" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Hole to Fill</figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/P5A/part1_7_2_camp_inpainted.png" alt="Inpainted" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Campanile Inpainted</figcaption>
+  </figure>
+</div>
+
+### Custom Image 1
+
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_custom1_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_custom1_mask.png" alt="Mask" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Mask</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_custom1_hole.png" alt="Hole to Fill" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Hole to Fill</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_custom1_inpainted.png" alt="Inpainted" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Inpainted</figcaption>
+  </figure>
+</div>
+
+### Custom Image 2
+
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_custom2_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_custom2_mask.png" alt="Mask" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Mask</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_custom2_hole.png" alt="Hole to Fill" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Hole to Fill</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_2_custom2_inpainted.png" alt="Inpainted" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Inpainted</figcaption>
   </figure>
 </div>
@@ -579,6 +627,122 @@ $$x_t \leftarrow \textbf{m} \cdot x_t + (1 - \textbf{m}) \cdot \text{forward}(x_
 **Observations:**
 - The model generates new content inside the mask while seamlessly blending with the surrounding pixels
 - The inpainted region maintains consistency with the rest of the image (lighting, style, structure)
+- Results vary based on the masked region and surrounding context—the model hallucinates plausible content
+
+**Limitation:** Using the generic prompt `"a high quality photo"`, the model tends to hallucinate faces/figures in masked regions since it was trained primarily on photos with people. Part 1.7.3 addresses this by using specific text prompts to guide the inpainting.
+
+### 1.7.3 Text-Conditioned Image-to-image Translation
+
+Instead of using the generic prompt `"a high quality photo"`, we can guide the image transformation with a **specific text prompt**. This gives us creative control over the style and content of the output.
+
+### Campanile → "an oil painting of a snowy mountain village"
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_camp_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_camp_i1.png" alt="i=1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_camp_i3.png" alt="i=3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_camp_i5.png" alt="i=5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_camp_i7.png" alt="i=7" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=7</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_camp_i10.png" alt="i=10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_camp_i20.png" alt="i=20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=20</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- The text prompt completely changes the style—instead of preserving the Campanile's identity, the model transforms it into snowy mountain village scenes
+- At **i=1** (heavy noise): Almost fully reimagined as an oil painting landscape
+- At **i=20** (light noise): The tower structure is preserved but takes on an oil painting aesthetic
+
+### Custom Image 1 → "a portrait of an ancient tree"
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom1_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom1_i1.png" alt="i=1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom1_i3.png" alt="i=3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom1_i5.png" alt="i=5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom1_i7.png" alt="i=7" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=7</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom1_i10.png" alt="i=10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom1_i20.png" alt="i=20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=20</figcaption>
+  </figure>
+</div>
+
+### Custom Image 2 → "a cozy cabin in the woods with snow"
+
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom2_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom2_i1.png" alt="i=1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom2_i3.png" alt="i=3" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=3</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom2_i5.png" alt="i=5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom2_i7.png" alt="i=7" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=7</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom2_i10.png" alt="i=10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_7_3_custom2_i20.png" alt="i=20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.8em; color: gray; margin-top: 4px;">i=20</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- Text-conditioned editing gives us powerful creative control over the transformation
+- The prompt guides what the model "sees" in the noisy image—even abstract shapes can become trees or cabins
+- At low `i_start` values, the prompt dominates; at high values, the original structure is preserved with stylistic changes
 
 ## 1.8 Visual Anagrams
 ## 1.9 Hybrid Images
