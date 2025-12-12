@@ -192,7 +192,72 @@ Can we recover the original image using classical methods? Let's try Gaussian bl
 - At $t=750$: No parameter choice can recover the image—classical denoising completely fails
 
 This demonstrates why learned denoisers (diffusion models) are so powerful: they can remove noise while preserving—or even hallucinating plausible—image structure.
+
 ## 1.3 One-Step Denoising
+
+Now let's use the pretrained diffusion model (UNet) to denoise. Given a noisy image $x_t$ and timestep $t$, the UNet predicts the noise $\epsilon$. We can then recover the original image using:
+
+$$x_0 = \frac{x_t - \sqrt{1 - \bar{\alpha}_t} \cdot \epsilon}{\sqrt{\bar{\alpha}_t}}$$
+
+**Row 1: Noisy | Row 2: Gaussian Blur | Row 3: One-Step UNet Denoising**
+
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Original</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_noisy_t250.png" alt="Noisy t=250" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Noisy t=250</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_noisy_t500.png" alt="Noisy t=500" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Noisy t=500</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_1_noisy_t750.png" alt="Noisy t=750" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Noisy t=750</figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: gray; font-size: 0.9em;">—</div>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_2_blur_t250.png" alt="Blur t=250" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Gaussian Blur</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_2_blur_t500.png" alt="Blur t=500" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Gaussian Blur</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_2_blur_t750.png" alt="Blur t=750" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Gaussian Blur</figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: gray; font-size: 0.9em;">—</div>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_3_onestep_t250.png" alt="One-step t=250" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">One-Step UNet</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_3_onestep_t500.png" alt="One-step t=500" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">One-Step UNet</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part1_3_onestep_t750.png" alt="One-step t=750" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">One-Step UNet</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- At $t=250$: One-step denoising recovers the Campanile almost perfectly—far better than Gaussian blur
+- At $t=500$: UNet still produces a recognizable tower, though some details are hallucinated differently
+- At $t=750$: Even the UNet struggles with heavy noise; the result looks like a generic tower but loses the original's identity
+
+The UNet dramatically outperforms Gaussian blur because it has learned the structure of natural images. However, one-step denoising still degrades at high noise levels—this motivates **iterative denoising** in Part 1.4.
 ## 1.4 Iterative Denoising
 ## 1.5 Diffusion Model Sampling
 ## 1.6 Classifier-Free Guidance (CFG)
