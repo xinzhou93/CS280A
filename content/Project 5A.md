@@ -199,6 +199,10 @@ Now let's use the pretrained diffusion model (UNet) to denoise. Given a noisy im
 
 $$x_0 = \frac{x_t - \sqrt{1 - \bar{\alpha}_t} \cdot \epsilon}{\sqrt{\bar{\alpha}_t}}$$
 
+```python
+pred_original = (im_noisy - torch.sqrt(1 - alpha_cumprod) * noise_est) / torch.sqrt(alpha_cumprod)
+```
+
 **Row 1: Noisy | Row 2: Gaussian Blur | Row 3: One-Step UNet Denoising**
 
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
