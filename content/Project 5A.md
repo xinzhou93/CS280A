@@ -818,3 +818,42 @@ The algorithm combines low and high frequency components from two different nois
 - The effect works best when viewed at different distances or by squinting
 
 # Part 2: Bells & Whistles
+
+## More Visual Anagrams
+
+Beyond the upside-down flip in Part 1.8, we can create visual anagrams with other transformations.
+
+### 90° Rotation Anagram: "an oil painting of a wise old wizard" ↔ "an oil painting of a mysterious forest"
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_rotation_normal.png" alt="Normal" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal (wizard)</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_rotation_rotated.png" alt="Rotated" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Rotated 90° (forest)</figcaption>
+  </figure>
+</div>
+
+### Horizontal Mirror Anagram: "an oil painting of a wise old wizard" ↔ "an oil painting of a mysterious forest"
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_mirror_normal.png" alt="Normal" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal (wizard)</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5A/part2_mirror_mirrored.png" alt="Mirrored" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Mirrored (forest)</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- Different transformations create different types of illusions
+- 90° rotation works well for subjects with rotational ambiguity
+- Horizontal mirror works best when the prompts have left-right symmetry or asymmetry that can be exploited
+
+## Course Logo Design
+
+*Coming soon...*
