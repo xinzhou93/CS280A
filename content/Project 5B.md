@@ -303,17 +303,20 @@ where $x_0 \sim \mathcal{N}(0, I)$ is noise and $x_1$ is the clean image. The mo
 Starting from pure noise $x_0 \sim \mathcal{N}(0, I)$, we iteratively apply the learned velocity field:
 $$x_{t+\Delta t} = x_t + \Delta t \cdot u_\theta(x_t, t)$$
 
-**Samples after Epoch 1:**
-
-<img src="/P5B/part2_2_epoch1_samples.png" alt="Epoch 1 Samples" style="max-width: 500px;" />
-
-**Samples after Epoch 5:**
-
-<img src="/P5B/part2_2_epoch5_samples.png" alt="Epoch 5 Samples" style="max-width: 500px;" />
-
-**Samples after Epoch 10:**
-
-<img src="/P5B/part2_2_epoch10_samples.png" alt="Epoch 10 Samples" style="max-width: 500px;" />
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5B/part2_2_epoch1_samples.png" alt="Epoch 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part2_2_epoch5_samples.png" alt="Epoch 5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part2_2_epoch10_samples.png" alt="Epoch 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 10</figcaption>
+  </figure>
+</div>
 
 **Observations:**
 - Epoch 1: Samples are still noisy and blurry
@@ -321,7 +324,98 @@ $$x_{t+\Delta t} = x_t + \Delta t \cdot u_\theta(x_t, t)$$
 - Epoch 10: Clear, diverse digits are generated from pure noise
 - Unlike Part 1.2.3, flow matching can generate diverse samples because it learns the full trajectory from noise to data
 ## 2.4 Adding Class-Conditioning to UNet
+
+We extend the time-conditioned UNet to also condition on class labels. This allows us to generate specific digits on demand.
+
+Key additions:
+- One-hot encode class labels c → FCBlocks for class embeddings
+- Modulate decoder features: `output = c_embed * features + t_embed`
+- During training, randomly drop class conditioning with probability p_uncond = 0.1 (for CFG)
+
 ## 2.5 Training the UNet
+
+**Hyperparameters:**
+- Batch size: 64
+- Learning rate: 1e-2 with ExponentialLR scheduler
+- Hidden dimension D: 64
+- Epochs: 10
+- Timesteps T: 50
+- Unconditional dropout p_uncond: 0.1
+
+**Training Loss:**
+
+<img src="/P5B/part2_5_training_loss.png" alt="Training Loss" style="max-width: 600px;" />
+
 ## 2.6 Sampling from the UNet
 
+We use Classifier-Free Guidance (CFG) with γ=5.0:
+$$u = u_{uncond} + \gamma (u_{cond} - u_{uncond})$$
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5B/part2_6_epoch1_samples.png" alt="Epoch 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part2_6_epoch5_samples.png" alt="Epoch 5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part2_6_epoch10_samples.png" alt="Epoch 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 10</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- Epoch 1: Digits are recognizable but noisy; class conditioning is already working
+- Epoch 5: Much cleaner digits with clear class separation
+- Epoch 10: High-quality digits with consistent style within each class
+- CFG (γ=5.0) helps sharpen the class-conditional samples
+
 # Part 3: Bells & Whistles
+
+## Improved Time-Conditioned Flow Matching
+
+For bells & whistles, I trained an improved time-conditioned UNet with larger capacity and longer training:
+
+**Improvements over baseline (Part 2.2):**
+| Parameter | Baseline | Improved |
+|-----------|----------|----------|
+| Hidden dim D | 64 | 128 |
+| Epochs | 10 | 20 |
+| Timesteps T | 50 | 100 |
+
+**Training Loss:**
+
+<img src="/P5B/part3_training_loss.png" alt="Training Loss" style="max-width: 600px;" />
+
+**Samples at Different Epochs:**
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5B/part3_epoch1_samples.png" alt="Epoch 1" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 1</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part3_epoch5_samples.png" alt="Epoch 5" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 5</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part3_epoch10_samples.png" alt="Epoch 10" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 10</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part3_epoch15_samples.png" alt="Epoch 15" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 15</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part3_epoch20_samples.png" alt="Epoch 20" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 20</figcaption>
+  </figure>
+</div>
+
+**Observations:**
+- The larger model (D=128) produces sharper, more detailed digits
+- Extended training (20 epochs) allows the model to learn finer details
+- More timesteps (T=100) during sampling provides smoother trajectories
+- By epoch 20, the samples are noticeably cleaner than the baseline at epoch 10
