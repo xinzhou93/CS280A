@@ -275,8 +275,51 @@ What if we try to denoise pure noise? We train a new model where the input is z 
 # Part 2: Training a Flow Matching Model
 
 ## 2.1 Adding Time Conditioning to UNet
+
+Flow matching uses a time-conditioned UNet that learns to predict the velocity field at each timestep t ∈ [0, 1]. We add time conditioning by:
+1. Creating FCBlocks that map t → embeddings
+2. Modulating the decoder features with these time embeddings
+
+The forward process interpolates between noise and data:
+$$x_t = (1-t) \cdot x_0 + t \cdot x_1$$
+
+where $x_0 \sim \mathcal{N}(0, I)$ is noise and $x_1$ is the clean image. The model learns to predict the velocity $u = x_1 - x_0$.
+
 ## 2.2 Training the UNet
+
+**Hyperparameters:**
+- Batch size: 64
+- Learning rate: 1e-2 with ExponentialLR scheduler
+- Hidden dimension D: 64
+- Epochs: 10
+- Timesteps T: 50
+
+**Training Loss:**
+
+<img src="/P5B/part2_2_training_loss.png" alt="Training Loss" style="max-width: 600px;" />
+
 ## 2.3 Sampling from the UNet
+
+Starting from pure noise $x_0 \sim \mathcal{N}(0, I)$, we iteratively apply the learned velocity field:
+$$x_{t+\Delta t} = x_t + \Delta t \cdot u_\theta(x_t, t)$$
+
+**Samples after Epoch 1:**
+
+<img src="/P5B/part2_2_epoch1_samples.png" alt="Epoch 1 Samples" style="max-width: 500px;" />
+
+**Samples after Epoch 5:**
+
+<img src="/P5B/part2_2_epoch5_samples.png" alt="Epoch 5 Samples" style="max-width: 500px;" />
+
+**Samples after Epoch 10:**
+
+<img src="/P5B/part2_2_epoch10_samples.png" alt="Epoch 10 Samples" style="max-width: 500px;" />
+
+**Observations:**
+- Epoch 1: Samples are still noisy and blurry
+- Epoch 5: Digits start to emerge with recognizable shapes
+- Epoch 10: Clear, diverse digits are generated from pure noise
+- Unlike Part 1.2.3, flow matching can generate diverse samples because it learns the full trajectory from noise to data
 ## 2.4 Adding Class-Conditioning to UNet
 ## 2.5 Training the UNet
 ## 2.6 Sampling from the UNet
