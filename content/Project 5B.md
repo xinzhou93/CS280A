@@ -219,6 +219,59 @@ The model was trained with σ=0.5. How does it perform on different noise levels
 
 ### 1.2.3 Denoising Pure Noise
 
+What if we try to denoise pure noise? We train a new model where the input is z = ε ~ N(0, I) and the target is a clean image.
+
+**Training Loss:**
+
+<img src="/P5B/part1_2_3_training_loss.png" alt="Training Loss" style="max-width: 600px;" />
+
+**Samples after Epoch 1:**
+
+<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch1_sample1.png" alt="Sample 1" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch1_sample2.png" alt="Sample 2" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch1_sample3.png" alt="Sample 3" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch1_sample4.png" alt="Sample 4" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch1_sample5.png" alt="Sample 5" style="width: 100%; height: auto; display: block;" />
+  </figure>
+</div>
+
+**Samples after Epoch 5:**
+
+<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; text-align: center;">
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch5_sample1.png" alt="Sample 1" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch5_sample2.png" alt="Sample 2" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch5_sample3.png" alt="Sample 3" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch5_sample4.png" alt="Sample 4" style="width: 100%; height: auto; display: block;" />
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/P5B/part1_2_3_epoch5_sample5.png" alt="Sample 5" style="width: 100%; height: auto; display: block;" />
+  </figure>
+</div>
+
+**Observations:**
+- All outputs look like a blurry oval/blob shape regardless of the input noise
+- This is the **average (centroid)** of all training digits
+- With MSE loss, the model learns to predict the point that minimizes squared distance to ALL training examples
+- Since pure noise contains no information about which digit to generate, the optimal prediction is the mean of the dataset
+- This demonstrates why single-step denoising from pure noise cannot work as a generative model
+
 # Part 2: Training a Flow Matching Model
 
 ## 2.1 Adding Time Conditioning to UNet
