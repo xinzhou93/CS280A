@@ -523,6 +523,8 @@ $$x_t \leftarrow \textbf{m} \cdot x_t + (1 - \textbf{m}) \cdot \text{forward}(x_
 
 ### Custom Image 1
 
+prompt: "an astronaut riding a horse on mars"
+
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5A/part1_7_2_custom1_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
@@ -542,7 +544,7 @@ $$x_t \leftarrow \textbf{m} \cdot x_t + (1 - \textbf{m}) \cdot \text{forward}(x_
   </figure>
 </div>
 
-### Custom Image 2 - Cyberpunk
+### Custom Image 2
 
 prompt: "a cyberpunk city at night"
 
@@ -565,16 +567,9 @@ prompt: "a cyberpunk city at night"
   </figure>
 </div>
 
-**Observations:**
-- The model generates new content inside the mask while seamlessly blending with the surrounding pixels
-- The inpainted region maintains consistency with the rest of the image (lighting, style, structure)
-- Results vary based on the masked region and surrounding context—the model hallucinates plausible content
-
-**Limitation:** Using the generic prompt `"a high quality photo"`, the model tends to hallucinate faces/figures in masked regions since it was trained primarily on photos with people. Part 1.7.3 addresses this by using specific text prompts to guide the inpainting.
-
 ### 1.7.3 Text-Conditioned Image-to-image Translation
 
-Instead of using the generic prompt `"a high quality photo"`, we can guide the image transformation with a **specific text prompt**. This gives us creative control over the style and content of the output.
+Instead of using the generic prompt `"a high quality photo"`, we can guide the image transformation with a specific text prompt. This gives us creative control over the style and content of the output.
 
 ### Campanile → "a cyberpunk city at night"
 
