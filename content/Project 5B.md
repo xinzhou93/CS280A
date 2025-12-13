@@ -354,7 +354,7 @@ During training, with probability $p_{uncond}=0.1$, I drop the class conditionin
 
 ## 2.5 Training the UNet
 
-Training is similar to 2.2, but with class labels and dropout for CFG:
+Training is similar to 2.3, but with class labels and dropout for CFG:
 
 ```
 repeat
@@ -374,8 +374,6 @@ until happy
 - Hidden dimension D: 64
 - Epochs: 10
 - $p_{uncond}$: 0.1
-
-To simplify training, I removed the ExponentialLR scheduler and compensated by using a lower constant learning rate (1e-3 instead of 1e-2). The original scheduler decayed LR from 1e-2 to 1e-3 over 10 epochs, so using 1e-3 throughout provides stable training without the complexity of scheduling.
 
 **Training Loss:**
 
@@ -412,7 +410,9 @@ return x_t
   </figure>
 </div>
 
-Each image shows 4 instances of each digit (0-9) generated with CFG ($\gamma=5.0$). At epoch 1, digits are recognizable but noisy, showing that class conditioning is already working. By epoch 5, the digits are much cleaner with clear class separation. At epoch 10, high-quality digits with consistent style within each class are generated. The constant learning rate (1e-3) without scheduler achieves comparable results to the scheduled version.
+Each image shows 4 instances of each digit (0-9) generated with CFG ($\gamma=5.0$). At epoch 1, digits are recognizable but noisy, showing that class conditioning is already working. By epoch 5, the digits are much cleaner with clear class separation. At epoch 10, high-quality digits with consistent style within each class are generated.
+
+To simplify training, I removed the ExponentialLR scheduler and compensated by using a lower constant learning rate (1e-3 instead of 1e-2). The original scheduler decayed LR from 1e-2 to 1e-3 over 10 epochs, so using 1e-3 throughout provides stable training without the complexity of scheduling.
 
 # Part 3: Bells & Whistles
 
