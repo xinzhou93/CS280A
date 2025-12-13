@@ -29,8 +29,12 @@ The encoder downsamples while the decoder upsamples with skip connections (chann
 
 ## 1.2 Using the UNet to Train a Denoiser
 
-The noising process adds Gaussian noise to clean images:
+The goal is to train a denoiser $D_\theta$ that maps noisy images $z$ back to clean images $x$, optimized with L2 loss: $L = \mathbb{E}_{z,x}||D_\theta(z) - x||^2$.
+
+We generate training pairs $(z, x)$ using the noising process:
 $$z = x + \sigma \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)$$
+
+Visualization of different noise levels:
 
 <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
   <figure style="margin: 0;">
