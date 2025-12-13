@@ -318,15 +318,6 @@ For each training step:
 Starting from pure noise $x_0 \sim \mathcal{N}(0, I)$, we iteratively apply the learned velocity field with $T=50$ timesteps:
 $$x_{t+\Delta t} = x_t + \Delta t \cdot u_\theta(x_t, t)$$
 
-```python
-x_t = torch.randn(1, 1, 28, 28)  # start from noise
-dt = 1.0 / T  # T = 50
-for i in range(T):
-    t = i / T
-    u = unet(x_t, t)
-    x_t = x_t + dt * u  # Euler step
-```
-
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5B/part2_2_epoch1_samples.png" alt="Epoch 1" style="width: 100%; height: auto; display: block;" />
