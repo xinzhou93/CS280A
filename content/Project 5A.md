@@ -734,12 +734,6 @@ The algorithm combines low and high frequency components from two different nois
   </figure>
 </div>
 
-**Observations:**
-- The low-frequency content (large shapes, overall structure) comes from the first prompt
-- The high-frequency content (fine details, textures) comes from the second prompt
-- Using a Gaussian blur (kernel=33, σ=2) separates the frequency components during denoising
-- The effect works best when viewed at different distances or by squinting
-
 # Part 2: Bells & Whistles
 
 ## More Visual Anagrams
@@ -747,6 +741,16 @@ The algorithm combines low and high frequency components from two different nois
 Beyond the upside-down flip in Part 1.8, we can create visual anagrams with other transformations.
 
 ### 90° Rotation Anagram: "a photo of a dog" ↔ "a photo of a cat"
+
+Similar to the vertical flip in Part 1.8, we average two noise estimates:
+- $\epsilon_1$: Denoise normally with prompt "dog"
+- $\epsilon_2$: Rotate image 90°, denoise with prompt "cat", rotate noise back -90°
+
+```python
+image_rot = torch.rot90(image, k=1, dims=[2, 3])  # Rotate 90°
+# ... denoise with prompt2 ...
+noise_est_2 = torch.rot90(noise_est_2, k=-1, dims=[2, 3])  # Rotate back
+```
 
 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -759,25 +763,43 @@ Beyond the upside-down flip in Part 1.8, we can create visual anagrams with othe
   </figure>
 </div>
 
-### Horizontal Mirror Anagram: "a photo of a dog" ↔ "a photo of a cat"
+### Quadrant Permutation Anagram: "a lithograph of waterfalls" ↔ "a lithograph of a skull"
+
+This transformation shuffles the four quadrants of the image: [TL, TR, BL, BR] → [BR, BL, TR, TL]. The same permutation function reverses itself, so we apply it to both the image and the noise.
+
+```python
+def permute_quadrants(x):
+    B, C, H, W = x.shape
+    h2, w2 = H // 2, W // 2
+    result = torch.zeros_like(x)
+    result[:, :, :h2, :w2] = x[:, :, h2:, w2:]    # TL <- BR
+    result[:, :, :h2, w2:] = x[:, :, h2:, :w2]    # TR <- BL
+    result[:, :, h2:, :w2] = x[:, :, :h2, w2:]    # BL <- TR
+    result[:, :, h2:, w2:] = x[:, :, :h2, :w2]    # BR <- TL
+    return result
+
+image_permuted = permute_quadrants(image)
+# ... denoise with prompt2 ...
+noise_est_2 = permute_quadrants(noise_est_2)  # Unpermute
+```
 
 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P5A/part2_mirror_normal.png" alt="Normal" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal</figcaption>
+    <img src="/P5A/part2_permute_normal.png" alt="Normal" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Normal (waterfalls)</figcaption>
   </figure>
   <figure style="margin: 0;">
-    <img src="/P5A/part2_mirror_mirrored.png" alt="Mirrored" style="width: 100%; height: auto; display: block;" />
-    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Mirrored</figcaption>
+    <img src="/P5A/part2_permute_permuted.png" alt="Permuted" style="width: 100%; height: auto; display: block;" />
+    <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Permuted (skull)</figcaption>
   </figure>
 </div>
 
 **Observations:**
 - 90° rotation works well—the dog face transforms into a cat-like appearance when rotated
-- Horizontal mirror is a more challenging transformation since most subjects look similar when flipped left-right, producing subtler results
-- The vertical flip (Part 1.8) remains the most effective transformation for visual anagrams
+- Quadrant permutation creates a puzzle-like effect where rearranging the four quadrants reveals a completely different image
+- Using the same art style ("a lithograph of...") for both prompts helps maintain visual coherence
 
-## Course Logo Design
+## UCB Logo Design
 
 Using text-conditioned image-to-image translation (SDEdit) on a logo to create a creative course logo design.
 
