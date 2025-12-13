@@ -11,15 +11,21 @@ In this project, I implemented generative models from scratch on the MNIST datas
 
 ## 1.1 Implementing the UNet
 
-The UNet architecture consists of an encoder-decoder structure with skip connections. We implement the following components:
+The UNet architecture consists of an encoder-decoder structure with skip connections. I implemented simple operations first, then composed them into blocks. D is the number of hidden channels.
 
-- **Conv**: Conv2d(3,1,1) + BatchNorm + GELU
-- **DownConv**: Conv2d(3,2,1) + BatchNorm + GELU (downsamples by 2)
-- **UpConv**: ConvTranspose2d(4,2,1) + BatchNorm + GELU (upsamples by 2)
-- **Flatten**: AvgPool(7) + GELU (7×7 → 1×1)
-- **Unflatten**: ConvTranspose2d(7,7,0) + BatchNorm + GELU (1×1 → 7×7)
+**Simple Operations:**
+- **Conv**: Conv2d(3,1,1) + BN + GELU — keeps resolution, changes channels
+- **DownConv**: Conv2d(3,2,1) + BN + GELU — downsamples by 2×
+- **UpConv**: ConvTranspose2d(4,2,1) + BN + GELU — upsamples by 2×
+- **Flatten**: AvgPool(7) + GELU — 7×7 → 1×1
+- **Unflatten**: ConvTranspose2d(7,7,0) + BN + GELU — 1×1 → 7×7
 
-The unconditional UNet takes a noisy image and predicts the clean image directly.
+**Composed Operations:**
+- **ConvBlock**: Conv → Conv (adds depth without changing dimensions)
+- **DownBlock**: DownConv → ConvBlock
+- **UpBlock**: UpConv → ConvBlock
+
+The encoder downsamples while the decoder upsamples with skip connections (channel-wise `torch.cat()`).
 
 ## 1.2 Using the UNet to Train a Denoiser
 
