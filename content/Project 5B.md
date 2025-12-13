@@ -370,10 +370,12 @@ until happy
 
 **Hyperparameters:**
 - Batch size: 64
-- Learning rate: 1e-2 with ExponentialLR scheduler
+- Learning rate: 1e-3 (constant, no scheduler)
 - Hidden dimension D: 64
 - Epochs: 10
 - $p_{uncond}$: 0.1
+
+To simplify training, I removed the ExponentialLR scheduler and compensated by using a lower constant learning rate (1e-3 instead of 1e-2). The original scheduler decayed LR from 1e-2 to 1e-3 over 10 epochs, so using 1e-3 throughout provides stable training without the complexity of scheduling.
 
 **Training Loss:**
 
@@ -397,20 +399,20 @@ return x_t
 
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
-    <img src="/P5B/part2_6_epoch1_samples.png" alt="Epoch 1" style="width: 100%; height: auto; display: block;" />
+    <img src="/P5B/part2_5_epoch1_samples.png" alt="Epoch 1" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 1</figcaption>
   </figure>
   <figure style="margin: 0;">
-    <img src="/P5B/part2_6_epoch5_samples.png" alt="Epoch 5" style="width: 100%; height: auto; display: block;" />
+    <img src="/P5B/part2_5_epoch5_samples.png" alt="Epoch 5" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 5</figcaption>
   </figure>
   <figure style="margin: 0;">
-    <img src="/P5B/part2_6_epoch10_samples.png" alt="Epoch 10" style="width: 100%; height: auto; display: block;" />
+    <img src="/P5B/part2_5_epoch10_samples.png" alt="Epoch 10" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.85em; color: gray; margin-top: 4px;">Epoch 10</figcaption>
   </figure>
 </div>
 
-At epoch 1, digits are recognizable but noisy, showing that class conditioning is already working. By epoch 5, the digits are much cleaner with clear class separation. At epoch 10, high-quality digits with consistent style within each class are generated. CFG ($\gamma=5.0$) helps sharpen the samples by amplifying the difference between conditional and unconditional predictions.
+Each image shows 4 instances of each digit (0-9) generated with CFG ($\gamma=5.0$). At epoch 1, digits are recognizable but noisy, showing that class conditioning is already working. By epoch 5, the digits are much cleaner with clear class separation. At epoch 10, high-quality digits with consistent style within each class are generated. The constant learning rate (1e-3) without scheduler achieves comparable results to the scheduled version.
 
 # Part 3: Bells & Whistles
 
