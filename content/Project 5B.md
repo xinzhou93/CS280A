@@ -74,13 +74,6 @@ For each training batch:
 2. Add noise with fixed $\sigma=0.5$: $z = x + 0.5 \cdot \epsilon$
 3. Train the UNet to predict the clean image: $D_\theta(z) \rightarrow x$
 
-```python
-noise = torch.randn_like(images) * 0.5
-noisy_images = images + noise
-outputs = model(noisy_images)
-loss = nn.MSELoss()(outputs, images)
-```
-
 **Hyperparameters:**
 - Batch size: 256
 - Learning rate: 1e-4
@@ -240,7 +233,7 @@ At $\sigma=0.0$ (no noise), the model slightly blurs the clean image since it ex
 To test whether a UNet can work as a generative model, I trained a new model where the input is pure noise $z = \epsilon \sim \mathcal{N}(0, I)$ and the target is a clean image $x$.
 
 ```python
-z = torch.randn_like(images)  # pure noise, no signal from x
+z = torch.randn_like(images)  # pure noise
 outputs = model(z)
 loss = nn.MSELoss()(outputs, images)
 ```
@@ -289,7 +282,7 @@ loss = nn.MSELoss()(outputs, images)
   </figure>
 </div>
 
-All outputs look like a blurry oval/blob shape regardless of the input noise. This is the average (centroid) of all training digits. With MSE loss, the model learns to predict the point that minimizes squared distance to all training examples. Since pure noise contains no information about which digit to generate, the optimal prediction is the mean of the dataset. This demonstrates why single-step denoising from pure noise cannot work as a generative model—we need a different approach like Flow Matching.
+All outputs look like a blurry disk regardless of the input noise. This is the average of all training digits. With MSE loss, the model learns to predict the point that minimizes squared distance to all training examples. Since pure noise contains no information about which digit to generate, the optimal prediction is the mean of the dataset. 
 
 # Part 2: Training a Flow Matching Model
 
