@@ -298,17 +298,10 @@ where $x_0 \sim \mathcal{N}(0, I)$ is noise and $x_1$ is the clean image. The mo
 ## 2.2 Training the UNet
 
 For each training step:
-1. Sample $t \sim \text{Uniform}(0,1)$ and noise $x_0 \sim \mathcal{N}(0,I)$
-2. Compute $x_t = (1-t) \cdot x_0 + t \cdot x_1$
-3. Train UNet to predict velocity: $\mathcal{L} = ||u_\theta(x_t, t) - (x_1 - x_0)||^2$
-
-```python
-t = torch.rand(N)
-x_0 = torch.randn_like(x_1)
-x_t = (1 - t) * x_0 + t * x_1
-u_pred = unet(x_t, t)
-loss = F.mse_loss(u_pred, x_1 - x_0)
-```
+1. Sample clean image $x_1$ from training set
+2. Sample $t \sim \text{Uniform}(0,1)$ and noise $x_0 \sim \mathcal{N}(0,I)$
+3. Compute $x_t = (1-t) \cdot x_0 + t \cdot x_1$
+4. Take gradient descent step on $\nabla_\theta ||(x_1 - x_0) - u_\theta(x_t, t)||^2$
 
 **Hyperparameters:**
 - Batch size: 64
