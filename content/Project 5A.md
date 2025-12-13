@@ -221,7 +221,7 @@ The UNet dramatically outperforms Gaussian blur because it has learned the struc
 
 ## 1.4 Iterative Denoising
 
-Instead of denoising in one step, we can iteratively denoise by taking small steps from $x_t$ to $x_{t'}$ where $t' < t$. Using strided timesteps (stride=30) starting from t=690 (`i_start=10`), we apply the DDPM formula:
+Instead of denoising in one step, we can iteratively denoise by taking small steps from $x_t$ to $x_{t'}$ where $t' < t$. Using strided timesteps (stride=30) starting from t=690 (`i_start=10`), we apply the formula:
 
 $$x_{t'} = \frac{\sqrt{\bar\alpha_{t'}}\beta_t}{1 - \bar\alpha_t} x_0 + \frac{\sqrt{\alpha_t}(1 - \bar\alpha_{t'})}{1 - \bar\alpha_t} x_t + v_\sigma$$
 
@@ -275,12 +275,9 @@ $$x_{t'} = \frac{\sqrt{\bar\alpha_{t'}}\beta_t}{1 - \bar\alpha_t} x_0 + \frac{\s
   </figure>
 </div>
 
-**Observations:**
-- The gradual denoising shows the image progressively becoming cleaner as we step through timesteps
-- **Iterative denoising** (23 steps from t=690 to t=0) produces a clean, realistic tower—but notice it's not the original Campanile! At t=690, so much noise is present that the model can't recover the original; instead, it **hallucinates a plausible tower** based on the vague structure and the prompt "a high quality photo"
-- **One-step denoising** at t=690 also hallucinates a different tower, but the result is blurry and distorted—too much noise to handle in one step
-- **Gaussian blur** at t=690 completely fails, producing an unrecognizable mess
-- This hallucination behavior is a key property of diffusion models: at low noise levels they recover the original; at high noise levels they "imagine" new content consistent with the noise pattern and prompt. This will be exploited in Part 1.7 for image-to-image translation!
+The gradual denoising shows the image progressively becoming cleaner as we step through timesteps. The result of iterative denoising
+produces a clean, realistic tower—but I noticed it's not the original Campanile. Instead, it hallucinates a plausible tower based on the vague structure and the prompt "a high quality photo". One-step denoising at $t=690$ also hallucinates a different tower, but the result is blurry and distorted—too much noise to handle in one step
+Gaussian blur $at t=690$ completely fails, producing an unrecognizable noise.
 
 ## 1.5 Diffusion Model Sampling
 
