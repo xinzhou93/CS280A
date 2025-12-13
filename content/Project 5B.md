@@ -308,7 +308,6 @@ For each training step:
 - Learning rate: 1e-2 with Exponential scheduler
 - Hidden dimension D: 64
 - Epochs: 10
-- Timesteps T: 50
 
 **Training Loss:**
 
@@ -316,14 +315,14 @@ For each training step:
 
 ## 2.3 Sampling from the UNet
 
-Starting from pure noise $x_0 \sim \mathcal{N}(0, I)$, we iteratively apply the learned velocity field:
+Starting from pure noise $x_0 \sim \mathcal{N}(0, I)$, we iteratively apply the learned velocity field with $T=50$ timesteps:
 $$x_{t+\Delta t} = x_t + \Delta t \cdot u_\theta(x_t, t)$$
 
 ```python
 x_t = torch.randn(1, 1, 28, 28)  # start from noise
-dt = 1.0 / num_ts
-for i in range(num_ts):
-    t = i / num_ts
+dt = 1.0 / T  # T = 50
+for i in range(T):
+    t = i / T
     u = unet(x_t, t)
     x_t = x_t + dt * u  # Euler step
 ```
