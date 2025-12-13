@@ -230,7 +230,7 @@ At $\sigma=0.0$ (no noise), the model slightly blurs the clean image since it ex
 
 ### 1.2.3 Denoising Pure Noise
 
-What happens if we try to use a UNet as a generative model? I trained a new model where the input is pure noise $z = \epsilon \sim \mathcal{N}(0, I)$ and the target is a clean image $x$.
+To test whether a UNet can work as a generative model, I trained a new model where the input is pure noise $z = \epsilon \sim \mathcal{N}(0, I)$ and the target is a clean image $x$.
 
 **Training Loss:**
 
