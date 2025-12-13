@@ -308,22 +308,18 @@ Instead of denoising a noisy image, we can generate images from scratch by start
   </figure>
 </div>
 
-Each sample produces a completely different image since each starts from different random noise and the generic prompt "a high quality photo" produces varied natural-looking scenes. The images look reasonable but lack sharpness and detail because of using unconditional prompts.
+Each sample produces a completely different image since each starts from different random noise and the generic prompt "a high quality photo" produces varied natural-looking scenes. The images look gray and blurry because of using unconditional prompts.
 
 ## 1.6 Classifier-Free Guidance (CFG)
 
-To improve image quality, we use **Classifier-Free Guidance (CFG)**. The idea is to compute both:
-- **Conditional noise** $\epsilon_c$: using the text prompt
-- **Unconditional noise** $\epsilon_u$: using an empty prompt ""
+To improve image quality, we use Classifier-Free Guidance (CFG). The idea is to compute both:
+- Conditional noise $\epsilon_c$: using the text prompt
+- Unconditional noise $\epsilon_u$: using an empty prompt ""
 
 Then combine them:
 $$\epsilon = \epsilon_u + \gamma (\epsilon_c - \epsilon_u)$$
 
 where $\gamma$ controls guidance strength. With $\gamma = 7$, we push strongly toward the prompt direction, producing sharper, more faithful images.
-
-```python
-noise_final = noise_uncond + scale * (noise_cond - noise_uncond)
-```
 
 **5 CFG Samples** (prompt: "a high quality photo", $\gamma = 7$)
 
@@ -350,10 +346,7 @@ noise_final = noise_uncond + scale * (noise_cond - noise_uncond)
   </figure>
 </div>
 
-**Observations:**
-- Compared to Part 1.5 (without CFG), these images are noticeably **sharper and more detailed**
-- CFG amplifies the "prompt direction" by overshooting ($\gamma > 1$), making the model commit more strongly to generating prompt-faithful content
-- The trade-off: higher $\gamma$ = better quality but less diversity
+Compared to Part 1.5 (without CFG), these images look more colorful with some details, since CFG amplifies the "prompt direction" by overshooting ($\gamma > 1$), making the model commit more strongly to generating prompt-faithful content.
 
 ## 1.7 Image-to-image Translation
 
