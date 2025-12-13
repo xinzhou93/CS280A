@@ -74,6 +74,13 @@ For each training batch:
 2. Add noise with fixed $\sigma=0.5$: $z = x + 0.5 \cdot \epsilon$
 3. Train the UNet to predict the clean image: $D_\theta(z) \rightarrow x$
 
+```python
+noise = torch.randn_like(images) * 0.5
+noisy_images = images + noise
+outputs = model(noisy_images)
+loss = nn.MSELoss()(outputs, images)
+```
+
 **Hyperparameters:**
 - Batch size: 256
 - Learning rate: 1e-4
@@ -232,6 +239,12 @@ At $\sigma=0.0$ (no noise), the model slightly blurs the clean image since it ex
 
 To test whether a UNet can work as a generative model, I trained a new model where the input is pure noise $z = \epsilon \sim \mathcal{N}(0, I)$ and the target is a clean image $x$.
 
+```python
+z = torch.randn_like(images)  # pure noise, no signal from x
+outputs = model(z)
+loss = nn.MSELoss()(outputs, images)
+```
+
 **Training Loss:**
 
 <img src="/P5B/part1_2_3_training_loss.png" alt="Training Loss" style="max-width: 600px;" />
@@ -282,9 +295,12 @@ All outputs look like a blurry oval/blob shape regardless of the input noise. Th
 
 ## 2.1 Adding Time Conditioning to UNet
 
-Flow matching uses a time-conditioned UNet that learns to predict the velocity field at each timestep t ∈ [0, 1]. We add time conditioning by:
-1. Creating FCBlocks that map t → embeddings
-2. Modulating the decoder features with these time embeddings
+Flow matching uses a time-conditioned UNet that learns to predict the velocity field at each timestep $t \in [0, 1]$. I added FCBlocks that map scalar $t$ to embeddings, then modulate decoder features by element-wise multiplication:
+
+```python
+t1 = self.fc1_t(t)  # (N, D) embedding
+unflat = unflat * t1[:, :, None, None]  # modulate features
+```
 
 The forward process interpolates between noise and data:
 $$x_t = (1-t) \cdot x_0 + t \cdot x_1$$
@@ -297,6 +313,14 @@ For each training step:
 1. Sample $t \sim \text{Uniform}(0,1)$ and noise $x_0 \sim \mathcal{N}(0,I)$
 2. Compute $x_t = (1-t) \cdot x_0 + t \cdot x_1$
 3. Train UNet to predict velocity: $\mathcal{L} = ||u_\theta(x_t, t) - (x_1 - x_0)||^2$
+
+```python
+t = torch.rand(N)
+x_0 = torch.randn_like(x_1)
+x_t = (1 - t) * x_0 + t * x_1
+u_pred = unet(x_t, t)
+loss = F.mse_loss(u_pred, x_1 - x_0)
+```
 
 **Hyperparameters:**
 - Batch size: 64
@@ -313,6 +337,15 @@ For each training step:
 
 Starting from pure noise $x_0 \sim \mathcal{N}(0, I)$, we iteratively apply the learned velocity field:
 $$x_{t+\Delta t} = x_t + \Delta t \cdot u_\theta(x_t, t)$$
+
+```python
+x_t = torch.randn(1, 1, 28, 28)  # start from noise
+dt = 1.0 / num_ts
+for i in range(num_ts):
+    t = i / num_ts
+    u = unet(x_t, t)
+    x_t = x_t + dt * u  # Euler step
+```
 
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -333,12 +366,18 @@ At epoch 1, samples are still noisy and blurry. By epoch 5, digits start to emer
 
 ## 2.4 Adding Class-Conditioning to UNet
 
-We extend the time-conditioned UNet to also condition on class labels. This allows us to generate specific digits on demand.
+I extended the time-conditioned UNet to also condition on class labels, allowing generation of specific digits on demand.
 
-Key additions:
-- One-hot encode class labels c → FCBlocks for class embeddings
-- Modulate decoder features: `output = c_embed * features + t_embed`
-- During training, randomly drop class conditioning with probability p_uncond = 0.1 (for CFG)
+```python
+# One-hot encode class label
+c_onehot = F.one_hot(c, num_classes=10)
+c1 = self.fc1_c(c_onehot)  # class embedding
+
+# Modulate decoder: multiply by class, add time
+unflat = c2 * unflat + t2  # combines both conditions
+```
+
+During training, I randomly drop class conditioning with probability $p_{uncond}=0.1$ to enable CFG at sampling time.
 
 ## 2.5 Training the UNet
 
@@ -346,6 +385,12 @@ Training is similar to 2.2, but with class labels:
 1. Sample $t$, noise $x_0$, and get class label $c$
 2. With probability $p_{uncond}=0.1$, drop the class label (set to zero) for CFG training
 3. Train: $\mathcal{L} = ||u_\theta(x_t, c, t) - (x_1 - x_0)||^2$
+
+```python
+mask = (torch.rand(N) > p_uncond).float()  # dropout mask
+u_pred = unet(x_t, c, t, mask)
+loss = F.mse_loss(u_pred, x_1 - x_0)
+```
 
 **Hyperparameters:**
 - Batch size: 64
@@ -362,6 +407,13 @@ Training is similar to 2.2, but with class labels:
 
 For sampling, we use Classifier-Free Guidance (CFG) to improve sample quality. At each step, we compute both conditional and unconditional velocity predictions, then extrapolate:
 $$u = u_{uncond} + \gamma (u_{cond} - u_{uncond})$$
+
+```python
+u_cond = unet(x_t, c, t, mask=1)    # with class
+u_uncond = unet(x_t, c, t, mask=0)  # without class
+u = u_uncond + gamma * (u_cond - u_uncond)
+x_t = x_t + dt * u
+```
 
 With $\gamma=5.0$, this amplifies the class-conditional signal.
 
