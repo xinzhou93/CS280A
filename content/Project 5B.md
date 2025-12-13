@@ -232,10 +232,10 @@ At $\sigma=0.0$ (no noise), the model slightly blurs the clean image since it ex
 
 To test whether a UNet can work as a generative model, I trained a new model where the input is pure noise $z = \epsilon \sim \mathcal{N}(0, I)$ and the target is a clean image $x$.
 
-```python
-z = torch.randn_like(images)  # pure noise
-outputs = model(z)
-loss = nn.MSELoss()(outputs, images)
+```
+z ~ N(0, I)  # pure noise, no signal from x
+output = D_θ(z)
+loss = ||output - x||²
 ```
 
 **Training Loss:**
@@ -337,30 +337,32 @@ At epoch 1, samples are still noisy and blurry. By epoch 5, digits start to emer
 
 ## 2.4 Adding Class-Conditioning to UNet
 
-I extended the time-conditioned UNet to also condition on class labels, allowing generation of specific digits on demand.
+I extended the time-conditioned UNet to also condition on class labels (one-hot vector $c$), allowing generation of specific digits on demand. Following the spec, I added 2 more FCBlocks for class conditioning and modulate the decoder features:
 
-```python
-# One-hot encode class label
-c_onehot = F.one_hot(c, num_classes=10)
-c1 = self.fc1_c(c_onehot)  # class embedding
+```
+fc1_t, fc1_c = FCBlock(1, D), FCBlock(num_classes, D)
+fc2_t, fc2_c = FCBlock(1, 2D), FCBlock(num_classes, 2D)
 
-# Modulate decoder: multiply by class, add time
-unflat = c2 * unflat + t2  # combines both conditions
+t1, t2 = fc1_t(t), fc2_t(t)
+c1, c2 = fc1_c(one_hot(c)), fc2_c(one_hot(c))
+
+unflatten = c2 * unflatten + t2   # 7×7 level, 2D channels
+up1 = c1 * up1 + t1               # 14×14 level, D channels
 ```
 
-During training, I randomly drop class conditioning with probability $p_{uncond}=0.1$ to enable CFG at sampling time.
+During training, with probability $p_{uncond}=0.1$, I drop the class conditioning (set $c$ to zero) so the model learns to work without it. This enables Classifier-Free Guidance at sampling time.
 
 ## 2.5 Training the UNet
 
-Training is similar to 2.2, but with class labels:
-1. Sample $t$, noise $x_0$, and get class label $c$
-2. With probability $p_{uncond}=0.1$, drop the class label (set to zero) for CFG training
-3. Train: $\mathcal{L} = ||u_\theta(x_t, c, t) - (x_1 - x_0)||^2$
+Training is similar to 2.2, but with class labels and dropout:
 
-```python
-mask = (torch.rand(N) > p_uncond).float()  # dropout mask
-u_pred = unet(x_t, c, t, mask)
-loss = F.mse_loss(u_pred, x_1 - x_0)
+```
+x_1, c ~ training set (image and class label)
+t ~ Uniform(0, 1)
+x_0 ~ N(0, I)
+x_t = (1 - t) * x_0 + t * x_1
+with probability p_uncond: c = 0  # dropout for CFG
+Take gradient descent step on ||(x_1 - x_0) - u_θ(x_t, c, t)||²
 ```
 
 **Hyperparameters:**
@@ -379,11 +381,13 @@ loss = F.mse_loss(u_pred, x_1 - x_0)
 For sampling, we use Classifier-Free Guidance (CFG) to improve sample quality. At each step, we compute both conditional and unconditional velocity predictions, then extrapolate:
 $$u = u_{uncond} + \gamma (u_{cond} - u_{uncond})$$
 
-```python
-u_cond = unet(x_t, c, t, mask=1)    # with class
-u_uncond = unet(x_t, c, t, mask=0)  # without class
-u = u_uncond + gamma * (u_cond - u_uncond)
-x_t = x_t + dt * u
+```
+x_t = x_0 ~ N(0, I)
+for t from 0 to 1, step 1/T:
+    u_cond = u_θ(x_t, c, t)      # with class
+    u_uncond = u_θ(x_t, 0, t)    # without class
+    u = u_uncond + γ * (u_cond - u_uncond)
+    x_t = x_t + (1/T) * u
 ```
 
 With $\gamma=5.0$, this amplifies the class-conditional signal.
