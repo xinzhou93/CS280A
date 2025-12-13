@@ -166,12 +166,6 @@ Now let's use the pretrained diffusion model (UNet) to denoise. Given a noisy im
 
 $$x_0 = \frac{x_t - \sqrt{1 - \bar{\alpha}_t} \cdot \epsilon}{\sqrt{\bar{\alpha}_t}}$$
 
-```python
-pred_original = (im_noisy - torch.sqrt(1 - alpha_cumprod) * noise_est) / torch.sqrt(alpha_cumprod)
-```
-
-**Row 1: Noisy | Row 2: Gaussian Blur | Row 3: One-Step UNet Denoising**
-
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5A/part1_1_original.png" alt="Original" style="width: 100%; height: auto; display: block;" />
@@ -223,12 +217,7 @@ pred_original = (im_noisy - torch.sqrt(1 - alpha_cumprod) * noise_est) / torch.s
   </figure>
 </div>
 
-**Observations:**
-- At $t=250$: One-step denoising recovers the Campanile almost perfectly—far better than Gaussian blur
-- At $t=500$: UNet still produces a recognizable tower, though some details are hallucinated differently
-- At $t=750$: Even the UNet struggles with heavy noise; the result looks like a generic tower but loses the original's identity
-
-The UNet dramatically outperforms Gaussian blur because it has learned the structure of natural images. However, one-step denoising still degrades at high noise levels—this motivates **iterative denoising** in Part 1.4.
+The UNet dramatically outperforms Gaussian blur because it has learned the structure of natural images. However, one-step denoising can not still fully recover the original image when $t$ is large. From the images above, the tower at $t=750$ is still blurry and its appearance differs from the original image.
 
 ## 1.4 Iterative Denoising
 
