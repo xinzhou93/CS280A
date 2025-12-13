@@ -716,7 +716,7 @@ The algorithm combines low and high frequency components from two different nois
 - $\epsilon_2$: Denoise with prompt $p_2$ → apply high-pass filter
 - $\epsilon = f_{lowpass}(\epsilon_1) + f_{highpass}(\epsilon_2)$
 
-### Hybrid 1: "a cyberpunk city at night" (far) / "an astronaut riding a horse on mars" (close)
+### Hybrid 1: "an oil painting of a wise old wizard" (far) / "an oil painting of a mysterious forest" (close)
 
 <div style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 15px; text-align: center; max-width: 400px; margin: 0 auto;">
   <figure style="margin: 0;">
