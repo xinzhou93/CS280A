@@ -154,13 +154,11 @@ For each training batch:
   </figure>
 </div>
 
-**Observations:**
-- After epoch 1, the model already produces reasonable denoising results
-- After epoch 5, the outputs are cleaner with sharper edges
+After epoch 1, the model already produces reasonable denoising results. After epoch 5, the outputs are cleaner with sharper edges.
 
 ### 1.2.2 Out-of-Distribution Testing
 
-The model was trained with σ=0.5. How does it perform on different noise levels?
+Since the model was trained only with $\sigma=0.5$, I tested it on different noise levels to see how it generalizes.
 
 <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
   <figure style="margin: 0;">
@@ -226,14 +224,11 @@ The model was trained with σ=0.5. How does it perform on different noise levels
   </figure>
 </div>
 
-**Observations:**
-- At σ=0.0 (no noise), the model slightly blurs the clean image
-- At σ=0.5 (trained level), the model performs best
-- At higher noise levels (σ=0.8, 1.0), the model struggles to recover details since it wasn't trained on those levels
+At σ=0.0 (no noise), the model slightly blurs the clean image since it expects some noise. At σ=0.5 (the trained level), the model performs best. At higher noise levels (σ=0.8, 1.0), the model struggles to recover details since it wasn't trained on those levels. This shows the limitation of training on a single noise level.
 
 ### 1.2.3 Denoising Pure Noise
 
-What if we try to denoise pure noise? We train a new model where the input is z = ε ~ N(0, I) and the target is a clean image.
+What happens if we try to use a UNet as a generative model? I trained a new model where the input is pure noise $z = \epsilon \sim \mathcal{N}(0, I)$ and the target is a clean image $x$.
 
 **Training Loss:**
 
@@ -279,12 +274,7 @@ What if we try to denoise pure noise? We train a new model where the input is z 
   </figure>
 </div>
 
-**Observations:**
-- All outputs look like a blurry oval/blob shape regardless of the input noise
-- This is the **average (centroid)** of all training digits
-- With MSE loss, the model learns to predict the point that minimizes squared distance to ALL training examples
-- Since pure noise contains no information about which digit to generate, the optimal prediction is the mean of the dataset
-- This demonstrates why single-step denoising from pure noise cannot work as a generative model
+All outputs look like a blurry oval/blob shape regardless of the input noise. This is the average (centroid) of all training digits. With MSE loss, the model learns to predict the point that minimizes squared distance to all training examples. Since pure noise contains no information about which digit to generate, the optimal prediction is the mean of the dataset. This demonstrates why single-step denoising from pure noise cannot work as a generative model—we need a different approach like Flow Matching.
 
 # Part 2: Training a Flow Matching Model
 
@@ -332,11 +322,8 @@ $$x_{t+\Delta t} = x_t + \Delta t \cdot u_\theta(x_t, t)$$
   </figure>
 </div>
 
-**Observations:**
-- Epoch 1: Samples are still noisy and blurry
-- Epoch 5: Digits start to emerge with recognizable shapes
-- Epoch 10: Clear, diverse digits are generated from pure noise
-- Unlike Part 1.2.3, flow matching can generate diverse samples because it learns the full trajectory from noise to data
+At epoch 1, samples are still noisy and blurry. By epoch 5, digits start to emerge with recognizable shapes. At epoch 10, clear and diverse digits are generated from pure noise. Unlike Part 1.2.3, flow matching can generate diverse samples because it learns the full trajectory from noise to data, not just a single-step mapping.
+
 ## 2.4 Adding Class-Conditioning to UNet
 
 We extend the time-conditioned UNet to also condition on class labels. This allows us to generate specific digits on demand.
@@ -380,11 +367,7 @@ $$u = u_{uncond} + \gamma (u_{cond} - u_{uncond})$$
   </figure>
 </div>
 
-**Observations:**
-- Epoch 1: Digits are recognizable but noisy; class conditioning is already working
-- Epoch 5: Much cleaner digits with clear class separation
-- Epoch 10: High-quality digits with consistent style within each class
-- CFG (γ=5.0) helps sharpen the class-conditional samples
+At epoch 1, digits are recognizable but noisy, showing that class conditioning is already working. By epoch 5, the digits are much cleaner with clear class separation. At epoch 10, high-quality digits with consistent style within each class are generated. CFG (γ=5.0) helps sharpen the samples by amplifying the difference between conditional and unconditional predictions.
 
 # Part 3: Bells & Whistles
 
@@ -428,8 +411,4 @@ For bells & whistles, I trained an improved time-conditioned UNet with larger ca
   </figure>
 </div>
 
-**Observations:**
-- The larger model (D=128) produces sharper, more detailed digits
-- Extended training (20 epochs) allows the model to learn finer details
-- More timesteps (T=100) during sampling provides smoother trajectories
-- By epoch 20, the samples are noticeably cleaner than the baseline at epoch 10
+The larger model (D=128) produces sharper, more detailed digits. Extended training (20 epochs) allows the model to learn finer details, and more timesteps (T=100) during sampling provides smoother trajectories. By epoch 20, the samples are noticeably cleaner than the baseline at epoch 10.
