@@ -69,7 +69,10 @@ Visualization of different noise levels:
 
 ### 1.2.1 Training
 
-We train the UNet to denoise images with σ=0.5. The model learns to predict the clean image from the noisy input.
+For each training batch:
+1. Take clean MNIST images $x$
+2. Add noise with fixed σ=0.5: $z = x + 0.5 \cdot \epsilon$
+3. Train the UNet to predict the clean image: $D_\theta(z) \rightarrow x$
 
 **Hyperparameters:**
 - Batch size: 256
