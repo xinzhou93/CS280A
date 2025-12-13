@@ -604,10 +604,7 @@ Instead of using the generic prompt `"a high quality photo"`, we can guide the i
   </figure>
 </div>
 
-**Observations:**
-- The text prompt completely changes the style—instead of preserving the Campanile's identity, the model transforms it into cyberpunk cityscapes
-- At **i=1** (heavy noise): Almost fully reimagined as a neon-lit city
-- At **i=20** (light noise): The tower structure is preserved but takes on a cyberpunk aesthetic with glowing lights
+The text prompt completely changes the style—instead of preserving the Campanile's identity, the model transforms it into cyberpunk cityscapes. At i=1 (heavy noise): it is almost fully reimagined as a neon-lit city; At i=20 (light noise): The tower structure is preserved but takes on a cyberpunk aesthetic with glowing lights
 
 ### Custom Image 1 → "a portrait of an ancient tree"
 
