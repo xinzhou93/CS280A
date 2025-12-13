@@ -87,7 +87,7 @@ The forward process gradually adds Gaussian noise to a clean image according to 
 
 $$x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1 - \bar{\alpha}_t} \epsilon$$
 
-where $\epsilon \sim \mathcal{N}(0, I)$ is random noise and $\bar{\alpha}_t$ is the cumulative product of $(1 - \beta_t)$ values from the noise schedule.
+where $\epsilon \sim \mathcal{N}(0, I)$ is random noise and $\bar{\alpha}_t$ is looked up from `alphas_cumprod` at timestep $t$.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
