@@ -281,7 +281,7 @@ Gaussian blur $at t=690$ completely fails, producing an unrecognizable noise.
 
 ## 1.5 Diffusion Model Sampling
 
-Instead of denoising a noisy image, we can **generate images from scratch** by starting from pure random noise and running `iterative_denoise` with `i_start=0`. The model "denoises" random noise into a coherent image guided by the prompt.
+Instead of denoising a noisy image, we can generate images from scratch by starting from pure random noise and running `iterative_denoise` with `i_start=0`. The model "denoises" random noise into a coherent image guided by the prompt.
 
 **5 Sampled Images** (prompt: "a high quality photo")
 
@@ -308,10 +308,7 @@ Instead of denoising a noisy image, we can **generate images from scratch** by s
   </figure>
 </div>
 
-**Observations:**
-- Each sample produces a completely different image since each starts from different random noise
-- The generic prompt "a high quality photo" produces varied natural-looking scenes
-- The images look reasonable but lack sharpness and detail—this is because we're using unconditional/weak guidance. Part 1.6 (CFG) will improve this!
+Each sample produces a completely different image since each starts from different random noise and the generic prompt "a high quality photo" produces varied natural-looking scenes. The images look reasonable but lack sharpness and detail because of using unconditional prompts.
 
 ## 1.6 Classifier-Free Guidance (CFG)
 
