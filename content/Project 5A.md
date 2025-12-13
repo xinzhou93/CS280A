@@ -7,85 +7,72 @@ tags: [project, cs280a]
 
 In this project, I explored diffusion models using DeepFloyd IF, a two-stage text-to-image model. Part A focuses on understanding the diffusion process and implementing sampling loops for various creative tasks including image generation, inpainting, and visual illusions.
 
-**Random Seed Used: 100**
-
 # Part 0: Setup
 
-DeepFloyd IF is a two-stage diffusion model: Stage 1 generates 64×64 images from text prompts, and Stage 2 upsamples them to 256×256. I created custom prompt embeddings using the Huggingface T5 Encoder and experimented with different `num_inference_steps` values.
+DeepFloyd IF is a two-stage diffusion model: Stage 1 generates 64×64 images from text prompts, and Stage 2 upsamples them to 256×256. I created custom prompt embeddings using the Huggingface T5 Encoder and experimented with different `num_inference_steps` values. The random seed I used is 100.
 
-**Random Seed: 100** (used for all subsequent parts)
-
-### Generated Images with `num_inference_steps=5`
+Generated Images with `num_inference_steps=5`
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5A/part0_steps5_a_cyberpunk_city_at_night.png" alt="Cyberpunk city" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    "a cyberpunk city at night"
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P5A/part0_steps5_an_astronaut_riding_a_horse_on.png" alt="Astronaut on Mars" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    "an astronaut riding a horse on mars"
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P5A/part0_steps5_a_cozy_cabin_in_the_woods_with.png" alt="Cozy cabin" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    "a cozy cabin in the woods with snow"
     </figcaption>
   </figure>
 </div>
 
-### Generated Images with `num_inference_steps=20`
+Generated Images with `num_inference_steps=20`
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5A/part0_steps20_a_cyberpunk_city_at_night.png" alt="Cyberpunk city" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    "a cyberpunk city at night"
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P5A/part0_steps20_an_astronaut_riding_a_horse_on.png" alt="Astronaut on Mars" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    "an astronaut riding a horse on mars"
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P5A/part0_steps20_a_cozy_cabin_in_the_woods_with.png" alt="Cozy cabin" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    "a cozy cabin in the woods with snow"
     </figcaption>
   </figure>
 </div>
 
-### Generated Images with `num_inference_steps=50`
+Generated Images with `num_inference_steps=50`
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5A/part0_steps50_a_cyberpunk_city_at_night.png" alt="Cyberpunk city" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    "a cyberpunk city at night"
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P5A/part0_steps50_an_astronaut_riding_a_horse_on.png" alt="Astronaut on Mars" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    "an astronaut riding a horse on mars"
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="/P5A/part0_steps50_a_cozy_cabin_in_the_woods_with.png" alt="Cozy cabin" style="width: 100%; height: auto; display: block;" />
     <figcaption style="font-size: 0.9em; color: gray; margin-top: 6px; line-height: 1.4;">
-    "a cozy cabin in the woods with snow"
     </figcaption>
   </figure>
 </div>
