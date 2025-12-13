@@ -71,7 +71,7 @@ Visualization of different noise levels:
 
 For each training batch:
 1. Take clean MNIST images $x$
-2. Add noise with fixed σ=0.5: $z = x + 0.5 \cdot \epsilon$
+2. Add noise with fixed $\sigma=0.5$: $z = x + 0.5 \cdot \epsilon$
 3. Train the UNet to predict the clean image: $D_\theta(z) \rightarrow x$
 
 **Hyperparameters:**
@@ -160,6 +160,8 @@ After epoch 1, the model already produces reasonable denoising results. After ep
 
 Since the model was trained only with $\sigma=0.5$, I tested it on different noise levels to see how it generalizes.
 
+Noisy inputs (top row) 
+
 <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
   <figure style="margin: 0;">
     <img src="/P5B/part1_2_2_sigma0.0_noisy.png" alt="σ=0.0" style="width: 100%; height: auto; display: block;" />
@@ -191,7 +193,7 @@ Since the model was trained only with $\sigma=0.5$, I tested it on different noi
   </figure>
 </div>
 
-**Noisy inputs (top row) → Denoised outputs (bottom row):**
+Denoised outputs (bottom row):
 
 <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center;">
   <figure style="margin: 0;">
@@ -291,6 +293,11 @@ where $x_0 \sim \mathcal{N}(0, I)$ is noise and $x_1$ is the clean image. The mo
 
 ## 2.2 Training the UNet
 
+For each training step:
+1. Sample $t \sim \text{Uniform}(0,1)$ and noise $x_0 \sim \mathcal{N}(0,I)$
+2. Compute $x_t = (1-t) \cdot x_0 + t \cdot x_1$
+3. Train UNet to predict velocity: $\mathcal{L} = ||u_\theta(x_t, t) - (x_1 - x_0)||^2$
+
 **Hyperparameters:**
 - Batch size: 64
 - Learning rate: 1e-2 with ExponentialLR scheduler
@@ -335,13 +342,17 @@ Key additions:
 
 ## 2.5 Training the UNet
 
+Training is similar to 2.2, but with class labels:
+1. Sample $t$, noise $x_0$, and get class label $c$
+2. With probability $p_{uncond}=0.1$, drop the class label (set to zero) for CFG training
+3. Train: $\mathcal{L} = ||u_\theta(x_t, c, t) - (x_1 - x_0)||^2$
+
 **Hyperparameters:**
 - Batch size: 64
 - Learning rate: 1e-2 with ExponentialLR scheduler
 - Hidden dimension D: 64
 - Epochs: 10
 - Timesteps T: 50
-- Unconditional dropout p_uncond: 0.1
 
 **Training Loss:**
 
@@ -349,8 +360,10 @@ Key additions:
 
 ## 2.6 Sampling from the UNet
 
-We use Classifier-Free Guidance (CFG) with γ=5.0:
+For sampling, we use Classifier-Free Guidance (CFG) to improve sample quality. At each step, we compute both conditional and unconditional velocity predictions, then extrapolate:
 $$u = u_{uncond} + \gamma (u_{cond} - u_{uncond})$$
+
+With $\gamma=5.0$, this amplifies the class-conditional signal.
 
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
@@ -367,7 +380,7 @@ $$u = u_{uncond} + \gamma (u_{cond} - u_{uncond})$$
   </figure>
 </div>
 
-At epoch 1, digits are recognizable but noisy, showing that class conditioning is already working. By epoch 5, the digits are much cleaner with clear class separation. At epoch 10, high-quality digits with consistent style within each class are generated. CFG (γ=5.0) helps sharpen the samples by amplifying the difference between conditional and unconditional predictions.
+At epoch 1, digits are recognizable but noisy, showing that class conditioning is already working. By epoch 5, the digits are much cleaner with clear class separation. At epoch 10, high-quality digits with consistent style within each class are generated. CFG ($\gamma=5.0$) helps sharpen the samples by amplifying the difference between conditional and unconditional predictions.
 
 # Part 3: Bells & Whistles
 
