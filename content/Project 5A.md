@@ -801,7 +801,7 @@ noise_est_2 = permute_quadrants(noise_est_2)  # Unpermute
 
 ## UCB Logo Design
 
-Using text-conditioned image-to-image translation (SDEdit) on a logo to create a creative course logo design.
+I used text-conditioned image-to-image translation (SDEdit) on a UCB logo to create a creative logo design.
 
 ### Logo 1: "a cyberpunk city at night"
 
@@ -869,8 +869,4 @@ Using text-conditioned image-to-image translation (SDEdit) on a logo to create a
   </figure>
 </div>
 
-**Observations:**
-- The intermediate noise levels (i=3 to i=7) produce the best logo designs—they retain the original structure while adding creative elements from the prompt
-- At i=1, the logo is almost entirely replaced by the prompt's content
-- At i=20, the result is nearly identical to the original logo
-- The "California bear" prompt works well with the UCB logo, enhancing the bear mascot while preserving the circular badge structure
+The intermediate noise levels (i=3 to i=7) produce the best logo designs—they retain the original structure while adding creative elements from the prompt. The "California bear" prompt works well with the UCB logo, enhancing the bear mascot while preserving the circular badge structure.
