@@ -794,10 +794,7 @@ noise_est_2 = permute_quadrants(noise_est_2)  # Unpermute
   </figure>
 </div>
 
-**Observations:**
-- 90° rotation works well—the dog face transforms into a cat-like appearance when rotated
-- Quadrant permutation creates a puzzle-like effect where rearranging the four quadrants reveals a completely different image
-- Using the same art style ("a lithograph of...") for both prompts helps maintain visual coherence
+90° rotation works well—the dog face transforms into a cat-like appearance when rotated. Quadrant permutation creates a puzzle-like effect where rearranging the four quadrants reveals a completely different image.
 
 ## UCB Logo Design
 
