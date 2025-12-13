@@ -354,15 +354,18 @@ During training, with probability $p_{uncond}=0.1$, I drop the class conditionin
 
 ## 2.5 Training the UNet
 
-Training is similar to 2.2, but with class labels and dropout:
+Training is similar to 2.2, but with class labels and dropout for CFG:
 
 ```
-x_1, c ~ training set (image and class label)
-t ~ Uniform(0, 1)
-x_0 ~ N(0, I)
-x_t = (1 - t) * x_0 + t * x_1
-with probability p_uncond: c = 0  # dropout for CFG
-Take gradient descent step on ||(x_1 - x_0) - u_θ(x_t, c, t)||²
+repeat
+    x_1, c ~ clean image and label from training set
+    Make c into a one-hot vector
+    with probability p_uncond set c to zero-vector
+    t ~ Uniform([0, 1])
+    x_0 ~ N(0, I)
+    x_t = (1 - t) * x_0 + t * x_1
+    Take gradient descent step on ∇_θ ||(x_1 - x_0) - u_θ(x_t, t, c)||²
+until happy
 ```
 
 **Hyperparameters:**
@@ -370,7 +373,7 @@ Take gradient descent step on ||(x_1 - x_0) - u_θ(x_t, c, t)||²
 - Learning rate: 1e-2 with ExponentialLR scheduler
 - Hidden dimension D: 64
 - Epochs: 10
-- Timesteps T: 50
+- $p_{uncond}$: 0.1
 
 **Training Loss:**
 
@@ -378,19 +381,19 @@ Take gradient descent step on ||(x_1 - x_0) - u_θ(x_t, c, t)||²
 
 ## 2.6 Sampling from the UNet
 
-For sampling, we use Classifier-Free Guidance (CFG) to improve sample quality. At each step, we compute both conditional and unconditional velocity predictions, then extrapolate:
-$$u = u_{uncond} + \gamma (u_{cond} - u_{uncond})$$
+For sampling, we use Classifier-Free Guidance (CFG) with $\gamma=5.0$:
 
 ```
+input: one-hot vector c, classifier guidance scale γ
 x_t = x_0 ~ N(0, I)
-for t from 0 to 1, step 1/T:
-    u_cond = u_θ(x_t, c, t)      # with class
-    u_uncond = u_θ(x_t, 0, t)    # without class
-    u = u_uncond + γ * (u_cond - u_uncond)
+for t from 0 to 1, step size 1/T do
+    u_uncond = u_θ(x_t, t, 0)
+    u_cond = u_θ(x_t, t, c)
+    u = u_uncond + γ * (u_cond - u_uncond)    ▷ Classifier-free guidance
     x_t = x_t + (1/T) * u
+end for
+return x_t
 ```
-
-With $\gamma=5.0$, this amplifies the class-conditional signal.
 
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
   <figure style="margin: 0;">
