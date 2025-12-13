@@ -305,7 +305,7 @@ For each training step:
 
 **Hyperparameters:**
 - Batch size: 64
-- Learning rate: 1e-2 with ExponentialLR scheduler
+- Learning rate: 1e-2 with Exponential scheduler
 - Hidden dimension D: 64
 - Epochs: 10
 - Timesteps T: 50
