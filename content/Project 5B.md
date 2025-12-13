@@ -5,6 +5,7 @@ tags: [project, cs280a]
 
 # Overview
 
+In this project, I implemented generative models from scratch on the MNIST dataset. Part 1 explores single-step denoising with a UNet, demonstrating why directly predicting clean images from pure noise fails (the model outputs the dataset mean). Part 2 introduces Flow Matching, which learns to transport samples from noise to data by predicting velocity fields $u = x_1 - x_0$ along linear interpolation paths $x_t = (1-t)x_0 + tx_1$. I implemented both time-conditioned and class-conditioned UNets, using Classifier-Free Guidance (CFG) for improved sample quality.
 
 # Part 1: Training a Single-Step Denoising UNet
 
