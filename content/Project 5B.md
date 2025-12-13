@@ -420,7 +420,7 @@ Each image shows 4 instances of each digit (0-9) generated with CFG ($\gamma=5.0
 
 For bells & whistles, I trained an improved time-conditioned UNet with larger capacity and longer training:
 
-**Improvements over baseline (Part 2.2):**
+**Improvements over baseline (Part 2.3):**
 | Parameter | Baseline | Improved |
 |-----------|----------|----------|
 | Hidden dim D | 64 | 128 |
