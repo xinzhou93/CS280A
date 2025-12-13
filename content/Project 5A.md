@@ -542,7 +542,9 @@ $$x_t \leftarrow \textbf{m} \cdot x_t + (1 - \textbf{m}) \cdot \text{forward}(x_
   </figure>
 </div>
 
-### Custom Image 2
+### Custom Image 2 - Cyberpunk
+
+prompt: "a cyberpunk city at night"
 
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
   <figure style="margin: 0;">
