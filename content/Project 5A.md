@@ -672,16 +672,9 @@ The text prompt completely changes the style—instead of preserving the Campani
   </figure>
 </div>
 
-**Observations:**
-- Text-conditioned editing gives us powerful creative control over the transformation
-- The prompt guides what the model "sees" in the noisy image—even abstract shapes can become trees or cabins
-- At low `i_start` values, the prompt dominates; at high values, the original structure is preserved with stylistic changes
-
 ## 1.8 Visual Anagrams
 
-[Visual Anagrams](https://dangeng.github.io/visual_anagrams/) create optical illusions where an image looks like one thing, but when flipped upside down reveals something completely different.
-
-The algorithm works by averaging two noise estimates:
+Visual Anagrams create optical illusions where an image looks like one thing, but when flipped upside down reveals something completely different. The algorithm works by averaging two noise estimates:
 - $\epsilon_1$: Denoise normally with prompt $p_1$
 - $\epsilon_2$: Flip image, denoise with prompt $p_2$, flip the noise back
 - $\epsilon = (\epsilon_1 + \epsilon_2) / 2$
@@ -712,14 +705,11 @@ The algorithm works by averaging two noise estimates:
   </figure>
 </div>
 
-**Observations:**
-- The illusions work best when the two prompts have compatible structures (e.g., wizard beard → tree roots, mountain peaks → wave crests)
-- Using matching art styles ("oil painting", "watercolor") helps unify the two views
-- The averaged noise estimate forces the model to find a compromise that satisfies both prompts
+The illusions work best when the two prompts have compatible structures such as wizard beard → tree roots, mountain peaks → wave crests). In addition, using matching art styles ("oil painting", "watercolor") helps unify the two views. The averaged noise estimate forces the model to find a compromise that satisfies both prompts
 
 ## 1.9 Hybrid Images
 
-[Factorized Diffusion](https://dangeng.github.io/factorized_diffusion/) creates hybrid images—images that look like one thing from far away but reveal something different up close (just like in Project 2!).
+Factorized Diffusion creates hybrid images—images that look like one thing from far away but reveal something different up close (just like in Project 2).
 
 The algorithm combines low and high frequency components from two different noise estimates:
 - $\epsilon_1$: Denoise with prompt $p_1$ → apply low-pass filter
