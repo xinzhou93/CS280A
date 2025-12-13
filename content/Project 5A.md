@@ -9,7 +9,7 @@ In this project, I explored diffusion models using DeepFloyd IF, a two-stage tex
 
 # Part 0: Setup
 
-DeepFloyd IF is a two-stage diffusion model: Stage 1 generates 64×64 images from text prompts, and Stage 2 upsamples them to 256×256. I created custom prompt embeddings using the Huggingface T5 Encoder and experimented with different `num_inference_steps` values. The random seed I used is 100.
+DeepFloyd IF is a two-stage diffusion model: Stage 1 generates 64×64 images from text prompts, and Stage 2 upsamples them to 256×256. I created custom prompt embeddings using the Huggingface T5 Encoder and experimented with different `num_inference_steps` values. The `random seed` I used was 100.
 
 Generated Images with `num_inference_steps=5`
 
@@ -77,14 +77,7 @@ Generated Images with `num_inference_steps=50`
   </figure>
 </div>
 
-Comparing different `num_inference_steps`:
-
-- **5 steps**: Fast generation but images appear blurry and lack fine details. Shapes are recognizable but textures are muddy.
-- **20 steps**: Good balance between speed and quality. Images are coherent with reasonable details.
-- **50 steps**: Highest quality with sharper details and better textures. The cyberpunk city shows more defined buildings, the astronaut has clearer features, and the cabin scene has better snow and tree details.
-
-The prompts align well with the outputs—the model correctly interprets "cyberpunk" style with neon colors, places the astronaut on a Mars-like red landscape, and creates a winter cabin scene with snow.
-
+The prompts align well with the outputs—the model correctly interprets "cyberpunk" style with neon colors, places the astronaut on a Mars-like red landscape, and creates a winter cabin scene with snow. However, the created images with steps of 5 look a bit blurry and gray, compared to steps of 20 and 50 with colorful and sharp qualities.
 
 # Part 1: Sampling Loops
 
