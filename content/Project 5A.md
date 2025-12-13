@@ -725,7 +725,7 @@ The algorithm combines low and high frequency components from two different nois
   </figure>
 </div>
 
-### Hybrid 2: "a magical library with floating books" (far) / "a Chinese garden with cherry blossoms" (close)
+### Hybrid 2: "a watercolor painting of mountains" (far) / "a watercolor painting of ocean waves" (close)
 
 <div style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 15px; text-align: center; max-width: 400px; margin: 0 auto;">
   <figure style="margin: 0;">
