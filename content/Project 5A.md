@@ -492,11 +492,7 @@ The noise level (`i_start`) controls how much the image changes:
   </figure>
 </div>
 
-**Observations:**
-- At **i_start=1** (most noise): The model almost completely reimagines the image, keeping only vague color/structure hints
-- At **i_start=20** (least noise): The result is nearly identical to the original
-- The progression shows a smooth transition from "hallucinated" to "preserved"
-- Hand-drawn images work particularly well—the model transforms sketches into realistic images while preserving the basic structure
+The progression shows a smooth transition from "hallucinated" to "preserved". At **i_start=1** (most noise): The model almost completely reimagines the image, keeping only vague color/structure hints. However, at **i_start=20** (least noise): The result is similar to the original. Hand-drawn images and the campanile work particularly well, whereas the web image shows less creativity since the original image is already in the natural image manifold.
 
 ### 1.7.2 Inpainting
 
