@@ -290,11 +290,6 @@ All outputs look like a blurry disk regardless of the input noise. This is the a
 
 Flow matching uses a time-conditioned UNet that learns to predict the velocity field at each timestep $t \in [0, 1]$. I added FCBlocks that map scalar $t$ to embeddings, then modulate decoder features by element-wise multiplication:
 
-```python
-t1 = self.fc1_t(t)  # (N, D) embedding
-unflat = unflat * t1[:, :, None, None]  # modulate features
-```
-
 The forward process interpolates between noise and data:
 $$x_t = (1-t) \cdot x_0 + t \cdot x_1$$
 
