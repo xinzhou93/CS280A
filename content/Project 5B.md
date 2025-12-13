@@ -224,7 +224,7 @@ Since the model was trained only with $\sigma=0.5$, I tested it on different noi
   </figure>
 </div>
 
-At σ=0.0 (no noise), the model slightly blurs the clean image since it expects some noise. At σ=0.5 (the trained level), the model performs best. At higher noise levels (σ=0.8, 1.0), the model struggles to recover details since it wasn't trained on those levels. This shows the limitation of training on a single noise level.
+At $\sigma=0.0$ (no noise), the model slightly blurs the clean image since it expects some noise. At $\sigma=0.5$ (the trained level), the model performs best. At higher noise levels ($\sigma=0.8, 1.0$), the model struggles to recover details since it wasn't trained on those levels. This shows the limitation of training on a single noise level.
 
 ### 1.2.3 Denoising Pure Noise
 
